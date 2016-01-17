@@ -1,0 +1,34 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+}
+
+.logo {
+    position: relative;
+}
+
+.logo img {
+    width: 200px;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.container {
+    background-color: #001e40;
+    width: 100%;
+    height: 100%;
+}
