@@ -1,3 +1,26 @@
+# PONGup
+
+## PostgreSQL
+
+start local postgres server:
+
+```
+pg_ctl -D /usr/local/var/postgres -l logfile start
+```
+
+open postgres in terminal:
+
+```
+python manage.py shell
+
+# example code:
+from ladders.models import Ladder, User_Ladder
+from django.contrib.auth.models import User
+from django.utils import timezone
+ul = User_Ladder.objects.get(pk=2)
+ul
+```
+
 # Heroku Django Starter Template
 
 An utterly fantastic project starter template for Django 1.9.

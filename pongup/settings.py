@@ -28,6 +28,8 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.admindocs',
+    'ladders.apps.LaddersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,8 +76,12 @@ WSGI_APPLICATION = 'pongup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pong_up',
+        'USER': 'galevanrossem',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -83,14 +89,14 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 
 # Parse database configuration from $DATABASE_URL
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default='postgres://user:pass@localhost/pong_up')
 
 # Enable Persistent Connections
 DATABASES['default']['CONN_MAX_AGE'] = 500

@@ -1,0 +1,10 @@
+{% if ladders_list %}
+    <ul>
+        {% for ladder in ladders_list %}
+            <li><a href="/ladders/{{ ladder.id }}/">{{ ladder.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p>No ladders are available.</p>
+{% endif %}
