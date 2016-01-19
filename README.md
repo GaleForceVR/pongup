@@ -21,6 +21,17 @@ ul = User_Ladder.objects.get(pk=2)
 ul
 ```
 
+create super user on heroku:
+
+```
+heroku run python manage.py createsuperuser
+```
+
+## heroku cli info:
+
+https://devcenter.heroku.com/articles/heroku-postgresql#using-the-cli
+
+
 # Heroku Django Starter Template
 
 An utterly fantastic project starter template for Django 1.9.
