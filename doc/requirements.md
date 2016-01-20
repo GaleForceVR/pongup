@@ -135,4 +135,47 @@ Player
 * All player ratings are updated
 * Ladder Rankings are updated
 
+### Recruit a new player
 
+Player
+
+##### Pre-Conditions
+
+* Player is registered
+
+##### Steps
+
+1. visit the 'Ladder Detail' page of the Ladder you want to recruit new player to
+2. click 'Recruit new player' button
+3. enter username or email of player to be recruited
+  3.1 if user exists, player is added to ladder
+    3.1.1 email informing player of addition to ladder is sent
+  3.2 if user does not exist
+    3.2.1 email is sent to player inviting to join ladder
+    3.2.2 temporary account is created for player
+    3.2.3 shows up on ladder temporarily
+
+##### Post-Conditions
+
+* new recruit has temporary account until it is claimed
+
+### Challenge Match
+
+Player (challenger)
+
+##### Pre-Conditions
+
+* Player (challenger) is within 3 spots of Player (Champion) on said Ladder
+
+##### Steps
+
+1. visit 'Ladder Detail' page and click the 'PONGup ball' button next to Champion you wish to challenge
+2. Challenge match will only count toward ranking in this ladder
+3. match statistics will count towards global rating
+3. schedule the match
+4. Play the match
+5. enter results
+
+##### Post-Conditions
+
+* all player and ladder stats are updated
