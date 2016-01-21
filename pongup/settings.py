@@ -29,6 +29,7 @@ DEBUG = True
 
 INSTALLED_APPS = (
     'django.contrib.admindocs',
+    'matches.apps.MatchesConfig',
     'ladders.apps.LaddersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
