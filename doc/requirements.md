@@ -1,5 +1,15 @@
 # Requirements
 
+## Purpose
+
+To provide a place where table tennis players can create and join ladders to further encourage player participation and personal growth.
+
+The app should provide the ability to rank players in a ladder as well as provide a 'global' ranking based on their past perfomances.
+
+This platform should start with a ranking algorithm that is already in use and attempt to improve upon it for the purposes of obtaining more accurate ratings and rankings.
+
+All players, regardless of  which Ladder they are a memeber, should automatically be ranked in the 'global' ranking which will be based on the players rating.
+
 ## Personas
 
 #### Player
