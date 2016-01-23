@@ -1,0 +1,1 @@
+global.pongup = require('./pongup/main');
