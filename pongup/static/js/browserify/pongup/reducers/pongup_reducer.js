@@ -10,6 +10,10 @@ const initialState = {
 
 
 const pongup_reducer = (state = initialState, action) => {
+    console.log('state')
+    console.log(state)
+    console.log('action')
+    console.log(action)
     switch (action.type) {
         case constants.UPDATE_TAB:
             return Object.assign({}, state, {

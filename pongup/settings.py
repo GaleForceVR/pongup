@@ -25,9 +25,19 @@ SECRET_KEY = "z0$%4ejmon@ummmm8)4ugg+@$#zlt_ok#tl5m=*5tqaa=g^!2x"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# REST API
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 # Application definition
 
 INSTALLED_APPS = (
+    'rest_framework',
     'django.contrib.admindocs',
     'matches.apps.MatchesConfig',
     'ladders.apps.LaddersConfig',

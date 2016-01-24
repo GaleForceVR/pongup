@@ -11,7 +11,7 @@ export class PongupClient {
     }
 
     fetch_user_profile() {
-        return axios.get('/api/user_profile')
+        return axios.get('/api/users')
     }
 
     // fetch_venues_and_events() {
