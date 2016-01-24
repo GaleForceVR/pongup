@@ -3,6 +3,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        
         <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}">
     </head>
     <body>
@@ -15,7 +16,12 @@
         </header>
         <div class="container">
             <h1>PONGup</h1>
+            <div id="react-pongup-app-container"></div>
         </div>
+        <script src="{% static "js/min-js/bundle.js" %}"></script>
+        <script>
+            pongup.init();
+        </script>
         
     </body>
 </html>

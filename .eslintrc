@@ -1,0 +1,39 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "jsx": true,
+    "experimentalObjectRestSpread": true,
+    "modules": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "linebreak-style": [2, "unix"],
+    "no-extra-semi": 2,
+    "no-console": 1,
+    "strict": [2, "never"],
+    "block-scoped-var": 2,
+    "complexity": [2, 2],
+    "consistent-return": 2,
+    "curly": 2,
+    "default-case": 2,
+    "dot-notation": [2, {"allowKeywords": true, "allowPattern": ""}],
+    "eqeqeq": [2, "smart"],
+    "guard-for-in": 2,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2
+  },
+  "globals": {
+    "history": true,
+    "document": true,
+    "jQuery": true,
+    "window": true
+  }
+}

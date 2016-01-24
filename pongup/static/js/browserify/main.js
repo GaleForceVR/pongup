@@ -1,1 +1,1 @@
-global.pongup = require('./pongup/main');
+global.pongup = require('./pongup/pongup');
