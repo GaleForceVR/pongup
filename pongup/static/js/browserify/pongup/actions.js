@@ -6,19 +6,29 @@ import { updatePath } from 'redux-simple-router'
 console.log('pongup/actions.js')
 export function loadUserData() {
     var client = new PongupClient()
+    console.log('pongup/actions.js 2')
+    // console.log(user_profile)
+    // console.log(user)
+    // console.log(user_data)
+    // var id = 1
+    // console.log(user)
+    // console.log(user_info)
+
+    // console.log(dispatch)
 
     return (dispatch) => {
         client.fetch_user_data()
-            .then( axios.spread( (user_profile, venues_and_events) => {
+            .then( axios.spread( (user_profile) => {
                 dispatch({
                     type: constants.USER_DATA_LOADED,
                     user_data: {
-                        user_profile: user_profile.data,
-                        venues_and_events: venues_and_events.data,
+                        // user_info: user_info,
+                        username: user_profile.data,
+                        // venues_and_events: venues_and_events.data,
                         is_loading: false
                     }
                 })
-                return venues_and_events
+                
             }))
             // .then((venues_and_events) => {
             //     console.log(venues_and_events.data.venues.map(venue => venue.id).toString())

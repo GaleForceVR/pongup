@@ -32,7 +32,8 @@ import { LaddersContainer } from '../ladders/components/LaddersContainer'
 
 function mapAppContainerStateToProps(state) {
     return {
-        active_app: state.pongup_reducer.active_tab
+        active_app: state.pongup_reducer.active_tab,
+        username: state.pongup_reducer.username
     };
 }
 

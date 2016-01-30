@@ -9,17 +9,16 @@ export class AppContainer extends Component {
         super(props);
 
         console.log('props')
+        console.log(props)
     }
 
     componentDidMount() {
         var self = this;
-        console.log('componentDidMount')
         
         self.props.dispatch(actions.loadUserData())
     }
 
     loading() {
-        console.log('AppContainer.jsx')
         return (
             <div className="infinite-list-item" style={{textAlign: "center"}}>
                  <h4>Loading...</h4>
@@ -31,10 +30,12 @@ export class AppContainer extends Component {
 
     render() {
         var self = this
+        console.log('bingo')
         console.log(self.props)
+        console.log(self.props.username)
         return (
             <div className="awesome">
-                <h1>Hello PONGup World!</h1>
+                <h1>{self.props.username}</h1>
             </div>
         )
     }

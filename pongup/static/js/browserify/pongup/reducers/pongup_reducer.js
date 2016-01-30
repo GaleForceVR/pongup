@@ -4,6 +4,7 @@ const initialState = {
     active_tab: 'home',
     is_loading: true,
     // unread_count: '...',
+    username: '',
     user_profile: {}/*,*/
     // venues_and_events: {}
 }
@@ -21,9 +22,10 @@ const pongup_reducer = (state = initialState, action) => {
             })
         case constants.USER_DATA_LOADED:
             return Object.assign({}, state, {
-                user_profile: action.user_data.user_profile,
+                username: action.user_data.username[0].username
+                // user_profile: action.user_data.user_profile,
                 // venues_and_events: action.user_data.venues_and_events,
-                is_loading: action.user_data.is_loading
+                // is_loading: action.user_data.is_loading
             })
         // case constants.UPDATE_UNREAD_ON_TAB:
         //     return Object.assign({}, state, {
