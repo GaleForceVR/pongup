@@ -15,8 +15,9 @@ class Ladder(models.Model):
 class User_Ladder(models.Model):
     user = models.ForeignKey(User)
     ladder = models.ForeignKey(Ladder)
+    ladder_rank = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '%s' % (self.ladder.name + ": " + self.user.username)
+        return '%s' % (self.ladder.name + ": " + self.user.username + " rank: " + self.ladder_rank.__str__())

@@ -38,8 +38,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """
-        This view should return a list of all the purchases
-        for the currently authenticated user.
+        This view should return the currently authenticated user.
         """
         user_id = self.request.user.id
         user = User.objects.get(pk=user_id)
