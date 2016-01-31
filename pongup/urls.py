@@ -43,10 +43,12 @@ urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^matches/', include('matches.urls')),
-    url(r'^ladders/', include('ladders.urls')),
+    # url(r'^ladders/', include('ladders.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # (r'^admin/(.*)', admin.site.urls),
+    # url(r'^/*', 'pongup.views.homepage', name='home'),
+    url(r'^ladders/', 'pongup.views.homepage', name='home'),
     url(r'^/?$', 'pongup.views.homepage', name='home'),
 )
 

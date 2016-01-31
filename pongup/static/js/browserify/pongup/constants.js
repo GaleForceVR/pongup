@@ -2,6 +2,7 @@
 
 // export const DATA_LOADED = 'DATA_LOADED';
 export const HOME_ACTIVE = 'HOME_ACTIVE';
+export const LADDERS_ACTIVE = 'LADDERS_ACTIVE';
 // export const INBOX_ACTIVE = 'INBOX_ACTIVE';
 // export const INBOX_FAILURE = 'INBOX_FAILURE';
 // export const LOADING_DATA = 'LOADING_DATA';

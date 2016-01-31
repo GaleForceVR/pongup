@@ -1,6 +1,7 @@
 import * as actions from '../actions'
 import classNames from 'classnames'
 import React, { Component } from 'react'
+import { PongupHomeContainer } from '../../pongup_home/components/PongupHomeContainer'
 
 
 export class AppContainer extends Component {
@@ -36,42 +37,45 @@ export class AppContainer extends Component {
         console.log(self.props.active_app)
         // var displayNone = { display: 'none' }
         return (
-            <ul>
-                <li>
-                    <a className={
-                            classNames (
-                                'left-nav-links',
-                                'no-class'
-                            )
+            <span>
+                {!self.props.is_loading ? this.props.children : self.loading()}
+                <ul>
+                    <li>
+                        <a className={
+                                classNames (
+                                    'left-nav-links',
+                                    'no-class'
+                                )
 
-                        }
-                        onClick={
-                            ()=>{
-                                console.log('Sign up clicked')
-                                self.props.dispatch(
-                                    actions.handleTabSelect('sign-up')
-                                )
                             }
-                        }
-                    >
-                    Sign up
-                    </a>
-                </li>
-                <li>
-                    <a
-                        onClick={
-                            ()=>{
-                                console.log('Log in clicked')
-                                self.props.dispatch(
-                                    actions.handleTabSelect('log-in')
-                                )
+                            onClick={
+                                ()=>{
+                                    console.log('Sign up clicked')
+                                    self.props.dispatch(
+                                        actions.handleTabSelect('sign-up')
+                                    )
+                                }
                             }
-                        }
-                    >
-                    Log in
-                    </a>
-                </li>
-            </ul>
+                        >
+                        Sign up
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            onClick={
+                                ()=>{
+                                    console.log('Log in clicked')
+                                    self.props.dispatch(
+                                        actions.handleTabSelect('log-in')
+                                    )
+                                }
+                            }
+                        >
+                        Log in
+                        </a>
+                    </li>
+                </ul>
+            </span>
         )
     }
 }

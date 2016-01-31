@@ -1,7 +1,8 @@
 import * as constants  from './constants'
 import axios from 'axios'
 import { PongupClient } from './pongup_client'
-import { updatePath } from 'redux-simple-router'
+// import { updatePath } from 'redux-simple-router'
+import { updatePath } from 'react-router-redux'
 
 console.log('pongup/actions.js')
 export function loadUserData() {

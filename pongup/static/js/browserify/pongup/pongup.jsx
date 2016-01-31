@@ -3,7 +3,7 @@ import 'babel-polyfill'
 // imported modules and libraries
 import { createHistory } from 'history'
 import { hashHistory } from 'react-router'
-import { syncHistory } from 'redux-simple-router'
+// import { syncHistory } from 'redux-simple-router'
 import { syncHistoryToStore } from 'redux-simple-router'
 // import { browserHistory } from 'react-router'
 
@@ -14,10 +14,20 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
+import ReactDom from 'react-dom'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { syncHistory, routeReducer } from 'react-router-redux'
+
+// import all_reducers from 'reducers/index.js'
+
+// const reducer = combineReducers(Object.assign({}, all_reducers, {
+//     routing: routeReducer
+// }))
+
 // imported components
 
 import { AppContainer } from './components/AppContainer'
-// import { LaddersContainer } from '../ladders/components/LaddersContainer'
+import { LaddersContainer } from '../ladders/components/LaddersContainer'
 import { PongupHomeContainer } from '../pongup_home/components/PongupHomeContainer'
 
 // import { ControlPanelContainer } from './components/ControlPanelContainer'
@@ -33,6 +43,11 @@ import { PongupHomeContainer } from '../pongup_home/components/PongupHomeContain
 // import * as CalendarActions from '../calendar/actions'
 
 function mapAppContainerStateToProps(state) {
+    console.log('%cAppContainer props', 'background-color:orange')
+    console.log({
+        active_app: state.pongup_reducer.active_tab,
+        username: state.pongup_reducer.username
+    })
     return {
         active_app: state.pongup_reducer.active_tab,
         username: state.pongup_reducer.username
@@ -50,18 +65,28 @@ function mapAppContainerStateToProps(state) {
 // }
 
 function mapPongupHomeContainerStateToProps(state) {
+    console.log('%cPongupHomeContainer props', 'background-color:orange')
+    console.log({
+        // active_app: state.pongup_reducer.active_tab
+        active_app: state.pongup_home_reducer.active_tab
+    })
     return {
         // active_app: state.pongup_reducer.active_tab
-        active_app: state.pongup_reducer.active_tab
+        active_app: state.pongup_home_reducer.active_tab
     };
 }
 
-// function mapLaddersContainerStateToProps(state) {
-//     return {
-//         // active_app: state.pongup_reducer.active_tab
-//         active_app: 'home'
-//     };
-// }
+function mapLaddersContainerStateToProps(state) {
+    console.log('%cLaddersContainer props', 'background-color:orange')
+    console.log({
+        // active_app: state.pongup_reducer.active_tab
+        active_app: state.ladders_reducer.active_tab
+    })
+    return {
+        // active_app: state.pongup_reducer.active_tab
+        active_app: state.ladders_reducer.active_tab
+    };
+}
 
 // function mapDashBoardStateToProps(state) {
 //     return {
@@ -128,7 +153,7 @@ export function init() {
     
     var ConnectedAppContainer = connect(mapAppContainerStateToProps)(AppContainer)
     var ConnectedPongupHomeContainer = connect(mapPongupHomeContainerStateToProps)(PongupHomeContainer)
-    // var ConnectedLaddersContainer = connect(mapLaddersContainerStateToProps)(LaddersContainer)
+    var ConnectedLaddersContainer = connect(mapLaddersContainerStateToProps)(LaddersContainer)
 
     // var ConnectedControlPanelContainer = connect(mapControlPanelContainerStateToProps)(ControlPanelContainer)
     // var ConnectedDashBoardContainer = connect(mapDashBoardStateToProps)(DashBoardContainer);
@@ -138,11 +163,11 @@ export function init() {
     console.log('render inside init')
     render(
         <Provider store={store}>
-            <Router history={hashHistory}>
+            <Router history={browserHistory}>
                 <Route path="/" component={ConnectedAppContainer} >
                     {/*<IndexRoute component={ConnectedDashBoardContainer}/>*/}
                     <IndexRoute component={ConnectedPongupHomeContainer}/>
-                    {/*<Route path="inbox" component={ConnectedInboxContainer} >*/}
+                    <Route path="ladders" component={ConnectedLaddersContainer} />
                         {/*<Route path="message/:message_id" component={ConnectedMessageContainer}/>*/}
                     {/*</Route>*/}
                     {/*<Route path="my-listings" component={ConnectedMyListingsContainer} />*/}

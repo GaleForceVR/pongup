@@ -1,5 +1,6 @@
 import pongup_reducer  from './pongup_reducer'
 import pongup_home_reducer from '../../pongup_home/reducers'
+import ladders_reducer from '../../ladders/reducers'
 
 // import  dashboard_reducer  from '../../dashboard/reducers'
 // import  control_panel_reducer  from './control_panel_reducer'
@@ -8,7 +9,8 @@ import pongup_home_reducer from '../../pongup_home/reducers'
 
 const all_reducers = {
     pongup_reducer,
-    pongup_home_reducer
+    pongup_home_reducer,
+    ladders_reducer
     // dashboard_reducer,
     // inbox_reducer,
     // my_listings_reducer

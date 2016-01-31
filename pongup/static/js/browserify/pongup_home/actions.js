@@ -2,13 +2,13 @@ import * as constants  from '../pongup/constants'
 import axios from 'axios'
 import { PongupHomeClient } from './pongup_home_client'
 
-export function loadPongupHome() {
+export function loadPongupHome(params) {
 
     // return (dispatch) => {
-		var client = new PongupHomeClient()
-		console.log('%cpongup_home/actions.js 2', 'background-color:yellow')
+		
 
 		return (dispatch) => {
+			var client = new PongupHomeClient()
 			client.fetch_user_data()
 				.then( axios.spread( (user_profile) => {
 					dispatch({
