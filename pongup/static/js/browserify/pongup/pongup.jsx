@@ -2,21 +2,23 @@ import 'babel-polyfill'
 
 // imported modules and libraries
 import { createHistory } from 'history'
-import { hashHistory } from 'history'
+import { hashHistory } from 'react-router'
 import { syncHistory } from 'redux-simple-router'
 import { syncHistoryToStore } from 'redux-simple-router'
+// import { browserHistory } from 'react-router'
 
 import { connect, Provider } from 'react-redux'
 import configureStore from './store'
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link } from 'react-router'
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
 // imported components
 
 import { AppContainer } from './components/AppContainer'
-import { LaddersContainer } from '../ladders/components/LaddersContainer'
+// import { LaddersContainer } from '../ladders/components/LaddersContainer'
+import { PongupHomeContainer } from '../pongup_home/components/PongupHomeContainer'
 
 // import { ControlPanelContainer } from './components/ControlPanelContainer'
 // import { DashBoardContainer } from '../dashboard/components/DashBoardContainer'
@@ -47,12 +49,19 @@ function mapAppContainerStateToProps(state) {
 //     }
 // }
 
-function mapLaddersContainerStateToProps(state) {
+function mapPongupHomeContainerStateToProps(state) {
     return {
         // active_app: state.pongup_reducer.active_tab
-        active_app: 'home'
+        active_app: state.pongup_reducer.active_tab
     };
 }
+
+// function mapLaddersContainerStateToProps(state) {
+//     return {
+//         // active_app: state.pongup_reducer.active_tab
+//         active_app: 'home'
+//     };
+// }
 
 // function mapDashBoardStateToProps(state) {
 //     return {
@@ -106,18 +115,19 @@ function mapLaddersContainerStateToProps(state) {
 // }
 
 export function init() {
-    console.log('init start')
+    console.log('%cinit start', 'background-color:yellow')
     const store = configureStore();
-    const history = createHistory();
+    // const history = createHistory();
     // syncReduxAndRouter(history, store);
-    const router = syncHistory(hashHistory);
+    // const router = syncHistory(hashHistory);
+    // console.log(hashHistory)
+    console.log(store)
     // router.syncHistoryToStore(store);
 
     // send dispatch() as a prop down to the components...
-    console.log(AppContainer)
-    console.log(mapAppContainerStateToProps)
+    
     var ConnectedAppContainer = connect(mapAppContainerStateToProps)(AppContainer)
-    console.log(ConnectedAppContainer)
+    var ConnectedPongupHomeContainer = connect(mapPongupHomeContainerStateToProps)(PongupHomeContainer)
     // var ConnectedLaddersContainer = connect(mapLaddersContainerStateToProps)(LaddersContainer)
 
     // var ConnectedControlPanelContainer = connect(mapControlPanelContainerStateToProps)(ControlPanelContainer)
@@ -128,10 +138,10 @@ export function init() {
     console.log('render inside init')
     render(
         <Provider store={store}>
-            <Router history={history}>
+            <Router history={hashHistory}>
                 <Route path="/" component={ConnectedAppContainer} >
                     {/*<IndexRoute component={ConnectedDashBoardContainer}/>*/}
-                    {/*<IndexRoute component={ConnectedPongupHomeContainer}/>*/}
+                    <IndexRoute component={ConnectedPongupHomeContainer}/>
                     {/*<Route path="inbox" component={ConnectedInboxContainer} >*/}
                         {/*<Route path="message/:message_id" component={ConnectedMessageContainer}/>*/}
                     {/*</Route>*/}

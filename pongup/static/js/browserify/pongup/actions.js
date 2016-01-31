@@ -47,7 +47,7 @@ export function loadUserData() {
 export function handleTabSelect(tab) {
     return (dispatch) => {
         dispatch({type: constants.UPDATE_TAB, active_tab: tab})
-        if (tab !== '') {
+        if (tab !== 'home') {
             dispatch(updatePath('/' + tab))
         } else {
             dispatch(updatePath('/'))

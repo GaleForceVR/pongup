@@ -122,18 +122,20 @@ gulp.task('prodBundle', function(){
         })
 })
 
-// gulp.task('watch', ['connect'] , function () {
+gulp.task('watch', function () {
 //     gutil.log('Watching Javascript Files...')
 //     gulp.watch('pongup/static/js/*/*.js', ['devGlobalJs']);
 //     // gulp.watch('assets/js/logged_in/*.js', ['devLoggedInJs']);
 //     // gulp.watch('assets/js/staff/*.js', ['devStaffJs']);
 //     // gulp.watch('assets/js/head/*.js', ['devHeadJs']);
+    gutil.log('Watching .scss files...');
+    gulp.watch('pongup/sass/*.scss', ['compass']);
 //     // gulp.watch('assets/sass/*.scss', ['cssSplit']);
 //     // gulp.watch('assets/css/global.css', ['cssSplit']);
-// });
+});
 
 // gulp.task('default', function() {
 //     return gutil.log('Gulp is running!')
 
 // });
-gulp.task('default', ['compass', 'bundle'/*, 'watch'*/]);
+gulp.task('default', ['compass', 'bundle', 'watch']);

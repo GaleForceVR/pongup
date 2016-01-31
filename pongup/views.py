@@ -8,13 +8,16 @@ from .serializers import UserSerializer
 from rest_framework import routers, serializers, viewsets
 
 def homepage(request):
-	user_info = User.objects.get(pk=request.user.id)
+    try:
+        user_info = User.objects.get(pk=request.user.id)
+    except User.DoesNotExist:
+        user_info = None
 	# return render_to_response('pongup/homepage.html')
-	template = loader.get_template('pongup/homepage.html')
-	context = {
+    template = loader.get_template('pongup/homepage.html')
+    context = {
 		'user_info': user_info,
 	}
-	return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(context, request))
 
 # def homepage(request):
 #     ladders_list = Ladder.objects.order_by('created_at')[:5]

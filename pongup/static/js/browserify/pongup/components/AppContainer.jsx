@@ -33,10 +33,45 @@ export class AppContainer extends Component {
         console.log('bingo')
         console.log(self.props)
         console.log(self.props.username)
+        console.log(self.props.active_app)
+        // var displayNone = { display: 'none' }
         return (
-            <div className="awesome">
-                <h1>{self.props.username}</h1>
-            </div>
+            <ul>
+                <li>
+                    <a className={
+                            classNames (
+                                'left-nav-links',
+                                'no-class'
+                            )
+
+                        }
+                        onClick={
+                            ()=>{
+                                console.log('Sign up clicked')
+                                self.props.dispatch(
+                                    actions.handleTabSelect('sign-up')
+                                )
+                            }
+                        }
+                    >
+                    Sign up
+                    </a>
+                </li>
+                <li>
+                    <a
+                        onClick={
+                            ()=>{
+                                console.log('Log in clicked')
+                                self.props.dispatch(
+                                    actions.handleTabSelect('log-in')
+                                )
+                            }
+                        }
+                    >
+                    Log in
+                    </a>
+                </li>
+            </ul>
         )
     }
 }

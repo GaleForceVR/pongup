@@ -1,3 +1,15 @@
+/*$backgroundBlue: #001e40;*/
+$backgroundBlue: #001B39;
+/*$footerBlue: #013878;*/
+/*$footerBlue: #01244B;*/
+$footerBlue: #002f62;
+$blueText: #0079fd;
+$hoverBlue: #024288;
+$hoverTextBlue: #5CA7F9;
+$footerTextColor: #01438D;
+$orange: #dd540c;
+$yellow: #fee042;
+
 html {
     height: 100%;
 }
@@ -5,6 +17,14 @@ html {
 body {
     height: 100%;
     margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.super-wrapper {
+    min-height: 100%;
+    position: relative;
+    background-color: $backgroundBlue;
 }
 
 header {
@@ -12,8 +32,109 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
-    background-color: white;
+    height: 55px;
+    background-color: $footerBlue;
+    z-index: 50000;
+    box-shadow: 0 5px 15px black;
+    ul {
+        position: absolute;
+        right: 0;
+        height: 55px;
+        top: 0;
+        li {
+            height: 55px;
+            line-height: 55px;
+            float: left;
+            &:hover {
+                background-color: $hoverBlue;
+                a {
+                    color: $hoverTextBlue;
+                }
+            }
+            &.sign-up a, &.log-in a{
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+            &.sign-up {
+                text-shadow: 1px 1px 1px #F0BA85;
+                background: $orange; /* For browsers that do not support gradients */
+                background: -webkit-linear-gradient($yellow, $orange); /* For Safari 5.1 to 6.0 */
+                background: -o-linear-gradient($yellow, $orange); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient($yellow, $orange); /* For Firefox 3.6 to 15 */
+                background: linear-gradient($yellow, $orange); /* Standard syntax */
+                a {
+                    color: black;
+                }
+                &:hover {
+                    background: $orange; /* For browsers that do not support gradients */
+                    background: -webkit-linear-gradient($orange, $yellow); /* For Safari 5.1 to 6.0 */
+                    background: -o-linear-gradient($orange, $yellow); /* For Opera 11.1 to 12.0 */
+                    background: -moz-linear-gradient($orange, $yellow); /* For Firefox 3.6 to 15 */
+                    background: linear-gradient($orange, $yellow); /* Standard syntax */
+                }
+            }
+            a {
+                line-height: 55px;
+                height: 55px;
+                display: block;
+                padding-right: 30px;
+                padding-left: 30px;
+                color: $blueText;
+                img {
+                    width: 30px;
+                    position: relative;
+                    top: 10px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    width: 100%;
+
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+    padding-top: 55px;
+    padding-bottom: 200px;
+    color: white;
+}
+
+footer {
+    width: 100%;
+    height: 50px;
+    padding: 75px;
+    background-color: $footerBlue;
+
+    position: absolute;
+    bottom: 0;
+
+    color: $footerTextColor;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    &.primary {
+        padding: 8px 45px;
+        background: $orange; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient($yellow, $orange); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient($yellow, $orange); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient($yellow, $orange); /* For Firefox 3.6 to 15 */
+        background: linear-gradient($yellow, $orange); /* Standard syntax */
+        color: black;
+        text-shadow: 1px 1px 1px #F0BA85;
+        &:hover {
+            background: $orange; /* For browsers that do not support gradients */
+            background: -webkit-linear-gradient($orange, $yellow); /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient($orange, $yellow); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient($orange, $yellow); /* For Firefox 3.6 to 15 */
+            background: linear-gradient($orange, $yellow); /* Standard syntax */
+        }
+    }
 }
 
 .logo {
@@ -21,9 +142,9 @@ header {
 }
 
 .logo img {
-    width: 200px;
+    width: 140px;
     position: absolute;
-    top: 10px;
+    top: 7px;
     left: 20px;
 }
 
@@ -31,9 +152,19 @@ header {
     background: blue;
 }
 
-
-.container {
-    background-color: #001e40;
+.homepage {
     width: 100%;
-    height: 100%;
+    min-height: 750px;
+    background-image: url('../img/backhand.png');
+    background-size: 1000px;
+    background-repeat: no-repeat;
+    background-position-x: 2%;
 }
+
+.homepage-cta {
+    position: absolute;
+    top: 500px;
+    left: 800px;
+    box-shadow: 5px 5px 10px #001429;
+}
+

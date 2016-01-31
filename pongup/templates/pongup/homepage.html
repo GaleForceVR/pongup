@@ -7,17 +7,35 @@
         <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}">
     </head>
     <body>
-        <header>
-            <a href="/">
-                <div class="logo">
-                    <img src="{% static "img/pong-up-logo.png" %}" alt="PONGup Logo" />
-                </div>
-            </a>
-        </header>
-        <div class="container">
-            <h1>PONGup</h1>
-            <div id="react-pongup-app-container"></div>
+
+        <div class="super-wrapper">
+            <header>
+                <a href="/">
+                    <div class="logo">
+                        <img src="{% static "img/pong-up-logo-white.png" %}" alt="PONGup Logo" />
+                    </div>
+                </a>
+                <ul>
+                    <li><a href="#ladders">Ladders</a></li>
+                    {% if user_info %}
+                        <li><a href="#profile"><img src="{% static "img/user-icon.png" %}">username</a></li>
+                    {% else %}
+                        <li class="sign-up"><a href="#sign-up">Sign up</a></li>
+                        <li class="log-in"><a href="#log-in">Log in</a></li>
+                    {% endif %}
+                </ul>
+            </header>
+
+            <div class="container">
+                <div id="react-pongup-app-container"></div>
+            </div>
+            
+
+            <footer>
+                <div>&#169; PONGup 2016</div>
+            </footer>
         </div>
+
         <script src="{% static "js/min-js/bundle.js" %}"></script>
         <script>
             pongup.init();
