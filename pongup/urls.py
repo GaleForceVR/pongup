@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
 from . import views
-from .views import UserViewSet
+from .views import UserViewSet, LaddersViewSet, LadderDetailViewSet
 
 
 
@@ -32,6 +32,9 @@ from .views import UserViewSet
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet, 'User')
+router.register(r'ladders', LaddersViewSet)
+# router.register(r'ladder', LadderDetailViewSet)
+# router.register(r'api/ladder/(?<ladder_id>.+)/$', LadderDetailViewSet)
 
 urlpatterns = patterns('',
     # Examples:
@@ -40,6 +43,7 @@ urlpatterns = patterns('',
 
     # url(r'^users_ladders/', include('ladders.urls')),
     url(r'user/(?P<pk>[-\d]+)/$', UserViewSet, name='user-detail'),
+    url(r'^api/ladder/(?P<pk>[-\d]+)/$', LadderDetailViewSet.as_view({'get': 'list'})),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^matches/', include('matches.urls')),
@@ -48,6 +52,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # (r'^admin/(.*)', admin.site.urls),
     # url(r'^/*', 'pongup.views.homepage', name='home'),
+    url(r'^login/', 'pongup.views.homepage', name='home'),
     url(r'^ladders/', 'pongup.views.homepage', name='home'),
     url(r'^/?$', 'pongup.views.homepage', name='home'),
 )

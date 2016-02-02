@@ -29,6 +29,7 @@ import { syncHistory, routeReducer } from 'react-router-redux'
 import { AppContainer } from './components/AppContainer'
 import { LaddersContainer } from '../ladders/components/LaddersContainer'
 import { PongupHomeContainer } from '../pongup_home/components/PongupHomeContainer'
+import { LoginContainer } from '../login/components/LoginContainer'
 
 // import { ControlPanelContainer } from './components/ControlPanelContainer'
 // import { DashBoardContainer } from '../dashboard/components/DashBoardContainer'
@@ -46,11 +47,21 @@ function mapAppContainerStateToProps(state) {
     console.log('%cAppContainer props', 'background-color:orange')
     console.log({
         active_app: state.pongup_reducer.active_tab,
-        username: state.pongup_reducer.username
+        is_loading: state.pongup_reducer.is_loading,
+        username: state.pongup_reducer.username,
+        user_profile: state.pongup_reducer.user_profile,
+        is_staff: state.pongup_reducer.is_staff,
+        password: state.pongup_reducer.password,
+        email: state.pongup_reducer.email
     })
     return {
         active_app: state.pongup_reducer.active_tab,
-        username: state.pongup_reducer.username
+        is_loading: state.pongup_reducer.is_loading,
+        username: state.pongup_reducer.username,
+        user_profile: state.pongup_reducer.user_profile,
+        is_staff: state.pongup_reducer.is_staff,
+        password: state.pongup_reducer.password,
+        email: state.pongup_reducer.email
     };
 }
 
@@ -72,7 +83,13 @@ function mapPongupHomeContainerStateToProps(state) {
     })
     return {
         // active_app: state.pongup_reducer.active_tab
-        active_app: state.pongup_home_reducer.active_tab
+        active_app: state.pongup_home_reducer.active_tab,
+        is_loading: state.pongup_home_reducer.is_loading,
+        username: state.pongup_home_reducer.username,
+        user_profile: state.pongup_home_reducer.user_profile,
+        is_staff: state.pongup_home_reducer.is_staff,
+        password: state.pongup_home_reducer.password,
+        email: state.pongup_home_reducer.email
     };
 }
 
@@ -85,6 +102,26 @@ function mapLaddersContainerStateToProps(state) {
     return {
         // active_app: state.pongup_reducer.active_tab
         active_app: state.ladders_reducer.active_tab
+    };
+}
+
+function mapLoginContainerStateToProps(state) {
+    console.log('%cLoginContainer props', 'background-color:orange')
+    console.log({
+        // active_app: state.pongup_reducer.active_tab
+        active_app: state.login_reducer.active_tab,
+        username: state.login_reducer.username,
+        is_staff: state.login_reducer.is_staff,
+        password: state.login_reducer.password,
+        email: state.login_reducer.email
+    })
+    return {
+        // active_app: state.pongup_reducer.active_tab
+        active_app: state.login_reducer.active_tab,
+        username: state.login_reducer.username,
+        is_staff: state.login_reducer.is_staff,
+        password: state.login_reducer.password,
+        email: state.login_reducer.email
     };
 }
 
@@ -154,6 +191,7 @@ export function init() {
     var ConnectedAppContainer = connect(mapAppContainerStateToProps)(AppContainer)
     var ConnectedPongupHomeContainer = connect(mapPongupHomeContainerStateToProps)(PongupHomeContainer)
     var ConnectedLaddersContainer = connect(mapLaddersContainerStateToProps)(LaddersContainer)
+    var ConnectedLoginContainer = connect(mapLoginContainerStateToProps)(LoginContainer)
 
     // var ConnectedControlPanelContainer = connect(mapControlPanelContainerStateToProps)(ControlPanelContainer)
     // var ConnectedDashBoardContainer = connect(mapDashBoardStateToProps)(DashBoardContainer);
@@ -170,7 +208,7 @@ export function init() {
                     <Route path="ladders" component={ConnectedLaddersContainer} />
                         {/*<Route path="message/:message_id" component={ConnectedMessageContainer}/>*/}
                     {/*</Route>*/}
-                    {/*<Route path="my-listings" component={ConnectedMyListingsContainer} />*/}
+                    <Route path="login" component={ConnectedLoginContainer} />
                     {/*<Route path="ladders" component={ConnectedLaddersContainer} />*/}
                 </Route>
             </Router>
