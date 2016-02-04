@@ -8,9 +8,6 @@ export class AppContainer extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
-
-        console.log('props')
-        console.log(props)
     }
 
     componentDidMount() {
@@ -31,11 +28,6 @@ export class AppContainer extends Component {
 
     render() {
         var self = this
-        console.log('bingo')
-        console.log(self.props)
-        console.log(self.props.username)
-        console.log(self.props.active_app)
-        // var displayNone = { display: 'none' }
         return (
             <span>
                 {!self.props.is_loading ? this.props.children : self.loading()}
@@ -50,7 +42,6 @@ export class AppContainer extends Component {
                             }
                             onClick={
                                 ()=>{
-                                    console.log('Sign up clicked')
                                     self.props.dispatch(
                                         actions.handleTabSelect('sign-up')
                                     )
@@ -64,7 +55,6 @@ export class AppContainer extends Component {
                         <a
                             onClick={
                                 ()=>{
-                                    console.log('Log in clicked')
                                     self.props.dispatch(
                                         actions.handleTabSelect('log-in')
                                     )

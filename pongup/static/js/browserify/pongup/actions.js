@@ -4,20 +4,10 @@ import { PongupClient } from './pongup_client'
 // import { updatePath } from 'redux-simple-router'
 import { updatePath } from 'react-router-redux'
 
-console.log('pongup/actions.js')
 export function loadUserData() {
-    var client = new PongupClient()
-    console.log('pongup/actions.js 2')
-    // console.log(user_profile)
-    // console.log(user)
-    // console.log(user_data)
-    // var id = 1
-    // console.log(user)
-    // console.log(user_info)
-
-    // console.log(dispatch)
 
     return (dispatch) => {
+        var client = new PongupClient()
         client.fetch_user_data()
             .then( axios.spread( (user_profile) => {
                 dispatch({
@@ -31,17 +21,6 @@ export function loadUserData() {
                 })
                 
             }))
-            // .then((venues_and_events) => {
-            //     console.log(venues_and_events.data.venues.map(venue => venue.id).toString())
-
-            //     client.fetch_unread_count({venues: venues_and_events.data.venues.map(venue => venue.id).toString()})
-            //         .then((unread_count)=>{
-            //             dispatch({
-            //                 type: constants.UPDATE_UNREAD_ON_TAB,
-            //                 unread_count: unread_count.data.o
-            //             })
-            //         })
-            // })
     }
 }
 

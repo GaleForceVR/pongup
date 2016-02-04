@@ -3,26 +3,11 @@ import * as constants from '../pongup/constants'
 const initialState = {
     active_tab: 'ladders',
     is_loading: true,
-    username: '',
+    // username: '',
     user_profile: {}
- //    listings: [{
- //        img_url: '',
- //        listing_impressions: 0,
- //        listing_page_views: 0,
- //        listing_quote_requests: 0,
- //        plan_option: ''
-
- //    }],
- //    is_loading: true,
-	// message_data: {},
-	// proposals: []
-
 }
 
 const ladders_reducer = (state = initialState, action) => {
-    // console.log('%cPongupHomeContainer componentDidMount', 'background-color:blue')
-    console.log('%cLadders reducer', 'background-color:red')
-    console.log('%caction.type' + action.type, 'background-color:yellow')
     switch (action.type) {
         case constants.LADDERS_ACTIVE:
             console.log('LADDERS_ACTIVE')

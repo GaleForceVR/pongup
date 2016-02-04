@@ -8,20 +8,10 @@ const initialState = {
     is_staff: false,
     password: '',
     email: ''
-
-
-    // unread_count: '...',
-    // username: '',
-    // user_profile: {}/*,*/
-    // venues_and_events: {}
 }
 
 
 const pongup_reducer = (state = initialState, action) => {
-    console.log('state')
-    console.log(state)
-    console.log('%caction', 'background-color:red')
-    console.log(action)
     switch (action.type) {
         case constants.UPDATE_TAB:
             return Object.assign({}, state, {

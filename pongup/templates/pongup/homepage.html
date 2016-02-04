@@ -15,6 +15,9 @@
                         <img src="{% static "img/pong-up-logo-white.png" %}" alt="PONGup Logo" />
                     </div>
                 </a>
+                <form  class="kinzie-form kinzie-dark" action="." method="post" id="contact_form">
+                    {% csrf_token %}
+                </form>
                 <ul>
                     <li><a href="/ladders">Ladders</a></li>
                     {% if user_info %}

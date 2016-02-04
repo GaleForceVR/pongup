@@ -21,55 +21,12 @@ export class PongupHomeContainer extends Component {
 
     componentDidMount() {
         var self = this
-        console.log('%cPongupHomeContainer componentDidMount', 'background-color:blue')
-        console.log(self)
-        console.log(self.props)
-        // console.log(self.props.venues_and_events)
-        // var venues = self.props.venues_and_events.venues.map(
-        //     (venue)=>{ return (venue.id) }
-        // ).toString()
-        // var events = self.props.venues_and_events.events.map(
-        //     (event)=>{ return (event.id) }
-        // ).toString()
-        // self.props.dispatch(
-        //     actions.loadDashboard({
-        //         messages: {
-        //             page: 1,
-        //             venues: venues,
-        //             events: events,
-        //             sort: "-updated",
-        //             status: "o"
-        //         }
-        //     })
-        // )
+
         self.props.dispatch(actions.loadPongupHome())
     }
 
-    // <div className="container messaging-override">
- //        <h1 className="dashboard-header">
- //            Dashboard
- //        </h1>
- //        {
- //            self.props.is_loading ?
- //                self.loading() :
- //                <div className="dashboard-row-container">
- //                    <MessageContainer {...self.props} />
- //                    <ProposalContainer {...self.props} />
- //                    <ListingsContainer {...self.props} />
- //                </div>
- //        }
-
- //        <div class="clearfix"></div>
- //    </div>
-
-    // shouldComponentUpdate(nextProps) {
-    //     return nextProps.venues_and_events.venues !== self.props.venues_and_events.venues
-    // }
-
     render() {
         var self = this
-        console.log('%cPongupHomeContainer', "background-color:yellow")
-        console.log(self.props)
         return (
             <div className="homepage">
                 <a className="primary homepage-cta" href="#joinLadder">Join a Ladder</a>

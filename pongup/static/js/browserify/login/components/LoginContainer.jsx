@@ -11,18 +11,19 @@ export class LoginContainer extends Component {
 
     submitUser() {
         var self = this
-        // console.log('%csubmitUser', 'background-color:blue;color:yellow')
-        // console.log(self)
-        // console.log(self.props)
-
+        console.log('submitUser')
+        console.log(self.props)
+        console.log('state')
+        console.log(self.state)
+        // console.log(self.state)
         self.props.dispatch(
             
             actions.createUser({
-                new_user_info: {
-                    username: self.props.username,
-                    is_staff: self.props.is_staff,
-                    password: self.props.password,
-                    email: self.props.email
+                new_user: {
+                    username: self.props.new_user.username,
+                    is_staff: false,
+                    password: self.props.new_user.password,
+                    email: self.props.new_user.email
                 }
             })
         )
@@ -40,16 +41,11 @@ export class LoginContainer extends Component {
 
     componentDidMount() {
         var self = this
-        console.log('%cLoginContainer componentDidMount', 'background-color:blue')
-        console.log(self)
-        console.log(self.props)
         self.props.dispatch(actions.loadUser())
     }
 
     render() {
         var self = this
-        console.log('%cLoginContainer', "background-color:yellow")
-        console.log(self.props)
         return (
             <div className="login-page">
                 <label>Username: 
@@ -64,10 +60,26 @@ export class LoginContainer extends Component {
                     />
                 </label>
                 <label>Email: 
-                    <input type="text" placeholder="Email" />
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        onChange={(e)=>{
+                            self.props.dispatch(
+                                actions.saveToProps({email: e.target.value})
+                            )
+                        }}
+                    />
                 </label>
                 <label>Password: 
-                    <input type="text" placeholder="Password" />
+                    <input
+                        type="text"
+                        placeholder="Password"
+                        onChange={(e)=>{
+                            self.props.dispatch(
+                                actions.saveToProps({password: e.target.value})
+                            )
+                        }}
+                    />
                 </label>
                 <a
                     className="primary homepage-cta"
@@ -76,7 +88,6 @@ export class LoginContainer extends Component {
                         self.submitUser()
                     }}
                 >
-
                 Submit
                 </a>
             </div>

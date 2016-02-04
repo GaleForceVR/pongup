@@ -29,20 +29,27 @@ export function loadUser() {
 }
 
 export function saveToProps(new_props) {
-	console.log('%csaveToProps', 'background-color:yellow;color:red')
 	return (dispatch, getState) => {
-		var new_state = Object.assign({}, getState().login_reducer, new_props)
+		var new_state = Object.assign({}, getState().login_reducer.new_user, new_props)
+		// return Object.assign({}, getState().login_reducer, new_props)
+		console.log('%csaveToProps', 'background-color:orange')
+		console.log(getState().login_reducer.new_user)
+		console.log(new_state)
+		console.log(new_props)
 		dispatch({
 			type: constants.SAVE_STATE,
-			new_state
+			new_props
 		})
 	}
 }
 
-export function createUser() {
+export function createUser(new_user) {
 	console.log('%ccreateUser', 'background-color:blue;color:yellow')
+	console.log('new_user')
+	console.log(new_user)
+	console.log(new_user.new_user)
 	return (dispatch, getState) => {
-		var current_state = Object.assign({}, getState().login_reducer)
+		var current_state = Object.assign({}, getState().login_reducer, new_user)
 		console.log('current_state')
 		console.log(current_state)
 		var client = new LoginClient()
