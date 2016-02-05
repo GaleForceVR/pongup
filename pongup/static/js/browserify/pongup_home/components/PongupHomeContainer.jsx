@@ -2,6 +2,9 @@ import * as actions from '../actions'
 // import classNames from 'classnames'
 import React, { Component } from 'react'
 
+var $ = require('jquery')
+
+
 export class PongupHomeContainer extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
@@ -21,6 +24,8 @@ export class PongupHomeContainer extends Component {
 
     componentDidMount() {
         var self = this
+        $('.haters').fadeOut(2000)
+        $('.haters').fadeIn(2000)
 
         self.props.dispatch(actions.loadPongupHome())
     }
@@ -28,7 +33,7 @@ export class PongupHomeContainer extends Component {
     render() {
         var self = this
         return (
-            <div className="homepage">
+            <div className="homepage haters">
                 <a className="primary homepage-cta" href="#joinLadder">Join a Ladder</a>
             </div>
         )
