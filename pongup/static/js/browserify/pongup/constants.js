@@ -13,5 +13,6 @@ export const SAVE_STATE = 'SAVE_STATE';
 // export const MESSAGE_ACTIVE = 'MESSAGE_ACTIVE';
 // export const TOGGLE_REPLY = 'TOGGLE_REPLY';
 export const UPDATE_TAB = 'UPDATE_TAB';
+export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const USER_DATA_LOADED = 'USER_DATA_LOADED';
 // export const UPDATE_UNREAD_ON_TAB = 'UPDATE_UNREAD_ON_TAB';

@@ -2,7 +2,8 @@ import * as constants  from './constants'
 import axios from 'axios'
 import { PongupClient } from './pongup_client'
 // import { updatePath } from 'redux-simple-router'
-import { updatePath } from 'react-router-redux'
+import { routeActions } from 'react-router-redux'
+// import { UPDATE_LOCATION } from 'react-router-redux'
 
 export function loadUserData() {
 
@@ -24,13 +25,28 @@ export function loadUserData() {
     }
 }
 
+// export update(state, action) {
+//     switch(action.type) {
+//         case UPDATE_LOCATION:
+
+//     }
+// }
+
 export function handleTabSelect(tab) {
+    console.log('%ctab', 'background-color:blue;color:yellow')
+    console.log(tab)
     return (dispatch) => {
-        dispatch({type: constants.UPDATE_TAB, active_tab: tab})
+        dispatch({type: constants.UPDATE_LOCATION, active_tab: tab})
         if (tab !== 'home') {
-            dispatch(updatePath('/' + tab))
+            // dispatch(updatePath('/' + tab))
+            console.log(dispatch)
+            console.log('/' + tab)
+            console.log(routeActions.push('/' + tab))
+            dispatch(routeActions.push('/' + tab))
         } else {
-            dispatch(updatePath('/'))
+            // dispatch(updatePath('/'))
+            console.log(dispatch)
+            dispatch(routeActions.push('/'))
         }
     }
 }

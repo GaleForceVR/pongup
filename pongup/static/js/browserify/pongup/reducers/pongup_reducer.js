@@ -13,7 +13,7 @@ const initialState = {
 
 const pongup_reducer = (state = initialState, action) => {
     switch (action.type) {
-        case constants.UPDATE_TAB:
+        case constants.UPDATE_LOCATION:
             return Object.assign({}, state, {
                 active_tab: action.active_tab
             })

@@ -8,6 +8,10 @@ const initialState = {
         is_staff: false,
         password: '',
         email: ''
+    },
+    login_info: {
+        username: '',
+        password: ''
     }
     
 }

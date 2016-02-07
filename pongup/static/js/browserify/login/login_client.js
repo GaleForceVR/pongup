@@ -33,6 +33,27 @@ export class LoginClient {
         return axios.get(url)
     }
 
+    login_user(user_info) {
+        var csrftoken = getTheCookie()
+
+        return axios.get('/api/user/', {
+            username: user_info.username,
+            password: user_info.password
+        },
+        {
+            xsrfCookieName: 'csrftoken',
+            xsrfHeaderName: 'X-CSRFToken',
+            'X-CSRFToken': csrftoken
+        })
+        .then(function (response) {
+            console.log('response')
+            console.log(response)
+        })
+        .catch(function (response) {
+            console.log(response)
+        })
+    }
+
     create_user(post_params) {
         
 

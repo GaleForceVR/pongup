@@ -68,7 +68,8 @@ function mapLoginContainerStateToProps(state) {
         // active_app: state.pongup_reducer.active_tab
         active_app: state.login_reducer.active_tab,
         is_loading: state.login_reducer.is_loading,
-        new_user: state.login_reducer.new_user
+        new_user: state.login_reducer.new_user,
+        login_info: state.login_reducer.login_info
 
         // username: state.pongup_reducer.username,
         // is_staff: state.login_reducer.is_staff,

@@ -1,8 +1,8 @@
 import * as actions from '../actions'
 import classNames from 'classnames'
 import React, { Component } from 'react'
-import { PongupHomeContainer } from '../../pongup_home/components/PongupHomeContainer'
-
+// import { PongupHomeContainer } from '../../pongup_home/components/PongupHomeContainer'
+import { Link } from 'react-router'
 
 export class AppContainer extends Component {
     constructor(props) {
@@ -31,6 +31,13 @@ export class AppContainer extends Component {
         return (
             <span>
                 {!self.props.is_loading ? this.props.children : self.loading()}
+                Links:
+                    {' '}
+                    <Link to="/">Home</Link>
+                    {' '}
+                    <Link to="/login">login</Link>
+                    {' '}
+                    <Link to="/signup">signup</Link>
                 <ul>
                     <li>
                         <a className={
@@ -55,8 +62,9 @@ export class AppContainer extends Component {
                         <a
                             onClick={
                                 ()=>{
+                                    console.log('clicked')
                                     self.props.dispatch(
-                                        actions.handleTabSelect('log-in')
+                                        actions.handleTabSelect('login')
                                     )
                                 }
                             }

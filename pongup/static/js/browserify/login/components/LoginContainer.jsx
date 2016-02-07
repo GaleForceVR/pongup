@@ -29,6 +29,19 @@ export class LoginContainer extends Component {
         )
     }
 
+    submitLogin() {
+        var self = this
+
+        self.props.dispatch(
+            actions.loginUser({
+                login_info: {
+                    username: self.props.login_info.username,
+                    password: self.props.login_info.password
+                }
+            })
+        )
+    }
+
     loading() {
         return (
             <div className="infinite-list-item" style={{textAlign: "center"}}>
@@ -48,6 +61,35 @@ export class LoginContainer extends Component {
         var self = this
         return (
             <div className="login-page">
+                <div className="login-form-wrapper">
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        onChange={(e)=>{
+                            self.props.dispatch(
+                                actions.saveToProps({username: e.target.value})
+                            )
+                        }}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Password"
+                        onChange={(e)=>{
+                            self.props.dispatch(
+                                actions.saveToProps({password: e.target.value})
+                            )
+                        }}
+                    />
+                    <a
+                        className="primary homepage-cta"
+                        href="#createUser"
+                        onClick={()=>{
+                            self.submitLogin()
+                        }}
+                    >
+                    Log in
+                    </a>
+                </div>
                 <label>Username: 
                     <input
                         type="text"
