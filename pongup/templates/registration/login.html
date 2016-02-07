@@ -1,0 +1,37 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+<div class="homepage">
+    <div class="form-wrapper login">
+        {% if form.errors %}
+        <p class="error">Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p class="error">Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p class="error">Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        
+        <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        {{ form.username }}
+        {{ form.password }}
+
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="/" />
+        </form>
+
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p><a class="secondary-link lost-password" style="display:none" href="{% url 'password_reset' %}">Lost password?</a></p>
+        <p><a class="secondary-link" href="#createAccount">New to PONGup?</a></p>
+        <a class="secondary login" href="#createAccount">Sign up</a>
+    </div>
+</div>
+
+{% endblock %}

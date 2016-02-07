@@ -10,6 +10,11 @@ $footerTextColor: #01438D;
 $orange: #dd540c;
 $yellow: #fee042;
 
+$formFieldLightBlue: #59a8fe;
+$formFieldTextBlue: #0d80fd;
+
+$secondaryButtonBlue: #013e81;
+
 html {
     height: 100%;
 }
@@ -21,10 +26,45 @@ body {
     font-family: sans-serif;
 }
 
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.9em;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+h6 {
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+h5.form-header {
+    padding-bottom: 20px;
+}
+
 .super-wrapper {
     min-height: 100%;
     position: relative;
     background-color: $backgroundBlue;
+    padding-bottom: 1px;
 }
 
 header {
@@ -127,12 +167,29 @@ a {
         background: linear-gradient($yellow, $orange); /* Standard syntax */
         color: black;
         text-shadow: 1px 1px 1px #F0BA85;
+        &.auth-form {
+            display: block;
+            width: 300px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
         &:hover {
             background: $orange; /* For browsers that do not support gradients */
             background: -webkit-linear-gradient($orange, $yellow); /* For Safari 5.1 to 6.0 */
             background: -o-linear-gradient($orange, $yellow); /* For Opera 11.1 to 12.0 */
             background: -moz-linear-gradient($orange, $yellow); /* For Firefox 3.6 to 15 */
             background: linear-gradient($orange, $yellow); /* Standard syntax */
+        }
+    }
+    &.secondary {
+        padding: 8px 45px;
+        background: $secondaryButtonBlue;
+        color: $formFieldLightBlue;
+        &:hover {
+            background: $hoverBlue;
+            color: $backgroundBlue;
         }
     }
 }
@@ -159,6 +216,10 @@ a {
     background-size: 1000px;
     background-repeat: no-repeat;
     background-position-x: 2%;
+    position: relative;
+    &.react-container {
+        background-image: none;
+    }
 }
 
 .homepage-cta {
@@ -168,3 +229,91 @@ a {
     box-shadow: 5px 5px 10px #001429;
 }
 
+.form-wrapper {
+    width: 330px;
+    /*height: 360px;*/
+    position: absolute;
+    top: 75px;
+    right: 17%;
+    background-color: $footerBlue;
+    padding: 55px;
+    box-shadow: 10px 10px 15px $backgroundBlue;
+    &.login {
+
+    }
+    a.secondary-link {
+        color: $formFieldLightBlue;
+        padding-bottom: 10px;
+        display: block;
+        font-size: 14px;
+        &.lost-password {
+            position: relative;
+            top: -50px;
+            float: right;
+            color: #024da0;
+            &:hover {
+                color: $formFieldLightBlue;
+            }
+        }
+    }
+    a.secondary {
+        width: 300px;
+        padding: 15px;
+        font-size: 16px;
+        display: block;
+        text-align: center;
+    }
+    input {
+        background-color: $formFieldLightBlue;
+        color: $backgroundBlue;
+        border: none;
+        width: 300px;
+        display: block;
+        padding: 15px;
+        margin-bottom: 40px;
+        font-size: 16px;
+        &[type="submit"] {
+            cursor: pointer;
+            margin-right: 0;
+            width: 330px;
+            background: $orange; /* For browsers that do not support gradients */
+            background: -webkit-linear-gradient($yellow, $orange); /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient($yellow, $orange); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient($yellow, $orange); /* For Firefox 3.6 to 15 */
+            background: linear-gradient($yellow, $orange); /* Standard syntax */
+            color: black;
+            text-shadow: 1px 1px 1px #F0BA85;
+            margin-bottom: 60px;
+            &:hover {
+                background: $orange; /* For browsers that do not support gradients */
+                background: -webkit-linear-gradient($orange, $yellow); /* For Safari 5.1 to 6.0 */
+                background: -o-linear-gradient($orange, $yellow); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient($orange, $yellow); /* For Firefox 3.6 to 15 */
+                background: linear-gradient($orange, $yellow); /* Standard syntax */
+            }
+        }
+        &::-webkit-input-placeholder {
+            color:    $formFieldTextBlue;
+        }
+        &:-moz-placeholder {
+            color:    $formFieldTextBlue;
+        }
+        &::-moz-placeholder {
+            color:    $formFieldTextBlue;
+        }
+        &:-ms-input-placeholder {
+            color:    $formFieldTextBlue;
+        }
+    }
+}
+
+.pongup-soon {
+    padding-bottom: 20px;
+}
+
+.error {
+    position: absolute;
+    top: 22px;
+    color: red;
+    font-size: 11px;
+}

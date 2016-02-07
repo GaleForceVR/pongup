@@ -14,7 +14,7 @@ def homepage(request):
     except User.DoesNotExist:
         user_info = None
 	# return render_to_response('pongup/homepage.html')
-    template = loader.get_template('pongup/homepage.html')
+    template = loader.get_template('homepage.html')
     context = {
 		'user_info': user_info,
 	}

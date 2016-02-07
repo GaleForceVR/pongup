@@ -22,14 +22,14 @@ export class PongupHomeContainer extends Component {
 
     componentDidMount() {
         var self = this
-
+        console.log('%cPongupHomeContainer componentDidMount', 'background-color:blue;color:yellow')
         self.props.dispatch(actions.loadPongupHome())
     }
 
     render() {
         var self = this
         return (
-            <div className="homepage haters">
+            <div className="homepage">
                 <a className="primary homepage-cta" href="/login">Join a Ladder</a>
             </div>
         )

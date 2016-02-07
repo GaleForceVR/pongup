@@ -2,7 +2,7 @@ import * as constants from '../constants'
 
 const initialState = {
     active_tab: 'home',
-    is_loading: true,
+    is_loading: false,
     username: '',
     user_profile: {},
     is_staff: false,

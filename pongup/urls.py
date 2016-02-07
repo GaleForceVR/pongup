@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from django.contrib.auth.views import login
 
 from . import views
 from .views import UserViewSet, LaddersViewSet, LadderDetailViewSet
@@ -52,7 +53,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # (r'^admin/(.*)', admin.site.urls),
     # url(r'^/*', 'pongup.views.homepage', name='home'),
-    url(r'^login/', 'pongup.views.homepage', name='home'),
+
+    # url(r'^login/', 'pongup.views.homepage', name='home'),
+    url('^', include('django.contrib.auth.urls')),
+    # url(r'^login/$', view=login, kwargs={'template_name': 'login.html'}, name='login'),
     url(r'^ladders/', 'pongup.views.homepage', name='home'),
     url(r'^/?$', 'pongup.views.homepage', name='home'),
 )

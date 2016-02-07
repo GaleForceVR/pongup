@@ -13,7 +13,7 @@ export class AppContainer extends Component {
     componentDidMount() {
         var self = this;
         
-        self.props.dispatch(actions.loadUserData())
+        // self.props.dispatch(actions.loadUserData())
     }
 
     loading() {
