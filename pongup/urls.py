@@ -58,6 +58,7 @@ urlpatterns = patterns('',
     url('^', include('django.contrib.auth.urls')),
     # url(r'^login/$', view=login, kwargs={'template_name': 'login.html'}, name='login'),
     url(r'^ladders/', 'pongup.views.homepage', name='home'),
+    url(r'^signup/', 'pongup.views.create_user', name='signup'),
     url(r'^/?$', 'pongup.views.homepage', name='home'),
 )
 

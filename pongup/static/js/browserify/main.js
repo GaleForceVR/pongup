@@ -8,4 +8,7 @@ $(document).ready(function(){
     $("#id_old_password").attr('placeholder', 'Old password')
     $("#id_new_password1").attr('placeholder', 'New password')
     $("#id_new_password2").attr('placeholder', 'Confirm new password')
+    $("#id_password1").attr('placeholder', 'Password')
+    $("#id_password2").attr('placeholder', 'Confirm password')
+    $("#id_email").attr('placeholder', 'Email')
 });

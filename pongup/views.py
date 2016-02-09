@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
@@ -7,6 +7,9 @@ from rest_framework import generics
 from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer
 from rest_framework import routers, serializers, viewsets
 from ladders.models import Ladder, User_Ladder
+# from django.contrib.auth.forms import UserCreationForm
+from .forms import UserCreateForm
+from django.core.urlresolvers import reverse
 
 def homepage(request):
     try:
@@ -33,6 +36,22 @@ def homepage(request):
 # class UserViewSet(viewsets.ModelViewSet):
 #     queryset = User.objects.all()
 #     serializer_class = userSerializer
+
+def create_user(request):
+    if request.method == 'POST':
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            from django.contrib.auth import authenticate, login
+            user = authenticate(username=form.cleaned_data.get('username'), email=form.cleaned_data.get('email'), password=form.cleaned_data.get('password1'))
+            login(request, user)
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = UserCreateForm()
+
+    return render_to_response('signup.html', {
+        'form': form,
+        }, context_instance=RequestContext(request))
 
 class UserViewSet(viewsets.ModelViewSet):
 # class UserViewSet(generics.ListAPIView):
