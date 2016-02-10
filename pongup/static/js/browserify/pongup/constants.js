@@ -3,6 +3,7 @@
 // export const DATA_LOADED = 'DATA_LOADED';
 export const HOME_ACTIVE = 'HOME_ACTIVE';
 export const LADDERS_ACTIVE = 'LADDERS_ACTIVE';
+export const LADDER_DATA_LOADED = "LADDER_DATA_LOADED";
 export const LOGIN_ACTIVE = 'LOGIN_ACTIVE';
 export const CREATE_USER = 'CREATE_USER';
 export const SAVE_STATE = 'SAVE_STATE';

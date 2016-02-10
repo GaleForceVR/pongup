@@ -80,6 +80,8 @@ class LadderDetailViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         # filter Ladder.objects.all() by provided ladder_id
         ladder_id = self.kwargs['pk']
+        # ladder_id = self.request.ladder.id
+        # ladder_id = self.request.ladder
         return User_Ladder.objects.filter(ladder_id=ladder_id)
 
 class MyLaddersViewSet(viewsets.ModelViewSet):

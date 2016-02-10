@@ -24,12 +24,22 @@ export class LaddersContainer extends Component {
         self.props.dispatch(actions.loadLadders())
     }
 
+    getLadders() {
+        var all_ladders = self.props.ladders.map(
+            (ladder)=>{ return (ladder.id) }
+        )
+    }
+
     render() {
         var self = this
-        console.log('%cLaddersContainer', "background-color:yellow")
-        console.log(self.props)
+        var all_ladders = self.props.ladders.map(
+                    (ladder)=>{ return (ladder.id) }
+                )
+        console.log('all_ladders')
+        console.log(all_ladders)
+
         return (
-            <div className="homepage">
+            <div>
                 <a className="primary homepage-cta" href="#joinLadder">Ladders Container</a>
             </div>
         )

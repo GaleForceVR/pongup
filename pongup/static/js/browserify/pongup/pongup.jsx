@@ -40,6 +40,7 @@ function mapAppContainerStateToProps(state) {
         is_staff: state.pongup_reducer.is_staff,
         password: state.pongup_reducer.password,
         email: state.pongup_reducer.email
+        // ladders: state.ladders_reducer.ladders
     };
 }
 
@@ -59,36 +60,35 @@ function mapPongupHomeContainerStateToProps(state) {
 function mapLaddersContainerStateToProps(state) {
     return {
         // active_app: state.pongup_reducer.active_tab
-        active_app: state.ladders_reducer.active_tab
+        active_app: state.ladders_reducer.active_tab,
+        ladders: state.ladders_reducer.ladders,
+        username: state.pongup_reducer.username
     };
 }
 
-function mapLoginContainerStateToProps(state) {
-    return {
-        // active_app: state.pongup_reducer.active_tab
-        active_app: state.login_reducer.active_tab,
-        is_loading: state.login_reducer.is_loading,
-        new_user: state.login_reducer.new_user,
-        login_info: state.login_reducer.login_info
+// function mapLoginContainerStateToProps(state) {
+//     return {
+//         // active_app: state.pongup_reducer.active_tab
+//         active_app: state.login_reducer.active_tab,
+//         is_loading: state.login_reducer.is_loading,
+//         new_user: state.login_reducer.new_user,
+//         login_info: state.login_reducer.login_info
 
-        // username: state.pongup_reducer.username,
-        // is_staff: state.login_reducer.is_staff,
-        // password: state.login_reducer.password,
-        // email: state.login_reducer.email
-    };
-}
+//         // username: state.pongup_reducer.username,
+//         // is_staff: state.login_reducer.is_staff,
+//         // password: state.login_reducer.password,
+//         // email: state.login_reducer.email
+//     };
+// }
 
 export function init() {
-    console.log('%cinit start', 'background-color:yellow')
     const store = configureStore();
-    console.log(store)
-
     // send dispatch() as a prop down to the components...
     
     var ConnectedAppContainer = connect(mapAppContainerStateToProps)(AppContainer)
     var ConnectedPongupHomeContainer = connect(mapPongupHomeContainerStateToProps)(PongupHomeContainer)
     var ConnectedLaddersContainer = connect(mapLaddersContainerStateToProps)(LaddersContainer)
-    var ConnectedLoginContainer = connect(mapLoginContainerStateToProps)(LoginContainer)
+    // var ConnectedLoginContainer = connect(mapLoginContainerStateToProps)(LoginContainer)
 
     render(
         <Provider store={store}>
@@ -99,7 +99,7 @@ export function init() {
                     <Route path="ladders" component={ConnectedLaddersContainer} />
                         {/*<Route path="message/:message_id" component={ConnectedMessageContainer}/>*/}
                     {/*</Route>*/}
-                    <Route path="login" component={ConnectedLoginContainer} />
+                    {/*<Route path="login" component={ConnectedLoginContainer} />*/}
                     {/*<Route path="ladders" component={ConnectedLaddersContainer} />*/}
                 </Route>
             </Router>
@@ -108,7 +108,6 @@ export function init() {
         document.getElementById('react-pongup-app-container')
 
     );
-    console.log('after render inside init')
 }
 
 // var ConnectedCalendarContainer = connect(mapCalendarStateToProps)(CalendarContainer);

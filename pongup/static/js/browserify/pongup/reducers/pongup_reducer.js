@@ -7,7 +7,8 @@ const initialState = {
     user_profile: {},
     is_staff: false,
     password: '',
-    email: ''
+    email: '',
+    // ladders: {}
 }
 
 
@@ -24,6 +25,14 @@ const pongup_reducer = (state = initialState, action) => {
                 // venues_and_events: action.user_data.venues_and_events,
                 is_loading: action.user_data.is_loading
             })
+        // case constants.LADDER_DATA_LOADED:
+        //     console.log('LADDER_DATA_LOADED')
+        //     console.log(action)
+        //     console.log(action.ladder_data.ladders_data)
+        //     return Object.assign({}, state, {
+        //         ladders: action.ladder_data.ladders_data,
+        //         is_loading: false
+        //     })
         // case constants.UPDATE_UNREAD_ON_TAB:
         //     return Object.assign({}, state, {
         //         unread_count: action.unread_count

@@ -13,7 +13,7 @@ export class AppContainer extends Component {
     componentDidMount() {
         var self = this;
         
-        // self.props.dispatch(actions.loadUserData())
+        self.props.dispatch(actions.loadUserData())
     }
 
     loading() {
@@ -31,48 +31,6 @@ export class AppContainer extends Component {
         return (
             <span>
                 {!self.props.is_loading ? this.props.children : self.loading()}
-                Links:
-                    {' '}
-                    <Link to="/">Home</Link>
-                    {' '}
-                    <Link to="/login">login</Link>
-                    {' '}
-                    <Link to="/signup">signup</Link>
-                <ul>
-                    <li>
-                        <a className={
-                                classNames (
-                                    'left-nav-links',
-                                    'no-class'
-                                )
-
-                            }
-                            onClick={
-                                ()=>{
-                                    self.props.dispatch(
-                                        actions.handleTabSelect('sign-up')
-                                    )
-                                }
-                            }
-                        >
-                        Sign up
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={
-                                ()=>{
-                                    console.log('clicked')
-                                    self.props.dispatch(
-                                        actions.handleTabSelect('login')
-                                    )
-                                }
-                            }
-                        >
-                        Log in
-                        </a>
-                    </li>
-                </ul>
             </span>
         )
     }

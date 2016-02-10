@@ -9,10 +9,10 @@ export function loadLadders() {
 			client.fetch_ladders()
 				.then( axios.spread( (ladders_data) => {
 					dispatch({
-						type: constants.LADDERS_ACTIVE,
+						type: constants.LADDER_DATA_LOADED,
 						ladder_data: {
 							// user_info: user_info,
-							ladders: ladders_data.data,
+							ladders_data: ladders_data.data,
 							// venues_and_events: venues_and_events.data,
 							is_loading: false
 						}
