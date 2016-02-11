@@ -28,8 +28,11 @@ import { syncHistory, routeReducer } from 'react-router-redux'
 
 import { AppContainer } from './components/AppContainer'
 import { LaddersContainer } from '../ladders/components/LaddersContainer'
+import { LaddersIndexContainer } from '../ladders/components/LaddersIndexContainer'
 import { PongupHomeContainer } from '../pongup_home/components/PongupHomeContainer'
 import { LoginContainer } from '../login/components/LoginContainer'
+import { LadderDetailContainer } from '../ladders/components/LadderDetailContainer'
+import { MyLaddersContainer } from '../ladders/components/MyLaddersContainer'
 
 function mapAppContainerStateToProps(state) {
     return {
@@ -60,10 +63,36 @@ function mapPongupHomeContainerStateToProps(state) {
 function mapLaddersContainerStateToProps(state) {
     return {
         // active_app: state.pongup_reducer.active_tab
+        is_loading: state.ladders_reducer.is_loading,
         active_app: state.ladders_reducer.active_tab,
         ladders: state.ladders_reducer.ladders,
         username: state.pongup_reducer.username
     };
+}
+
+function mapLaddersIndexContainerStateToProps(state) {
+    return {
+        active_app: state.ladders_reducer.active_tab,
+        ladders: state.ladders_reducer.ladders,
+        username: state.pongup_reducer.username
+    }
+}
+
+function mapLadderDetailContainerStateToProps(state) {
+    return {
+        is_loading: state.ladders_reducer.is_loading,
+        active_app: state.ladders_reducer.active_tab,
+        ladders: state.ladders_reducer.ladders,
+        username: state.pongup_reducer.username
+    }
+}
+
+function mapMyLaddersContainerStateToProps(state) {
+    return {
+        active_app: state.ladders_reducer.active_tab,
+        ladders: state.ladders_reducer.ladders,
+        username: state.pongup_reducer.username
+    }
 }
 
 // function mapLoginContainerStateToProps(state) {
@@ -88,6 +117,9 @@ export function init() {
     var ConnectedAppContainer = connect(mapAppContainerStateToProps)(AppContainer)
     var ConnectedPongupHomeContainer = connect(mapPongupHomeContainerStateToProps)(PongupHomeContainer)
     var ConnectedLaddersContainer = connect(mapLaddersContainerStateToProps)(LaddersContainer)
+    var ConnectedLadderDetailContainer = connect(mapLadderDetailContainerStateToProps)(LadderDetailContainer)
+    var ConnectedMyLaddersContainer = connect(mapMyLaddersContainerStateToProps)(MyLaddersContainer)
+    var ConnectedLaddersIndexContainer = connect(mapLaddersIndexContainerStateToProps)(LaddersIndexContainer)
     // var ConnectedLoginContainer = connect(mapLoginContainerStateToProps)(LoginContainer)
 
     render(
@@ -96,7 +128,12 @@ export function init() {
                 <Route path="/" component={ConnectedAppContainer} >
                     {/*<IndexRoute component={ConnectedDashBoardContainer}/>*/}
                     <IndexRoute component={ConnectedPongupHomeContainer}/>
-                    <Route path="ladders" component={ConnectedLaddersContainer} />
+                    <Route path="ladders" component={ConnectedLaddersContainer} >
+                        <IndexRoute component={ConnectedLaddersIndexContainer} />
+                        <Route path="my-ladders" component={ConnectedMyLaddersContainer} ></Route>
+                        <Route path=":ladder_id" component={ConnectedLadderDetailContainer} ></Route>
+                        
+                    </Route>
                         {/*<Route path="message/:message_id" component={ConnectedMessageContainer}/>*/}
                     {/*</Route>*/}
                     {/*<Route path="login" component={ConnectedLoginContainer} />*/}

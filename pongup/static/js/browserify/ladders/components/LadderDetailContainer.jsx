@@ -3,7 +3,7 @@ import * as actions from '../actions'
 import { LaddersList } from './LaddersList'
 import React, { Component } from 'react'
 
-export class LaddersContainer extends Component {
+export class LadderDetailContainer extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
@@ -25,37 +25,31 @@ export class LaddersContainer extends Component {
         self.props.dispatch(actions.loadLadders())
     }
 
-    buildLadderList() {
+    getCurrentLadder() {
         var self = this
-        return self.props.ladders.map(function(ladder, index) {
-            return (
-                <LaddersList
-                    key={index}
-                    id={ladder.id}
-                    name={ladder.name}
-                    {...self.props}
-                />
-            )
-        })
-    }
+        var current_ladder
 
-    getLadders() {
-        var all_ladders = self.props.ladders.map(
-            (ladder)=>{ return (ladder.id) }
-        )
+        for (var i = 0; i < self.props.ladders.length; i++) {
+            if (self.props.ladders[i].id == self.props.params.ladder_id) {
+                current_ladder = self.props.ladders[i]
+            }
+        }
+
+        return current_ladder.name
     }
 
     render() {
         var self = this
-        var all_ladders = self.props.ladders.map(
-                    (ladder)=>{ return (ladder.id) }
-                )
-        console.log('all_ladders')
-        console.log(all_ladders)
 
         return (
             <div>
-                {!self.props.is_loading ? this.props.children : self.loading()}
+                <ul>
+
+                    <h5>Ladder:</h5>
+                    <h1>{ self.props.is_loading ? self.loading() : self.getCurrentLadder() }</h1>
+                    {/*(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null*/}
+                </ul>
+                <a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>
             </div>
         )
     }

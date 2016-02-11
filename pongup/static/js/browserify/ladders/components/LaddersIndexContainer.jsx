@@ -3,7 +3,7 @@ import * as actions from '../actions'
 import { LaddersList } from './LaddersList'
 import React, { Component } from 'react'
 
-export class LaddersContainer extends Component {
+export class LaddersIndexContainer extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
@@ -47,15 +47,18 @@ export class LaddersContainer extends Component {
 
     render() {
         var self = this
-        var all_ladders = self.props.ladders.map(
-                    (ladder)=>{ return (ladder.id) }
-                )
-        console.log('all_ladders')
-        console.log(all_ladders)
+        // var all_ladders = self.props.ladders.map(
+        //             (ladder)=>{ return (ladder.id) }
+        //         )
+        // console.log('all_ladders')
+        // console.log(all_ladders)
 
         return (
             <div>
-                {!self.props.is_loading ? this.props.children : self.loading()}
+                <ul>
+                    {(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null}
+                </ul>
+                <a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>
             </div>
         )
     }

@@ -2,7 +2,7 @@ import * as constants from '../pongup/constants'
 
 const initialState = {
     active_tab: 'ladders',
-    is_loading: false,
+    is_loading: true,
     user_profile: {},
     ladders: []
 }
@@ -12,7 +12,7 @@ const ladders_reducer = (state = initialState, action) => {
         case constants.LADDERS_ACTIVE:
             return Object.assign({}, state, {
                 // message_data: action.new_state.message_data,
-                // is_loading: action.is_loading
+                is_loading: action.is_loading,
                 active_tab: action.active_tab
             })
         case constants.LADDER_DATA_LOADED:
