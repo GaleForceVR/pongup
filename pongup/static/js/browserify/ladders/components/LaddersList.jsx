@@ -1,5 +1,5 @@
 import * as actions from '../actions'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 import React, { Component } from 'react'
 
 export class LaddersList extends Component {
@@ -7,15 +7,49 @@ export class LaddersList extends Component {
 		//explicit call to super must remain because of es7 weirdness and class property usage below
 		super(props);
 	}
+
+	loading() {
+		return (
+			<div className="infinite-list-item" style={{textAlign: "center"}}>
+				<h4>Loading...</h4>
+				<br/>
+				<img src="/static/img/loading.gif" style={{width: "50px"}} />
+			</div>
+		)
+	}
+
     render() {
         var self = this
         var data = self.props
+        var index = data.key
+        // var open_arr = self.props.open
 
         var detail_url = "/ladders/" + data.id
 
         console.log('LaddersList')
         console.log(data)
         console.log(detail_url)
+        console.log(self.state)
+        console.log(self.props)
+        console.log('%cThis IS IT', 'background-color:pink')
+  //       var open = [
+		// 	...open_arr.slice(0, index),
+		// 	false,
+		// 	...open_arr.slice(index + 1)
+		// ]
+        // console.log(this.props.open)
+
+        var is_open = false
+        if (self.props.open[index] == undefined ) {
+			if (!self.props.is_loading) {
+				var open_arr = self.props.open
+				self.props.dispatch(actions.createOpenState(index, is_open, open_arr, self)) 
+			}
+		}
+
+        // (!self.props.is_loading ?  :)
+
+        // self.props.dispatch(actions.createOpenState(index, is_open))
 
         // var hiddenClasses = "primary upgrade-button"
         // var visibleClasses = hiddenClasses + " active"
@@ -25,8 +59,32 @@ export class LaddersList extends Component {
         // var upgradeLink = "/venues/edit/" + data.id + "/pick-your-plan"
 
         return (
-			<li>
-				<h1><a href={detail_url} >{data.name}</a></h1>
+			<li
+				className={classNames("seen message-detail template", {'open': this.props.open[index]})}
+				onClick={()=>{
+					console.log('CLICK')
+                    console.log(this.props)
+                    console.log(this.props.open[index])
+                    this.props.open[index] = !this.props.open[index]
+                    console.log('this one:')
+                    console.log(this.props.open)
+                    var open_arr = this.props.open
+                    var open = [
+                        ...open_arr.slice(0, index),
+                        !this.props.open[index],
+                        ...open_arr.slice(index + 1)
+                    ]
+                    this.setProps({open: open})
+                    this.forceUpdate()
+                    console.log(this.props.open)
+                    // this.forceUpdate()
+                    console.log(this.props)
+                    console.log('END CLICK')
+				}}
+			>
+				<h1>
+					<a>{data.name}</a>
+				</h1>
 				<h5>{data.id}</h5>
 			</li>
         )

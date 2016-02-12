@@ -27,3 +27,15 @@ export function loadLadders() {
 				})
 		}
 }
+
+export function createOpenState(key, is_open, open_arr, selfy) {
+	return (dispatch) => {
+		dispatch({
+			type: constants.CREATE_OPEN_STATE,
+			selfy: selfy,
+			arr: open_arr,
+			index: key,
+			open: is_open
+		})
+	}
+}

@@ -33,6 +33,7 @@ export class LaddersIndexContainer extends Component {
                     key={index}
                     id={ladder.id}
                     name={ladder.name}
+                    open={[]}
                     {...self.props}
                 />
             )
