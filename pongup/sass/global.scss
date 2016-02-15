@@ -168,6 +168,10 @@ footer {
     color: $footerTextColor;
 }
 
+.display-number {
+    margin: 20px;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -180,6 +184,10 @@ a {
         background: linear-gradient($yellow, $orange); /* Standard syntax */
         color: black;
         text-shadow: 1px 1px 1px #F0BA85;
+        display: block;
+        width: 20px;
+        text-align: center;
+        margin: 20px;
         &.auth-form {
             display: block;
             width: 300px;

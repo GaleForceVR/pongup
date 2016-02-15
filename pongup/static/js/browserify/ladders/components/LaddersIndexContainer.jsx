@@ -28,12 +28,18 @@ export class LaddersIndexContainer extends Component {
     buildLadderList() {
         var self = this
         return self.props.ladders.map(function(ladder, index) {
+            var is_open = false
+            // if (self.props.open[index] == undefined ) {
+
+            if (!self.props.is_loading) {
+                var open_arr = self.props.open
+                self.props.dispatch(actions.createOpenState(index, is_open, open_arr, self)) 
+            }
             return (
                 <LaddersList
                     key={index}
                     id={ladder.id}
                     name={ladder.name}
-                    open={[]}
                     {...self.props}
                 />
             )

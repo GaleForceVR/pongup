@@ -66,7 +66,8 @@ function mapLaddersContainerStateToProps(state) {
         is_loading: state.ladders_reducer.is_loading,
         active_app: state.ladders_reducer.active_tab,
         ladders: state.ladders_reducer.ladders,
-        username: state.pongup_reducer.username
+        username: state.pongup_reducer.username,
+        counter: state.ladders_reducer.counter
     };
 }
 

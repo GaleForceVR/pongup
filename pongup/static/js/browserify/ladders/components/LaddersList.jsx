@@ -2,6 +2,8 @@ import * as actions from '../actions'
 import classNames from 'classnames'
 import React, { Component } from 'react'
 
+var counter = 0
+
 export class LaddersList extends Component {
 	constructor(props) {
 		//explicit call to super must remain because of es7 weirdness and class property usage below
@@ -39,13 +41,8 @@ export class LaddersList extends Component {
 		// ]
         // console.log(this.props.open)
 
-        var is_open = false
-        if (self.props.open[index] == undefined ) {
-			if (!self.props.is_loading) {
-				var open_arr = self.props.open
-				self.props.dispatch(actions.createOpenState(index, is_open, open_arr, self)) 
-			}
-		}
+        
+		// }
 
         // (!self.props.is_loading ?  :)
 
@@ -60,26 +57,31 @@ export class LaddersList extends Component {
 
         return (
 			<li
-				className={classNames("seen message-detail template", {'open': this.props.open[index]})}
+				className={classNames("seen message-detail template", {'open': this.props.open})}
+				key={index}
 				onClick={()=>{
 					console.log('CLICK')
                     console.log(this.props)
-                    console.log(this.props.open[index])
-                    this.props.open[index] = !this.props.open[index]
-                    console.log('this one:')
-                    console.log(this.props.open)
-                    var open_arr = this.props.open
-                    var open = [
-                        ...open_arr.slice(0, index),
-                        !this.props.open[index],
-                        ...open_arr.slice(index + 1)
-                    ]
-                    this.setProps({open: open})
-                    this.forceUpdate()
-                    console.log(this.props.open)
+
+                    self.props.dispatch(actions.updateOpenState(index, this.props.open))
+                    
+
+                    // console.log(this.props.open[index])
+                    // this.props.open[index] = !this.props.open[index]
+                    // console.log('this one:')
+                    // console.log(this.props.open)
+                    // var open_arr = this.props.open
+                    // var open = [
+                    //     ...open_arr.slice(0, index),
+                    //     !this.props.open[index],
+                    //     ...open_arr.slice(index + 1)
+                    // ]
+                    // this.setProps({open: open})
                     // this.forceUpdate()
-                    console.log(this.props)
-                    console.log('END CLICK')
+                    // console.log(this.props.open)
+                    // // this.forceUpdate()
+                    // console.log(this.props)
+                    // console.log('END CLICK')
 				}}
 			>
 				<h1>

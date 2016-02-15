@@ -39,3 +39,65 @@ export function createOpenState(key, is_open, open_arr, selfy) {
 		})
 	}
 }
+
+export function updateOpenState(key, is_open) {
+	return (dispatch) => {
+		dispatch({
+			type: constants.UPDATE_OPEN_STATE,
+			index: key,
+			open: is_open
+		})
+	}
+}
+
+export function increment() {
+	return(dispatch) => {
+		dispatch({
+			type: constants.INCREMENT
+		})
+	}
+}
+
+export function decrement() {
+	return(dispatch) => {
+		dispatch({
+			type: constants.DECREMENT
+		})
+	}
+}
+
+export function addCounter() {
+	return(dispatch) => {
+		dispatch({
+			type: constants.ADD_COUNTER
+		})
+	}
+}
+
+export function removeCounter(index) {
+	return(dispatch) => {
+		dispatch({
+			type: constants.REMOVE_COUNTER,
+			index: index
+		})
+	}
+}
+
+export function incrementCounter(index) {
+	return(dispatch) => {
+		dispatch({
+			type: constants.INCREMENT_COUNTER,
+			index: index
+		})
+	}
+}
+
+export function decrementCounter(index) {
+	return(dispatch) => {
+		dispatch({
+			type: constants.DECREMENT_COUNTER,
+			index: index
+		})
+	}
+}
+
