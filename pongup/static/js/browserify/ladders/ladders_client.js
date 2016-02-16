@@ -11,4 +11,16 @@ export class LaddersClient {
     fetch_all_ladders() {
         return axios.get('/api/ladders/')
     }
+
+    fetch_ladder_detail(id) {
+        return axios.all([
+            this.fetch_all_ladder_details(id)
+        ])
+    }
+
+    fetch_all_ladder_details(id) {
+        console.log('fetch_all_ladder_details/' + id)
+        console.log(axios.get('/api/ladder/' + id))
+        return axios.get('/api/ladder/' + id)
+    }
 }

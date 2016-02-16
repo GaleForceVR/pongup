@@ -20,14 +20,17 @@ export class LadderDetailContainer extends Component {
         )
     }
 
+
+
     componentDidMount() {
         var self = this
         self.props.dispatch(actions.loadLadders())
+        self.props.dispatch(actions.loadLadderDetail(self.getCurrentLadder().id))
     }
 
     getCurrentLadder() {
         var self = this
-        var current_ladder
+        var current_ladder        
 
         for (var i = 0; i < self.props.ladders.length; i++) {
             if (self.props.ladders[i].id == self.props.params.ladder_id) {
@@ -35,20 +38,29 @@ export class LadderDetailContainer extends Component {
             }
         }
 
-        return current_ladder.name
+        console.log('current_ladder')
+        console.log(current_ladder)
+        
+
+        return current_ladder
     }
 
     render() {
         var self = this
-
+        console.log('LadderDetailContainer')
+        console.log(self.props)
         return (
-            <div>
+            <div className="container-1600">
+                <div className="left-wrapper">
                 <ul>
 
                     <h5>Ladder:</h5>
-                    <h1>{ self.props.is_loading ? self.loading() : self.getCurrentLadder() }</h1>
+                    <h1>{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h1>
                     {/*(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null*/}
                 </ul>
+                </div>
+                <div className="right-wrapper">
+                </div>
                 <a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>
             </div>
         )

@@ -27,3 +27,28 @@ export function loadLadders() {
 				})
 		}
 }
+
+export function loadLadderDetail(id) {
+	console.log('loadLadderDetail: ' + id)
+	return (dispatch) => {
+		var client = new LaddersClient()
+		client.fetch_ladder_detail(id)
+			.then( axios.spread( (ladder_data) => {
+				dispatch({
+					type: constants.LADDER_DETAIL_LOADED,
+					ladder_data: {
+						ladder_data: ladder_data.data,
+						is_loading: false
+					}
+
+				})
+			}))
+			.then( () => {
+				dispatch({
+					type: constants.UPDATE_TAB,
+					active_tab: 'ladder',
+					is_loading: false
+				})
+			})
+	}
+}

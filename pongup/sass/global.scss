@@ -242,6 +242,28 @@ a {
     box-shadow: 5px 5px 10px #001429;
 }
 
+.container-1600 {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-top: 115px;
+}
+
+.left-wrapper, .right-wrapper {
+    width: 37.5%;
+    min-height: 100px;
+    float: left;
+}
+
+.left-wrapper {
+    padding-left: 7.5%;
+    padding-right: 5%;
+}
+
+.right-wrapper {
+    padding-left: 5%;
+    padding-right: 7.5%;
+}
+
 .form-wrapper {
     width: 330px;
     /*height: 360px;*/

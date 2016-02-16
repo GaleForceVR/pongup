@@ -4,7 +4,8 @@ const initialState = {
     active_tab: 'ladders',
     is_loading: true,
     user_profile: {},
-    ladders: []
+    ladders: [],
+    ladder_detail: []
 }
 
 const ladders_reducer = (state = initialState, action) => {
@@ -18,6 +19,14 @@ const ladders_reducer = (state = initialState, action) => {
         case constants.LADDER_DATA_LOADED:
             return Object.assign({}, state, {
                 ladders: action.ladder_data.ladders_data,
+                is_loading: false
+            })
+        case constants.LADDER_DETAIL_LOADED:
+            console.log('LADDER_DETAIL_LOADED')
+            console.log(state)
+            console.log(action)
+            return Object.assign({}, state, {
+                ladder_detail: action.ladder_data.ladder_data,
                 is_loading: false
             })
         default:
