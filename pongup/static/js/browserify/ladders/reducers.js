@@ -5,7 +5,7 @@ const initialState = {
     is_loading: true,
     user_profile: {},
     ladders: [],
-    open: false,
+    open: [],
     counter: []
 }
 
@@ -58,6 +58,21 @@ const ladders_reducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 ladders: action.ladder_data.ladders_data,
                 is_loading: false
+            })
+        case constants.SET_OPEN_STATES:
+            console.log('SET_OPEN_STATES')
+            console.log(state)
+            var open_arr = []
+            var is_open = false
+            for (var i = 0; i < state.ladders.length; i++) {
+                if (i + 1 == state.ladders.length) {
+                    is_open = true
+                }
+                open_arr.push(is_open)
+            }
+            console.log(open_arr)
+            return Object.assign({}, state, {
+                open: open_arr
             })
         case constants.CREATE_OPEN_STATE:
             // var open_arr = action.arr

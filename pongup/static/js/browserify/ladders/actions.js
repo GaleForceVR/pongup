@@ -3,7 +3,7 @@ import axios from 'axios'
 import { LaddersClient } from './ladders_client'
 
 export function loadLadders() {
-
+		var self = this
 		return (dispatch) => {
 			var client = new LaddersClient()
 			client.fetch_ladders()
@@ -25,7 +25,16 @@ export function loadLadders() {
 						is_loading: false
 					})
 				})
+				.then( () => {
+					dispatch({
+						type: constants.SET_OPEN_STATES
+					})
+				})
 		}
+}
+
+export function setOpenStates() {
+	console.log('%csetOpenStates', 'background-color:orange')
 }
 
 export function createOpenState(key, is_open, open_arr, selfy) {

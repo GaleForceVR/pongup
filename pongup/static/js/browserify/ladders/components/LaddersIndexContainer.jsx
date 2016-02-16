@@ -33,7 +33,7 @@ export class LaddersIndexContainer extends Component {
 
             if (!self.props.is_loading) {
                 var open_arr = self.props.open
-                self.props.dispatch(actions.createOpenState(index, is_open, open_arr, self)) 
+                // self.props.dispatch(actions.createOpenState(index, is_open, open_arr, self)) 
             }
             return (
                 <LaddersList
