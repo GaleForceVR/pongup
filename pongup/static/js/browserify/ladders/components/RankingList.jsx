@@ -8,6 +8,20 @@ export class RankingList extends Component {
 		super(props);
 	}
 
+    renderRanking() {
+        var self = this
+
+        if (self.props.rank) {
+            return (
+                <p className="rank">{self.props.rank}</p>
+            )
+        } else {
+            return (
+                <p className="rank">N</p>
+            )
+        }
+    }
+
     render() {
         var self = this
         console.log('RankingList')
@@ -16,8 +30,8 @@ export class RankingList extends Component {
         return (
 			<li className="ladder-rank-list">
                 <a href="#" >
-                    <p className="rank">{self.props.rank}</p>
-    				<p className="name">{self.props.player_name}</p>
+                    {self.renderRanking()}
+                    <p className="name">{self.props.player_name}</p>
                 </a>
 			</li>
         )
