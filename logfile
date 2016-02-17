@@ -25,3 +25,7 @@ LOG:  database system is ready to accept connections
 LOG:  using stale statistics instead of current ones because stats collector is not responding
 LOG:  using stale statistics instead of current ones because stats collector is not responding
 LOG:  using stale statistics instead of current ones because stats collector is not responding
+LOG:  database system was shut down at 2016-02-16 17:49:58 CST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started

@@ -1,6 +1,6 @@
 import * as actions from '../actions'
 // import classNames from 'classnames'
-import { LaddersList } from './LaddersList'
+import { RankingList } from './RankingList'
 import React, { Component } from 'react'
 
 export class LadderDetailContainer extends Component {
@@ -19,8 +19,6 @@ export class LadderDetailContainer extends Component {
             </div>
         )
     }
-
-
 
     componentDidMount() {
         var self = this
@@ -45,22 +43,43 @@ export class LadderDetailContainer extends Component {
         return current_ladder
     }
 
+    buildRankingList() {
+        var self = this
+        return self.props.ladder_detail.map(function(player, index) {
+            return (
+                <RankingList 
+                    key={index}
+                    rank={player.ladder_rank}
+                    player_name={player.user.username}
+                    {...self.props}
+                />
+            )
+        })
+    }
+
     render() {
         var self = this
         console.log('LadderDetailContainer')
         console.log(self.props)
         return (
             <div className="container-1600">
-                <div className="left-wrapper">
-                <ul>
 
-                    <h5>Ladder:</h5>
-                    <h1>{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h1>
-                    {/*(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null*/}
-                </ul>
+                <div className="ladder-detail-header">
+                    <p className="header-label">Ladder:</p>
+                    <h3>{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h3>
                 </div>
+
+                <div className="left-wrapper">
+                    <p className="header-label category">Scheduled Matches:</p>
+                </div>
+
                 <div className="right-wrapper">
+                    <p className="header-label category">Rankings:</p>
+                    <ul>
+                        {(self.props.ladder_detail && self.props.ladder_detail.length > 0) ? self.buildRankingList() : null}
+                    </ul>
                 </div>
+
                 <a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>
             </div>
         )

@@ -11,6 +11,9 @@ from ladders.models import Ladder, User_Ladder
 from .forms import UserCreateForm
 from django.core.urlresolvers import reverse
 
+from rest_framework import filters
+from rest_framework import generics
+
 def homepage(request):
     try:
         user_info = User.objects.get(pk=request.user.id)
@@ -76,6 +79,8 @@ class LadderDetailViewSet(viewsets.ModelViewSet):
     queryset = Ladder.objects.all()
     model = User_Ladder
     serializer_class = LadderDetailSerializer
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
+    ordering = ('ladder_rank',)
 
     def get_queryset(self):
         # filter Ladder.objects.all() by provided ladder_id
