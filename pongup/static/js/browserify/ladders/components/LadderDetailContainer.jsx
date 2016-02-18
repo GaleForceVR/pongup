@@ -66,11 +66,37 @@ export class LadderDetailContainer extends Component {
 
                 <div className="ladder-detail-header">
                     <p className="header-label">Ladder:</p>
-                    <h3>{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h3>
+                    <h3 className="ladder-name">{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h3>
                 </div>
 
                 <div className="left-wrapper">
                     <p className="header-label category">Scheduled Matches:</p>
+                    <ul className="scheduled-matches-list">
+                        <li>
+                            
+                            <div className="scheduled-matches-container">
+                                <p className="seed">#2</p>
+                                <p className="player-name">Gale VanRossem</p>
+                                <input type="text" placeholder="Score"/>
+                                <p className="seed">vs. #3</p>
+                                <p className="player-name">Yale Reardon</p>
+                                <input type="text" placeholder="Score"/>
+                            </div>
+                            <p className="header-label">Friday, Jan. 15 3:30pm</p>
+                            <a className="primary submit-btn"href="#submit">Submit scores</a>
+                        </li>
+                        <li>
+                            <div className="scheduled-matches-container">
+                                <p className="seed">#1</p>
+                                <p className="player-name">Bob Chappuis</p>
+                                
+                                <p className="seed">vs. #4</p>
+                                <p className="player-name">Ryder Lewis</p>
+                                
+                            </div>
+                            <p className="header-label">Friday, Jan. 15 3:30pm</p>
+                        </li>
+                    </ul>
                 </div>
 
                 <div className="right-wrapper">

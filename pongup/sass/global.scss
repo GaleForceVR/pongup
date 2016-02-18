@@ -16,7 +16,7 @@ $formFieldTextBlue: #0d80fd;
 $secondaryButtonBlue: #013e81;
 
 
-$mutedTextBlue: #557496;
+$mutedTextBlue: #1c3c5f;
 
 $pongupYellow: #fddb40;
 $pongupOrange: #fddb40;
@@ -203,6 +203,9 @@ a {
             background: -moz-linear-gradient($orange, $yellow); /* For Firefox 3.6 to 15 */
             background: linear-gradient($orange, $yellow); /* Standard syntax */
         }
+        &.submit-btn {
+            padding: 3px 25px;
+        }
     }
     &.secondary {
         padding: 8px 45px;
@@ -253,20 +256,65 @@ a {
 .container-1600 {
     max-width: 1600px;
     margin: 0 auto;
-    padding-top: 115px;
+    padding-top: 75px;
 }
 
 .ladder-detail-header {
-    width: 85%;
-    padding-left: 7.5%;
-    padding-right: 7.5%;
+    width: 92.5%;
+    padding-left: 3.75%;
+    padding-right: 3.75%;
     padding-bottom: 50px;
 }
 
-.ladder-rank-list {
+.ladder-rank-list, .scheduled-matches-container {
     padding-bottom: 7px;
-    a {
+    a, p {
         color: $formFieldLightBlue;
+        font-size: 24px;
+        display: inline-block;
+    }
+}
+
+.scheduled-matches-list {
+    position: relative;
+    a.primary.submit-btn {
+        position: absolute;
+        right: 90px;
+        bottom: 15px;
+    }
+    li {
+        position: relative;
+        padding-bottom: 20px;
+    }
+}
+
+.scheduled-matches-container {
+    p.seed, p.player-name {
+        margin-right: 10px;
+    }
+    input {
+        background-color: $mutedTextBlue;
+        border: none;
+        padding: 3px 8px;
+        color: $formFieldLightBlue;
+        width: 40px;
+        position: relative;
+        top: -3px;
+        font-size: 15px;
+        margin-right: 10px;
+        text-align: center;
+        &::-webkit-input-placeholder {
+            color:    $backgroundBlue;
+        }
+        &:-moz-placeholder {
+            color:    $backgroundBlue;
+        }
+        &::-moz-placeholder {
+            color:    $backgroundBlue;
+        }
+        &:-ms-input-placeholder {
+            color:    $backgroundBlue;
+        }
     }
 }
 
@@ -276,28 +324,35 @@ p.rank {
     width: 35px;
 }
 
-.header-label {
+.header-label, p.seed {
     color: $mutedTextBlue;
+}
+
+.header-label {
     padding-bottom: 7px;
     &.category {
         padding-bottom: 20px;
     }
 }
 
+.ladder-name {
+    color: $formFieldLightBlue;
+}
+
 .left-wrapper, .right-wrapper {
-    width: 37.5%;
+    width: 43.75%;
     min-height: 100px;
     float: left;
 }
 
 .left-wrapper {
-    padding-left: 7.5%;
-    padding-right: 5%;
+    padding-left: 3.75%;
+    padding-right: 2.5%;
 }
 
 .right-wrapper {
-    padding-left: 5%;
-    padding-right: 7.5%;
+    padding-left: 2.5%;
+    padding-right: 3.75%;
 }
 
 .form-wrapper {

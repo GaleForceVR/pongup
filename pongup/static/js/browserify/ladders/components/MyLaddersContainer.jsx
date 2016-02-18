@@ -25,26 +25,6 @@ export class MyLaddersContainer extends Component {
         self.props.dispatch(actions.loadLadders())
     }
 
-    buildLadderList() {
-        var self = this
-        return self.props.ladders.map(function(ladder, index) {
-            return (
-                <LaddersList
-                    key={index}
-                    id={ladder.id}
-                    name={ladder.name}
-                    {...self.props}
-                />
-            )
-        })
-    }
-
-    getLadders() {
-        var all_ladders = self.props.ladders.map(
-            (ladder)=>{ return (ladder.id) }
-        )
-    }
-
     render() {
         var self = this
         var all_ladders = self.props.ladders.map(
@@ -52,6 +32,7 @@ export class MyLaddersContainer extends Component {
                 )
         console.log('all_ladders')
         console.log(all_ladders)
+        console.log(self.props)
 
         return (
             <div>
