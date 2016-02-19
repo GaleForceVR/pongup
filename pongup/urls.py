@@ -5,7 +5,7 @@ from rest_framework import routers, serializers, viewsets
 from django.contrib.auth.views import login
 
 from . import views
-from .views import UserViewSet, LaddersViewSet, LadderDetailViewSet, MyLaddersViewSet
+from .views import UserViewSet, LaddersViewSet, LadderDetailViewSet, MyLaddersViewSet, MatchesDetailViewSet
 
 
 
@@ -36,6 +36,7 @@ router.register(r'users', UserViewSet, 'User')
 
 # router.register(r'ladder/(?P<pk>[-\d]+)/$', LadderDetailViewSet)
 router.register(r'ladders', LaddersViewSet)
+# router.register(r'matches', MatchesViewSet)
 # router.register(r'api/ladder/(?<ladder_id>.+)/$', LadderDetailViewSet)
 
 urlpatterns = patterns('',
@@ -46,6 +47,7 @@ urlpatterns = patterns('',
     # url(r'^users_ladders/', include('ladders.urls')),
     url(r'user/(?P<pk>[-\d]+)/$', UserViewSet, name='user-detail'),
     url(r'^api/ladder/(?P<pk>[-\d]+)/$', LadderDetailViewSet.as_view({'get': 'list'})),
+    url(r'^api/matches/(?P<pk>[-\d]+)/$', MatchesDetailViewSet.as_view({'get': 'list'})),
     url(r'^api/user/ladders/$', MyLaddersViewSet.as_view({'get': 'list'})),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

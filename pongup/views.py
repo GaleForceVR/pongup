@@ -4,9 +4,10 @@ from django.template import RequestContext, loader
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer
+from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer, MatchDetailSerializer
 from rest_framework import routers, serializers, viewsets
 from ladders.models import Ladder, User_Ladder
+from matches.models import Match
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import UserCreateForm
 from django.core.urlresolvers import reverse
@@ -101,4 +102,16 @@ class MyLaddersViewSet(viewsets.ModelViewSet):
         user_id = self.request.user.id
         return User_Ladder.objects.filter(user_id=user_id)
 
+class MatchesDetailViewSet(viewsets.ModelViewSet):
+    queryset = Match.objects.all()
+    model = Match
+    serializer_class = MatchDetailSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of match cleaned_data
+        """
+        user_id = self.request.user.id
+        ladder_id = self.kwargs['pk']
+        return Match.objects.filter(ladder_id=ladder_id)
     
