@@ -23,4 +23,16 @@ export class LaddersClient {
         console.log(axios.get('/api/ladder/' + id))
         return axios.get('/api/ladder/' + id)
     }
+
+    fetch_matches_detail(id) {
+        return axios.all([
+            this.fetch_all_match_details(id)
+        ])
+    }
+
+    fetch_all_match_details(id) {
+        console.log('fetch_all_match_details/' + id)
+        console.log(axios.get('/api/matches/' + id))
+        return axios.get('/api/matches/' + id)
+    }
 }

@@ -84,7 +84,8 @@ function mapLadderDetailContainerStateToProps(state) {
         active_app: state.ladders_reducer.active_tab,
         ladders: state.ladders_reducer.ladders,
         username: state.pongup_reducer.username,
-        ladder_detail: state.ladders_reducer.ladder_detail
+        ladder_detail: state.ladders_reducer.ladder_detail,
+        matches_detail: state.ladders_reducer.matches_detail
     }
 }
 

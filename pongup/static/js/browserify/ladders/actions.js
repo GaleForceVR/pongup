@@ -52,3 +52,21 @@ export function loadLadderDetail(id) {
 			})
 	}
 }
+
+export function loadMatchesDetail(id) {
+	console.log('%cloadMatchesDetail()', 'background-color:red;color:yellow')
+	return (dispatch) => {
+		var client = new LaddersClient()
+		client.fetch_matches_detail(id)
+			.then( axios.spread( (matches_data) => {
+				dispatch({
+					type: constants.MATCHES_DETAIL_LOADED,
+					matches_data: {
+						matches_data: matches_data.data,
+						is_loading: false
+					}
+
+				})
+			}))
+	}
+}

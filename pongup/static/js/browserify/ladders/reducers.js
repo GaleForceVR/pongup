@@ -5,7 +5,8 @@ const initialState = {
     is_loading: true,
     user_profile: {},
     ladders: [],
-    ladder_detail: []
+    ladder_detail: [],
+    matches_detail: []
 }
 
 const ladders_reducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ const ladders_reducer = (state = initialState, action) => {
         case constants.LADDER_DETAIL_LOADED:
             return Object.assign({}, state, {
                 ladder_detail: action.ladder_data.ladder_data,
+                is_loading: false
+            })
+        case constants.MATCHES_DETAIL_LOADED:
+            console.log('%cMATCHES_DETAIL_LOADED', 'background-color:pink')
+            return Object.assign({}, state, {
+                matches_detail: action.matches_data.matches_data,
                 is_loading: false
             })
         default:

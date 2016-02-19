@@ -1,6 +1,7 @@
 import * as actions from '../actions'
 // import classNames from 'classnames'
 import { RankingList } from './RankingList'
+import { MatchDetail } from './MatchDetail'
 import React, { Component } from 'react'
 
 export class LadderDetailContainer extends Component {
@@ -22,8 +23,11 @@ export class LadderDetailContainer extends Component {
 
     componentDidMount() {
         var self = this
+        var current_ladder_id = self.getCurrentLadder().id
+
         self.props.dispatch(actions.loadLadders())
-        self.props.dispatch(actions.loadLadderDetail(self.getCurrentLadder().id))
+        self.props.dispatch(actions.loadLadderDetail(current_ladder_id))
+        self.props.dispatch(actions.loadMatchesDetail(current_ladder_id))
     }
 
     getCurrentLadder() {
@@ -46,6 +50,8 @@ export class LadderDetailContainer extends Component {
     buildRankingList() {
         var self = this
         return self.props.ladder_detail.map(function(player, index) {
+            console.log('buildRankingList')
+            console.log(player)
             return (
                 <RankingList 
                     key={index}
@@ -55,6 +61,64 @@ export class LadderDetailContainer extends Component {
                 />
             )
         })
+    }
+
+    buildMatches() {
+        var self = this
+
+
+        return self.props.matches_detail.map(function(match, index) {
+
+            var ladder_list = self.props.ladder_detail
+
+            var player_a_username = match.player_a.username
+            var player_b_username = match.player_b.username
+
+            var player_a_rank
+            var player_b_rank
+
+            // TODO iterate over self.props.ladder_detail to get ladder_rank
+            for (var i = 0; i < ladder_list.length; i++) {
+                console.log('%cladder_list[' + i + ']', 'background-color:yellow')
+                console.log(ladder_list[i].user.username)
+                var next_username = ladder_list[i].user.username
+                
+
+                if (next_username == player_a_username) {
+                    player_a_rank = ladder_list[i].ladder_rank
+                } else if (next_username == player_b_username) {
+                    player_b_rank = ladder_list[i].ladder_rank
+                }
+            }
+
+            console.log('%cLADDER RANKS')
+            console.log('player A: ' + player_a_username + ': ' + player_a_rank)
+            console.log('player B: ' + player_b_username + ': ' + player_b_rank)
+
+            console.log('buildMatches()')
+            console.log(match.player_a.username)
+            return (
+                <MatchDetail
+                    key={index}
+                    ladder_detail={match.ladder_detail}
+                    matches_detail={match.matches_detail}
+                    player_a_rank={player_a_rank}
+                    player_a_username={player_a_username}
+                    player_b_rank={player_b_rank}
+                    player_b_username={player_b_username}
+                    {...self.props}
+                />
+            )
+
+        })
+    }
+
+    buildNoMatches() {
+        <li>
+            <div className="scheduled-matches-container">
+                <p className="seed">There are no matches scheduled at this time.</p>
+            </div>
+        </li>
     }
 
     render() {
@@ -72,19 +136,7 @@ export class LadderDetailContainer extends Component {
                 <div className="left-wrapper">
                     <p className="header-label category">Scheduled Matches:</p>
                     <ul className="scheduled-matches-list">
-                        <li>
-                            
-                            <div className="scheduled-matches-container">
-                                <p className="seed">#2</p>
-                                <p className="player-name">Gale VanRossem</p>
-                                <input type="text" placeholder="Score"/>
-                                <p className="seed">vs. #3</p>
-                                <p className="player-name">Yale Reardon</p>
-                                <input type="text" placeholder="Score"/>
-                            </div>
-                            <p className="header-label">Friday, Jan. 15 3:30pm</p>
-                            <a className="primary submit-btn"href="#submit">Submit scores</a>
-                        </li>
+                        { (this.props.matches_detail && this.props.matches_detail.length > 0) ? this.buildMatches() : this.buildNoMatches() }
                         <li>
                             <div className="scheduled-matches-container">
                                 <p className="seed">#1</p>

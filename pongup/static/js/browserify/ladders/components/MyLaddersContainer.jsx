@@ -1,6 +1,5 @@
 import * as actions from '../actions'
 // import classNames from 'classnames'
-import { LaddersList } from './LaddersList'
 import React, { Component } from 'react'
 
 export class MyLaddersContainer extends Component {
@@ -23,6 +22,7 @@ export class MyLaddersContainer extends Component {
     componentDidMount() {
         var self = this
         self.props.dispatch(actions.loadLadders())
+        // self.props.dispatch(actions.loadMatchDetails())
     }
 
     render() {
