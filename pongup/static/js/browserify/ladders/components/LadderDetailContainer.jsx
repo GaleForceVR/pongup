@@ -78,6 +78,7 @@ export class LadderDetailContainer extends Component {
             var player_b_rank
 
             // TODO iterate over self.props.ladder_detail to get ladder_rank
+            // TODO iterate over self.props.match_detail to get 
             for (var i = 0; i < ladder_list.length; i++) {
                 console.log('%cladder_list[' + i + ']', 'background-color:yellow')
                 console.log(ladder_list[i].user.username)
@@ -100,6 +101,7 @@ export class LadderDetailContainer extends Component {
             return (
                 <MatchDetail
                     key={index}
+                    index={index}
                     ladder_detail={match.ladder_detail}
                     matches_detail={match.matches_detail}
                     player_a_rank={player_a_rank}

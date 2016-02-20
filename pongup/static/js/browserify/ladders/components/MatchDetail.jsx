@@ -1,6 +1,7 @@
 import * as actions from '../actions'
 // import classNames from 'classnames'
 import React, { Component } from 'react'
+import moment from 'moment'
 
 export class MatchDetail extends Component {
     constructor(props) {
@@ -30,11 +31,11 @@ export class MatchDetail extends Component {
 					<p className="seed">#{self.props.player_a_rank}</p>
 					<p className="player-name">{self.props.player_a_username}</p>
 					<input type="text" placeholder="Score"/>
-					<p className="seed">vs. #3</p>
-					<p className="player-name">Yale Reardon</p>
+					<p className="seed">vs. #{self.props.player_b_rank}</p>
+					<p className="player-name">{self.props.player_b_username}</p>
 					<input type="text" placeholder="Score"/>
 				</div>
-				<p className="header-label">Friday, Jan. 15 3:30pm</p>
+				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
 				<a className="primary submit-btn"href="#submit">Submit scores</a>
 			</li>
 		)
