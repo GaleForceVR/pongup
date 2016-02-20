@@ -20,13 +20,10 @@ export class MatchDetail extends Component {
         )
     }
 
-    render() {
+    renderMatchInfoAndForm() {
 		var self = this
-		console.log('%cMatchDetail', 'background-color:blue;color:yellow')
-		console.log('%c ' + self, 'background-color:blue;color:white')
-		console.log(self.props)
 		return (
-			<li>
+			<div>
 				<div className="scheduled-matches-container">
 					<p className="seed">#{self.props.player_a_rank}</p>
 					<p className="player-name">{self.props.player_a_username}</p>
@@ -37,6 +34,33 @@ export class MatchDetail extends Component {
 				</div>
 				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
 				<a className="primary submit-btn"href="#submit">Submit scores</a>
+			</div>
+		)
+    }
+
+    renderMatchInfoWithoutForm() {
+		var self = this
+		return (
+			<div>
+				<div className="scheduled-matches-container">
+					<p className="seed">#{self.props.player_a_rank}</p>
+					<p className="player-name">{self.props.player_a_username}</p>
+					<p className="seed">vs. #{self.props.player_b_rank}</p>
+					<p className="player-name">{self.props.player_b_username}</p>
+				</div>
+				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
+			</div>
+		)
+    }
+
+    render() {
+		var self = this
+		console.log('%cMatchDetail', 'background-color:blue;color:yellow')
+		console.log('%c ' + self, 'background-color:blue;color:white')
+		console.log(self.props)
+		return (
+			<li>
+				{(self.props.player_a_username == self.props.username || self.props.player_b_username == self.props.username) ? self.renderMatchInfoAndForm() : self.renderMatchInfoWithoutForm() }
 			</li>
 		)
     }
