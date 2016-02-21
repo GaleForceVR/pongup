@@ -1,9 +1,9 @@
 import * as constants  from '../pongup/constants'
 import axios from 'axios'
 import { LaddersClient } from './ladders_client'
+import validator from 'validator'
 
 export function loadLadders() {
-
 		return (dispatch) => {
 			var client = new LaddersClient()
 			client.fetch_ladders()
@@ -69,4 +69,55 @@ export function loadMatchesDetail(id) {
 				})
 			}))
 	}
+}
+
+export function checkValidations(field, value = null, all = false) {
+	return (dispatch, getState) => {
+		var errors = getState().ladders_reducer.errors
+
+		switch (field) {
+			case 'player_a_score':
+				var val = value || null
+
+				if (validator.isInt(val, {min: 0, max: 99})) {
+					console.log('player_a_score: null')
+					Object.assign(errors, {player_a_score: null})
+				} else {
+					console.log('player_a_score: error message')
+					Object.assign(errors, {player_a_score: 'Score must be a number between 0 and 99'})
+				}
+				break;
+			default:
+				break;
+				
+		}
+
+		let new_state = Object.assign({}, getState().ladders_reducer, {errors: errors})
+
+		dispatch({
+			type: constants.VALIDATE,
+			new_state
+		})
+
+	}	
+}
+
+export function initEditMode() {
+	return (dispatch) => {
+		dispatch({
+			type: constants.INIT_EDIT_MODE,
+			is_editing: true
+		})
+	}
+}
+
+export function saveAndExitEditMode(new_props) {
+	return(dispatch, getState) => {
+		var new_state = Object.assign({}, getState().ladders_reducer, new_props)
+		dispatch({
+			type: constants.EXIT_EDIT_MODE,
+			new_state
+		})
+	}
+
 }

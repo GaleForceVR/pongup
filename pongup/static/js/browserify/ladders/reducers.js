@@ -6,7 +6,13 @@ const initialState = {
     user_profile: {},
     ladders: [],
     ladder_detail: [],
-    matches_detail: []
+    matches_detail: [],
+    errors: {
+        player_a_score: null
+    },
+    player_a_score: null,
+    is_editing: false
+
 }
 
 const ladders_reducer = (state = initialState, action) => {
@@ -28,11 +34,26 @@ const ladders_reducer = (state = initialState, action) => {
                 is_loading: false
             })
         case constants.MATCHES_DETAIL_LOADED:
-            console.log('%cMATCHES_DETAIL_LOADED', 'background-color:pink')
             return Object.assign({}, state, {
                 matches_detail: action.matches_data.matches_data,
                 is_loading: false
             })
+        case constants.VALIDATE:
+            console.log('%cVALIDATE', 'background-color:pink')
+            console.log(action.new_state)
+            return Object.assign({}, state, 
+                action.new_state
+            )
+        case constants.INIT_EDIT_MODE:
+            console.log('INIT_EDIT_MODE')
+            return Object.assign({}, state,
+                action.new_state
+            )
+        case constants.EXIT_EDIT_MODE:
+            console.log('EXIT_EDIT_MODE')
+            return Object.assign({}, state,
+                action.new_state
+            )
         default:
             return state;
     }

@@ -1,13 +1,22 @@
 import * as actions from '../actions'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 import React, { Component } from 'react'
 import moment from 'moment'
+import listensToClickOutside from 'react-onclickoutside/decorator'
 
-export class MatchDetail extends Component {
+export class _MatchDetail extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
+        this.state = {
+	    	errors: this.props.errors,
+			player_a_score: this.props.player_a_score
+        }
 
+    }
+
+    componentDidMount() {
+		this.forceUpdate()
     }
 
     loading() {
@@ -20,20 +29,70 @@ export class MatchDetail extends Component {
         )
     }
 
+    handleClickOutside = () => {
+		console.log('handleClickOutside')
+		this.props.dispatch(
+			actions.saveAndExitEditMode({
+				player_a_score: this.state.player_a_score,
+				is_editing: false
+			})
+		)
+		this.setState(this.state)
+    };
+
     renderMatchInfoAndForm() {
 		var self = this
+		console.log('renderMatchInfoAndForm()')
+		console.log(self.props)
+		console.log('self.props.errors.player_a_score')
+		console.log(self.props.errors.player_a_score)
+		if (self.state) {
+			console.log('self.state.errors.player_a_score')
+			console.log(self.state)
+			console.log(self.state.errors)
+		}
 		return (
 			<div>
-				<div className="scheduled-matches-container">
+				<div 
+					className="scheduled-matches-container"
+					onClick={()=>{
+						self.props.dispatch(
+							actions.initEditMode()
+						)
+					}}
+					>
 					<p className="seed">#{self.props.player_a_rank}</p>
 					<p className="player-name">{self.props.player_a_username}</p>
-					<input type="text" placeholder="Score"/>
+					{self.props.errors.player_a_score && <div>{self.props.errors.player_a_score}</div>}
+					<input 
+						type="text" 
+						name="player_a_score"
+						placeholder="Score"
+						value={this.state.player_a_score}
+						onChange={(e)=>{
+							console.log('player_a_onChange')
+							self.setState({player_a_score: e.target.value})
+						}}
+						onBlur={(e)=>{
+							console.log('player_a_score entered')
+							self.props.dispatch(actions.checkValidations('player_a_score', e.target.value))
+						}}
+						className={classNames({'error': self.props.errors.player_a_score })} 
+						/>
 					<p className="seed">vs. #{self.props.player_b_rank}</p>
 					<p className="player-name">{self.props.player_b_username}</p>
-					<input type="text" placeholder="Score"/>
+					<input type="text" name="player_b_score" placeholder="Score"/>
 				</div>
 				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
-				<a className="primary submit-btn"href="#submit">Submit scores</a>
+				<a 
+					className="primary submit-btn" 
+					href="#submit"
+					onClick={()=> {
+						console.log('submit button clicked!')
+					}}
+					>
+					Submit scores
+				</a>
 			</div>
 		)
     }
@@ -65,3 +124,4 @@ export class MatchDetail extends Component {
 		)
     }
 }
+export var MatchDetail = listensToClickOutside(_MatchDetail)

@@ -303,6 +303,9 @@ a {
         font-size: 15px;
         margin-right: 10px;
         text-align: center;
+        &.error {
+            border: 2px solid red;
+        }
         &::-webkit-input-placeholder {
             color:    $backgroundBlue;
         }
