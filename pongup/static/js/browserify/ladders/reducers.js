@@ -11,7 +11,8 @@ const initialState = {
         player_a_score: null
     },
     player_a_score: null,
-    is_editing: false
+    is_editing: false,
+    liked: false
 
 }
 

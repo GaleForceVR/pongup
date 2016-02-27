@@ -9,10 +9,25 @@ export class _MatchDetail extends Component {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
         this.state = {
-	    	errors: this.props.errors,
-			player_a_score: this.props.player_a_score
+			errors: this.props.errors,
+			player_a_score: this.props.player_a_score,
+			liked: false
         }
 
+    }
+
+    handleClick() {
+		this.setState({liked: !this.state.liked})
+    }
+
+    handleChange(e) {	
+		console.log('player_a_onChange')
+		this.setState({player_a_score: e.target.value})
+    }
+
+    handleBlur(e) {
+		console.log('player_a_score entered')
+		this.props.dispatch(actions.checkValidations('player_a_score', e.target.value))
     }
 
     componentDidMount() {
@@ -46,37 +61,35 @@ export class _MatchDetail extends Component {
 		console.log(self.props)
 		console.log('self.props.errors.player_a_score')
 		console.log(self.props.errors.player_a_score)
+		var index = self.index
 		if (self.state) {
 			console.log('self.state.errors.player_a_score')
 			console.log(self.state)
 			console.log(self.state.errors)
 		}
+		var text = this.state.liked ? 'like' : 'haven\'t liked'
 		return (
 			<div>
 				<div 
 					className="scheduled-matches-container"
-					onClick={()=>{
-						self.props.dispatch(
-							actions.initEditMode()
-						)
-					}}
+					
 					>
+					<p
+						onClick={this.handleClick.bind(this)}
+						>
+						You {text} this. Click to toggle.
+					</p>
 					<p className="seed">#{self.props.player_a_rank}</p>
 					<p className="player-name">{self.props.player_a_username}</p>
 					{self.props.errors.player_a_score && <div>{self.props.errors.player_a_score}</div>}
 					<input 
+						key={index}
 						type="text" 
 						name="player_a_score"
 						placeholder="Score"
 						value={this.state.player_a_score}
-						onChange={(e)=>{
-							console.log('player_a_onChange')
-							self.setState({player_a_score: e.target.value})
-						}}
-						onBlur={(e)=>{
-							console.log('player_a_score entered')
-							self.props.dispatch(actions.checkValidations('player_a_score', e.target.value))
-						}}
+						onChange={this.handleChange.bind(this)}
+						onBlur={this.handleBlur.bind(this)}
 						className={classNames({'error': self.props.errors.player_a_score })} 
 						/>
 					<p className="seed">vs. #{self.props.player_b_rank}</p>

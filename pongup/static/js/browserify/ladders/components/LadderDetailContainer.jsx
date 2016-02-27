@@ -8,6 +8,11 @@ export class LadderDetailContainer extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
+        this.state = {
+            errors: this.props.errors,
+            player_a_score: this.props.player_a_score,
+            liked: false
+        }
 
     }
 
@@ -108,6 +113,7 @@ export class LadderDetailContainer extends Component {
                     player_a_username={player_a_username}
                     player_b_rank={player_b_rank}
                     player_b_username={player_b_username}
+                    errors={self.state.errors}
                     {...self.props}
                 />
             )
