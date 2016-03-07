@@ -16,8 +16,16 @@ export class _MatchDetail extends Component {
 
     }
 
+    handleSubmit() {
+		console.log('%csubmit button clicked!', 'background-color:red;color:yellow')
+		this.props.dispatch(actions.checkValidations('player_a_score', e.target.value))
+    }
+
     handleClick() {
+    	console.log('handleClick')
+		console.log(this.state)
 		this.setState({liked: !this.state.liked})
+		console.log(this.state)
     }
 
     handleChange(e) {	
@@ -101,7 +109,7 @@ export class _MatchDetail extends Component {
 					className="primary submit-btn" 
 					href="#submit"
 					onClick={()=> {
-						console.log('submit button clicked!')
+						this.handleSubmit()
 					}}
 					>
 					Submit scores

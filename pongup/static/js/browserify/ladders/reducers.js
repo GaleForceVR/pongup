@@ -12,7 +12,8 @@ const initialState = {
     },
     player_a_score: null,
     is_editing: false,
-    liked: false
+    liked: false,
+    force_update: false
 
 }
 
@@ -43,7 +44,7 @@ const ladders_reducer = (state = initialState, action) => {
             console.log('%cVALIDATE', 'background-color:pink')
             console.log(action.new_state)
             return Object.assign({}, state, 
-                action.new_state
+                action.new_state, {force_update: !state.force_update}
             )
         case constants.INIT_EDIT_MODE:
             console.log('INIT_EDIT_MODE')
