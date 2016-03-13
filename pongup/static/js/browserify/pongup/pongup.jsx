@@ -88,6 +88,8 @@ function mapLadderDetailContainerStateToProps(state) {
         matches_detail: state.ladders_reducer.matches_detail,
         errors: state.ladders_reducer.errors,
         player_a_score: state.ladders_reducer.player_a_score,
+        player_b_score: state.ladders_reducer.player_b_score,
+        match_id: state.ladders_reducer.match_id,
         is_editing: state.ladders_reducer.is_editing,
         liked: state.ladders_reducer.liked,
         force_update: state.ladders_reducer.force_update

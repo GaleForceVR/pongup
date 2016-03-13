@@ -11,31 +11,45 @@ export class _MatchDetail extends Component {
         this.state = {
 			errors: this.props.errors,
 			player_a_score: this.props.player_a_score,
+			player_b_score: this.props.player_b_score,
+			match_id: this.props.match_id,
 			liked: false
         }
 
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
 		console.log('%csubmit button clicked!', 'background-color:red;color:yellow')
-		this.props.dispatch(actions.checkValidations('player_a_score', e.target.value))
+		console.log(this.state)
+		this.props.dispatch(actions.submitScores())
     }
 
     handleClick() {
-    	console.log('handleClick')
+		console.log('handleClick')
 		console.log(this.state)
 		this.setState({liked: !this.state.liked})
 		console.log(this.state)
     }
 
     handleChange(e) {	
-		console.log('player_a_onChange')
-		this.setState({player_a_score: e.target.value})
+		var score_obj = {}
+		var player = e.target.name
+		var score = e.target.value
+
+		score_obj[player] = score
+
+		this.setState(score_obj)
     }
 
     handleBlur(e) {
-		console.log('player_a_score entered')
-		this.props.dispatch(actions.checkValidations('player_a_score', e.target.value))
+		var player = e.target.name
+		console.log('handleBlur')
+		console.log(player)
+		var score = e.target.value
+		console.log(score)
+		this.props.dispatch(actions.checkValidations(player, score))
+		console.log('handleBlurErrors: ')
+		console.log(this.state.errors)
     }
 
     componentDidMount() {
@@ -53,10 +67,10 @@ export class _MatchDetail extends Component {
     }
 
     handleClickOutside = () => {
-		console.log('handleClickOutside')
 		this.props.dispatch(
 			actions.saveAndExitEditMode({
 				player_a_score: this.state.player_a_score,
+				player_b_score: this.state.player_b_score,
 				is_editing: false
 			})
 		)
@@ -65,16 +79,7 @@ export class _MatchDetail extends Component {
 
     renderMatchInfoAndForm() {
 		var self = this
-		console.log('renderMatchInfoAndForm()')
-		console.log(self.props)
-		console.log('self.props.errors.player_a_score')
-		console.log(self.props.errors.player_a_score)
 		var index = self.index
-		if (self.state) {
-			console.log('self.state.errors.player_a_score')
-			console.log(self.state)
-			console.log(self.state.errors)
-		}
 		var text = this.state.liked ? 'like' : 'haven\'t liked'
 		return (
 			<div>
@@ -102,14 +107,23 @@ export class _MatchDetail extends Component {
 						/>
 					<p className="seed">vs. #{self.props.player_b_rank}</p>
 					<p className="player-name">{self.props.player_b_username}</p>
-					<input type="text" name="player_b_score" placeholder="Score"/>
+					<input 
+						key={index}
+						type="text" 
+						name="player_b_score" 
+						placeholder="Score"
+						value={this.state.player_b_score}
+						onChange={this.handleChange.bind(this)}
+						onBlur={this.handleBlur.bind(this)}
+						className={classNames({'error': self.props.errors.player_b_score})}
+						/>
 				</div>
 				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
 				<a 
 					className="primary submit-btn" 
 					href="#submit"
-					onClick={()=> {
-						this.handleSubmit()
+					onClick={(e)=> {
+						this.handleSubmit(e)
 					}}
 					>
 					Submit scores
@@ -135,9 +149,6 @@ export class _MatchDetail extends Component {
 
     render() {
 		var self = this
-		console.log('%cMatchDetail', 'background-color:blue;color:yellow')
-		console.log('%c ' + self, 'background-color:blue;color:white')
-		console.log(self.props)
 		return (
 			<li>
 				{(self.props.player_a_username == self.props.username || self.props.player_b_username == self.props.username) ? self.renderMatchInfoAndForm() : self.renderMatchInfoWithoutForm() }

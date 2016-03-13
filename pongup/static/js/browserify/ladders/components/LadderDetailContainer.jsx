@@ -45,18 +45,12 @@ export class LadderDetailContainer extends Component {
             }
         }
 
-        console.log('current_ladder')
-        console.log(current_ladder)
-        
-
         return current_ladder
     }
 
     buildRankingList() {
         var self = this
         return self.props.ladder_detail.map(function(player, index) {
-            console.log('buildRankingList')
-            console.log(player)
             return (
                 <RankingList 
                     key={index}
@@ -85,24 +79,14 @@ export class LadderDetailContainer extends Component {
             // TODO iterate over self.props.ladder_detail to get ladder_rank
             // TODO iterate over self.props.match_detail to get 
             for (var i = 0; i < ladder_list.length; i++) {
-                console.log('%cladder_list[' + i + ']', 'background-color:yellow')
-                console.log(ladder_list[i].user.username)
                 var next_username = ladder_list[i].user.username
                 
-
                 if (next_username == player_a_username) {
                     player_a_rank = ladder_list[i].ladder_rank
                 } else if (next_username == player_b_username) {
                     player_b_rank = ladder_list[i].ladder_rank
                 }
             }
-
-            console.log('%cLADDER RANKS')
-            console.log('player A: ' + player_a_username + ': ' + player_a_rank)
-            console.log('player B: ' + player_b_username + ': ' + player_b_rank)
-
-            console.log('buildMatches()')
-            console.log(match.player_a.username)
             return (
                 <MatchDetail
                     key={index}
@@ -131,8 +115,6 @@ export class LadderDetailContainer extends Component {
 
     render() {
         var self = this
-        console.log('LadderDetailContainer')
-        console.log(self.props)
         return (
             <div className="container-1600">
 

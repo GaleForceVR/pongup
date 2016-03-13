@@ -8,9 +8,12 @@ const initialState = {
     ladder_detail: [],
     matches_detail: [],
     errors: {
-        player_a_score: null
+        player_a_score: null,
+        player_b_score: null
     },
     player_a_score: null,
+    player_b_score: null,
+    match_id: null,
     is_editing: false,
     liked: false,
     force_update: false
@@ -47,12 +50,10 @@ const ladders_reducer = (state = initialState, action) => {
                 action.new_state, {force_update: !state.force_update}
             )
         case constants.INIT_EDIT_MODE:
-            console.log('INIT_EDIT_MODE')
             return Object.assign({}, state,
                 action.new_state
             )
         case constants.EXIT_EDIT_MODE:
-            console.log('EXIT_EDIT_MODE')
             return Object.assign({}, state,
                 action.new_state
             )

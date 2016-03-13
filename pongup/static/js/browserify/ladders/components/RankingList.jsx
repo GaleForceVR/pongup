@@ -24,8 +24,6 @@ export class RankingList extends Component {
 
     render() {
         var self = this
-        console.log('RankingList')
-        console.log(self.props)
 
         return (
 			<li className="ladder-rank-list">
