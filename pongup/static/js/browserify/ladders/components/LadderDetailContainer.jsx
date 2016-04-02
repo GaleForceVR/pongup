@@ -91,13 +91,13 @@ export class LadderDetailContainer extends Component {
                 <MatchDetail
                     key={index}
                     index={index}
+                    match={match}
                     ladder_detail={match.ladder_detail}
                     matches_detail={match.matches_detail}
                     player_a_rank={player_a_rank}
                     player_a_username={player_a_username}
                     player_b_rank={player_b_rank}
                     player_b_username={player_b_username}
-                    errors={self.state.errors}
                     {...self.props}
                 />
             )

@@ -7,10 +7,7 @@ const initialState = {
     ladders: [],
     ladder_detail: [],
     matches_detail: [],
-    errors: {
-        player_a_score: null,
-        player_b_score: null
-    },
+    errors: {},
     player_a_score: null,
     player_b_score: null,
     match_id: null,
@@ -45,10 +42,16 @@ const ladders_reducer = (state = initialState, action) => {
             })
         case constants.VALIDATE:
             console.log('%cVALIDATE', 'background-color:pink')
+            console.log(state)
             console.log(action.new_state)
-            return Object.assign({}, state, 
-                action.new_state, {force_update: !state.force_update}
-            )
+            var errors = Object.assign({}, state.errors, action.new_state.errors)
+            console.log(errors)
+            console.log(Object.assign({}, state, {
+                errors: errors
+            }))
+            return Object.assign({}, state, {
+                errors: errors
+            },{force_update: !state.force_update})
         case constants.INIT_EDIT_MODE:
             return Object.assign({}, state,
                 action.new_state

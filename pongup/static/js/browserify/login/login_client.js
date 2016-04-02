@@ -3,6 +3,7 @@ import axiosDefaults from 'axios'
 var $ = require('jquery')
 
 export function getTheCookie() {
+    console.log('%cgetTheCookie', 'background-color:blue;color:yellow')
     var cookieValue = null;
     var name = 'csrftoken';
     if (document.cookie && document.cookie != '') {

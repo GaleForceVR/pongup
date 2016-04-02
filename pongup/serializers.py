@@ -34,4 +34,4 @@ class MatchDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Match 
 		depth = 2
-		fields = ('ladder', 'name', 'player_a', 'player_b', 'player_a_score', 'player_b_score', 'match_date')
+		fields = ('id', 'ladder', 'name', 'player_a', 'player_b', 'player_a_score', 'player_b_score', 'match_date')
