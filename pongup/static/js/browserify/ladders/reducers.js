@@ -44,8 +44,10 @@ const ladders_reducer = (state = initialState, action) => {
             console.log('%cVALIDATE', 'background-color:pink')
             console.log(state)
             console.log(action.new_state)
+            console.log(state.errors)
             var errors = Object.assign({}, state.errors, action.new_state.errors)
             console.log(errors)
+            console.log(state.force_update)
             console.log(Object.assign({}, state, {
                 errors: errors
             }))

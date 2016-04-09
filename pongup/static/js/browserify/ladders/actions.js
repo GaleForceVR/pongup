@@ -119,10 +119,6 @@ export function checkValidations(field, value = null, index, all = false) {
 
 		switch (field) {
 			case 'player_a_score':
-
-				
-
-				
 				if (validator.isInt(val, {min: 0, max: 99})) {
 					// Object.assign({}, state.errors, temp_obj)
 					temp_obj = {player_a_score: undefined}
@@ -144,13 +140,13 @@ export function checkValidations(field, value = null, index, all = false) {
 				break;
 			case 'player_b_score':
 
-				if (validator.isInt(val, {min: 0, max: 99})) {
-					temp_obj = {player_b_score: undefined}
-					errors = Object.assign({}, errors[index], temp_obj)
-				} else {
-					temp_obj = {player_b_score: 'Score must be a number between 0 and 99'}
-					errors = Object.assign({}, errors[index], temp_obj)
-				}
+				// if (validator.isInt(val, {min: 0, max: 99})) {
+				// 	temp_obj = {player_b_score: undefined}
+				// 	errors = Object.assign({}, errors[index], temp_obj)
+				// } else {
+				// 	temp_obj = {player_b_score: 'Score must be a number between 0 and 99'}
+				// 	errors = Object.assign({}, errors[index], temp_obj)
+				// }
 				break;
 			default:
 				break;

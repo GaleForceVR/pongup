@@ -10,12 +10,20 @@ export class _MatchDetail extends Component {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
         this.state = {
-			errors: this.props.errors,
+			// errors: this.props.errors,
 			player_a_score: this.props.player_a_score,
 			player_b_score: this.props.player_b_score,
 			match_id: this.props.match_id,
-			liked: false,
+			liked: false
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
+        this.handleClickOutside = this.handleClickOutside.bind(this)
+        this.renderMatchInfoAndForm = this.renderMatchInfoAndForm.bind(this)
+        this.renderMatchInfoWithoutForm = this.renderMatchInfoWithoutForm.bind(this)
 
     }
 
@@ -59,7 +67,10 @@ export class _MatchDetail extends Component {
 		console.log(self.state.errors)
 		console.log('index')
 		console.log(index)
-		console.log(self.state.errors[index])
+		// console.log(self.state.errors[index])
+		console.log('new')
+		console.log(self.props)
+		console.log(self.props.errors)
 		// console.log(this.state.errors[index].player_a_score)
     }
 
@@ -119,14 +130,13 @@ export class _MatchDetail extends Component {
 					<p className="player-name">{self.props.player_a_username}</p>
 					{self.props.errors && self.props.errors[index] && self.props.errors[index].player_a_score && <div>{self.props.errors[index].player_a_score}</div>}
 					<input 
-						
 						type="text" 
 						name="player_a_score"
 						placeholder="Score"
 						value={this.state.player_a_score}
 						onChange={this.handleChange.bind(this)}
 						onBlur={this.handleBlur.bind(this)}
-						className={classNames({'error': (this.state.errors && this.state.errors[index] && this.state.errors[index].player_a_score) })} 
+						className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_a_score) })} 
 						/>
 					<p className="seed">vs. #{self.props.player_b_rank}</p>
 					<p className="player-name">{self.props.player_b_username}</p>
