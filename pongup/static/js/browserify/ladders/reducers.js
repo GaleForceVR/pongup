@@ -8,8 +8,8 @@ const initialState = {
     ladder_detail: [],
     matches_detail: [],
     errors: {},
-    player_a_score: null,
-    player_b_score: null,
+    player_a_score: {},
+    player_b_score: {},
     match_id: null,
     is_editing: false,
     liked: false,
@@ -41,16 +41,7 @@ const ladders_reducer = (state = initialState, action) => {
                 is_loading: false
             })
         case constants.VALIDATE:
-            console.log('%cVALIDATE', 'background-color:pink')
-            console.log(state)
-            console.log(action.new_state)
-            console.log(state.errors)
             var errors = Object.assign({}, state.errors, action.new_state.errors)
-            console.log(errors)
-            console.log(state.force_update)
-            console.log(Object.assign({}, state, {
-                errors: errors
-            }))
             return Object.assign({}, state, {
                 errors: errors
             },{force_update: !state.force_update})
@@ -59,6 +50,12 @@ const ladders_reducer = (state = initialState, action) => {
                 action.new_state
             )
         case constants.EXIT_EDIT_MODE:
+            return Object.assign({}, state,
+                action.new_state
+            )
+        case constants.UPDATE_SCORE:
+            console.log('%cUPDATE_SCORE', 'background-color:blue;color:yellow')
+            console.log(action.new_state)
             return Object.assign({}, state,
                 action.new_state
             )

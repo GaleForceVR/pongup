@@ -50,8 +50,8 @@ export class LaddersContainer extends Component {
         var all_ladders = self.props.ladders.map(
                     (ladder)=>{ return (ladder.id) }
                 )
-        console.log('all_ladders')
-        console.log(all_ladders)
+        // console.log('all_ladders')
+        // console.log(all_ladders)
 
         return (
             <div>

@@ -72,9 +72,9 @@ export function loadMatchesDetail(id) {
 
 export function checkAllValidations(state) {
 	return (dispatch, getState) => {
-		// var has_errors = false
-		console.log('run validations')
-		console.log(state)
+		// // var has_errors = false
+		// console.log('run validations')
+		// console.log(state)
 
 		let new_state = Object.assign({}, getState().ladders_reducer, {errors: errors})
 		dispatch({
@@ -84,16 +84,27 @@ export function checkAllValidations(state) {
 	}
 }
 
+export function updateScore(new_score) {
+	return (dispatch, getState) => {
+		let new_state = Object.assign({}, getState().ladders_reducer, new_score)
+		dispatch({
+			type: constants.UPDATE_SCORE,
+			new_state
+		})
+	}
+}
+
 export function submitScores(match_id, index) {
 	return (dispatch, getState) => {
 		var state = getState().ladders_reducer;
 
-		// var err_data = checkAllValidations(state)
-		console.log('submitScores()')
-		console.log(state)
-		console.log(state.errors)
-		console.log(index)
-		console.log(state.errors[index])
+		let current_match
+		for (var i = 0; i < state.matches_detail.length; i++) {
+			if (state.matches_detail[i].id === match_id) {
+				current_match = state.matches_detail[i]
+			}
+		}
+
 		var err_data = state.errors[index]
 		if (err_data.player_a_score || err_data.player_b_score) {
 			console.log('%cerrors exist', 'background-color:red;color:white')
@@ -105,6 +116,28 @@ export function submitScores(match_id, index) {
 		} else {
 			console.log('%cno errors', 'background-color:green;color:white')
 			var csrftoken = getTheCookie()
+			var headers = {
+				xsrfCookieName: 'csrftoken',
+				xsrfHeaderName: 'X-CSRFToken',
+				'X-CSRFToken': csrftoken
+			}
+
+			var params = {
+				id: match_id,
+				player_a_score: state.player_a_score[index],
+				player_b_score: state.player_b_score[index],
+				match_date: current_match.match_date 
+			}
+
+			axios.put('/api/match/' + match_id + '/', params, headers)
+				.then(function (response) {
+					console.log('success')
+					console.log(response)
+				})
+				.catch(function (response) {
+					console.log('error')
+					console.log(response)
+				})
 		}
 	}	
 	
@@ -115,38 +148,34 @@ export function checkValidations(field, value = null, index, all = false) {
 		var errors = getState().ladders_reducer.errors
 		var val = value || null
 		var temp_obj = {}
-		var inner_errors
 
 		switch (field) {
 			case 'player_a_score':
 				if (validator.isInt(val, {min: 0, max: 99})) {
-					// Object.assign({}, state.errors, temp_obj)
 					temp_obj = {player_a_score: undefined}
-					inner_errors = Object.assign({}, errors[index], temp_obj)
-					errors = Object.assign({}, errors, inner_errors)
-					console.log('checkValidations score is valid:')
-					console.log(temp_obj)
-					console.log(errors)
+					var new_temp_obj = {}
+					new_temp_obj[index] = temp_obj
+					errors[index] = Object.assign({}, errors[index], temp_obj)
 				} else {
 					temp_obj = {player_a_score: 'Score must be a number between 0 and 99'}
 					var new_temp_obj = {}
 					new_temp_obj[index] = temp_obj
-					// inner_errors = Object.assign({}, errors[index], temp_obj)
-					errors = Object.assign({}, errors, new_temp_obj)
-					console.log('checkValidations score is NOT valid:')
-					console.log(temp_obj)
-					console.log(errors)
+					errors[index] = Object.assign({}, errors[index], temp_obj)
 				}
 				break;
 			case 'player_b_score':
 
-				// if (validator.isInt(val, {min: 0, max: 99})) {
-				// 	temp_obj = {player_b_score: undefined}
-				// 	errors = Object.assign({}, errors[index], temp_obj)
-				// } else {
-				// 	temp_obj = {player_b_score: 'Score must be a number between 0 and 99'}
-				// 	errors = Object.assign({}, errors[index], temp_obj)
-				// }
+				if (validator.isInt(val, {min: 0, max: 99})) {
+					temp_obj = {player_b_score: undefined}
+					var new_temp_obj = {}
+					new_temp_obj[index] = temp_obj
+					errors[index] = Object.assign({}, errors[index], temp_obj)
+				} else {
+					temp_obj = {player_b_score: 'Score must be a number between 0 and 99'}
+					var new_temp_obj = {}
+					new_temp_obj[index] = temp_obj
+					errors[index] = Object.assign({}, errors[index], temp_obj)
+				}
 				break;
 			default:
 				break;
@@ -156,8 +185,6 @@ export function checkValidations(field, value = null, index, all = false) {
 		// var new_temp_obj = Object.assign({}, getState().ladders_reducer.errors[index], errors)
 
 		let new_state = Object.assign({}, getState().ladders_reducer, {errors: errors})
-		console.log('new_state')
-		console.log(new_state)
 
 		dispatch({
 			type: constants.VALIDATE,

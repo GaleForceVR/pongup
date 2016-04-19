@@ -142,7 +142,7 @@ export function init() {
                     <Route path="ladders" component={ConnectedLaddersContainer} >
                         <IndexRoute component={ConnectedLaddersIndexContainer} />
                         <Route path="my-ladders" component={ConnectedMyLaddersContainer} ></Route>
-                        <Route path=":ladder_id" component={ConnectedLadderDetailContainer} ></Route>
+                        <Route path=":ladder_id/matches" component={ConnectedLadderDetailContainer} ></Route>
                         
                     </Route>
                         {/*<Route path="message/:message_id" component={ConnectedMessageContainer}/>*/}

@@ -32,7 +32,7 @@ export class LaddersClient {
 
     fetch_all_match_details(id) {
         console.log('fetch_all_match_details/' + id)
-        console.log(axios.get('/api/matches/' + id))
-        return axios.get('/api/matches/' + id)
+        console.log(axios.get('/api/ladders/' + id + '/matches/'))
+        return axios.get('/api/ladders/' + id + '/matches/')
     }
 }

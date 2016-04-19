@@ -14,6 +14,8 @@ from django.core.urlresolvers import reverse
 
 from rest_framework import filters
 from rest_framework import generics
+from rest_framework import permissions
+from matches.permissions import IsPlayerInMatchOrReadOnly
 
 def homepage(request):
     try:
@@ -102,7 +104,7 @@ class MyLaddersViewSet(viewsets.ModelViewSet):
         user_id = self.request.user.id
         return User_Ladder.objects.filter(user_id=user_id)
 
-class MatchesDetailViewSet(viewsets.ModelViewSet):
+class LadderMatchesViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all()
     model = Match
     serializer_class = MatchDetailSerializer
@@ -114,4 +116,32 @@ class MatchesDetailViewSet(viewsets.ModelViewSet):
         user_id = self.request.user.id
         ladder_id = self.kwargs['pk']
         return Match.objects.filter(ladder_id=ladder_id)
+
+class LadderDetailViewSet(viewsets.ModelViewSet):
+    queryset = Ladder.objects.all()
+    model = User_Ladder
+    serializer_class = LadderDetailSerializer
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
+    ordering = ('ladder_rank',)
+
+    def get_queryset(self):
+        # filter Ladder.objects.all() by provided ladder_id
+        ladder_id = self.kwargs['pk']
+        # ladder_id = self.request.ladder.id
+        # ladder_id = self.request.ladder
+        return User_Ladder.objects.filter(ladder_id=ladder_id)
+
+class MatchesDetailViewSet(viewsets.ModelViewSet):
+    queryset = Match.objects.all()
+    model = Match
+    serializer_class = MatchDetailSerializer
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsPlayerInMatchOrReadOnly,)
+
+    def get_queryset(self, *args, **kwargs):
+        """
+        This view should return a list of match cleaned_data
+        """
+        match_id = self.kwargs['pk']
+        return Match.objects.filter(pk=match_id)
     

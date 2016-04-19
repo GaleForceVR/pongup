@@ -11,14 +11,12 @@ export class _MatchDetail extends Component {
         super(props);
         this.state = {
 			// errors: this.props.errors,
-			player_a_score: this.props.player_a_score,
-			player_b_score: this.props.player_b_score,
-			match_id: this.props.match_id,
-			liked: false
+			// player_a_score: this.props.player_a_score,
+			// player_b_score: this.props.player_b_score,
+			match_id: this.props.match_id
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
         this.handleClickOutside = this.handleClickOutside.bind(this)
@@ -28,64 +26,49 @@ export class _MatchDetail extends Component {
     }
 
     handleSubmit(e, index) {
-		console.log('%csubmit button clicked!', 'background-color:red;color:yellow')
-		console.log(this.state)
-		console.log(this.props.match)
-		console.log(this.props.match.id)
-		console.log('%cindex', 'background-color:pink')
+		console.log('handleSubmit()')
+		console.log(e)
+		console.log('index')
 		console.log(index)
+		console.log(this.props.player_a_score[index])
 		this.props.dispatch(actions.submitScores(this.props.match.id, index))
-    }
-
-    handleClick() {
-		this.setState({liked: !this.state.liked})
     }
 
     handleChange(e) {	
 		var score_obj = {}
+		var indexed_score = {}
+		var index = this.props.index
+
 		var player = e.target.name
 		var score = e.target.value
 
-		score_obj[player] = score
+		score_obj[index] = score
+		indexed_score[player] = score_obj
 
-		this.setState(score_obj)
+
+		// score_obj[player] = score
+		// indexed_score[index] = score_obj
+
+
+		this.props.dispatch(actions.updateScore(indexed_score))
     }
 
     handleBlur(e) {
 		var self = this
 		var player = e.target.name
-		console.log('handleBlur')
-		console.log(self)
-
-		console.log(player)
 		var score = e.target.value
 		var index = self.props.index
-		console.log(score)
 		self.props.dispatch(actions.checkValidations(player, score, index))
-		console.log('handleBlurErrors: ')
-		console.log(self.state)
-		console.log(self.state.errors)
-		console.log('index')
-		console.log(index)
-		// console.log(self.state.errors[index])
-		console.log('new')
-		console.log(self.props)
-		console.log(self.props.errors)
-		// console.log(this.state.errors[index].player_a_score)
     }
 
     componentDidMount() {
 		this.forceUpdate()
     }
 
-    componentWillMount() {
-
-    }
-
     componentWillReceiveProps(nextProps){
 		if (nextProps.force_update != this.props.force_update) {
 			this.forceUpdate()
-			this.setState(this.state)
+			// this.setState(this.state)
 		}
     }
 
@@ -102,30 +85,25 @@ export class _MatchDetail extends Component {
     handleClickOutside = () => {
 		this.props.dispatch(
 			actions.saveAndExitEditMode({
-				player_a_score: this.state.player_a_score,
-				player_b_score: this.state.player_b_score,
-				errors: this.state.errors,
+				player_a_score: this.props.player_a_score,
+				player_b_score: this.props.player_b_score,
+				errors: this.props.errors,
 				is_editing: false
 			})
 		)
-		this.setState(this.state)
+		// this.setState(this.state)
     };
 
     renderMatchInfoAndForm() {
 		var self = this
-		var index = self.index
-		var text = this.state.liked ? 'like' : 'haven\'t liked'
+		var index = self.props.index
+		// var text = this.state.liked ? 'like' : 'haven\'t liked'
 		return (
 			<div className={classNames({'force-update': self.props.force_update})}>
 				<div 
 					className="scheduled-matches-container"
-					
 					>
-					<p
-						onClick={this.handleClick.bind(this)}
-						>
-						You {text} this. Click to toggle.
-					</p>
+					
 					<p className="seed">#{self.props.player_a_rank}</p>
 					<p className="player-name">{self.props.player_a_username}</p>
 					{self.props.errors && self.props.errors[index] && self.props.errors[index].player_a_score && <div>{self.props.errors[index].player_a_score}</div>}
@@ -133,7 +111,7 @@ export class _MatchDetail extends Component {
 						type="text" 
 						name="player_a_score"
 						placeholder="Score"
-						value={this.state.player_a_score}
+						value={this.props.player_a_score[index]}
 						onChange={this.handleChange.bind(this)}
 						onBlur={this.handleBlur.bind(this)}
 						className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_a_score) })} 
@@ -146,7 +124,7 @@ export class _MatchDetail extends Component {
 						type="text" 
 						name="player_b_score" 
 						placeholder="Score"
-						value={this.state.player_b_score}
+						value={this.props.player_b_score[index]}
 						onChange={this.handleChange.bind(this)}
 						onBlur={this.handleBlur.bind(this)}
 						className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_b_score)})}
@@ -166,15 +144,35 @@ export class _MatchDetail extends Component {
 		)
     }
 
-    renderMatchInfoWithoutForm() {
+    renderScore(score) {
+		return(
+			<p className="player-score">{score}</p>
+		)
+    }
+
+    renderMatchInfoWithoutForm(scores_exist) {
 		var self = this
+		var index = self.props.index
+
+		console.log('renderMatchInfoWithoutForm()')
+		console.log(scores_exist)
+
+		// needs to be self.props.match_detail[index].player_a_score
+		console.log(self.props.matches_detail)
+
+		console.log(self.props.matches_detail[index].player_a_score)
+		console.log(self.props.matches_detail[index].player_b_score)
+
+
 		return (
 			<div>
 				<div className="scheduled-matches-container">
 					<p className="seed">#{self.props.player_a_rank}</p>
 					<p className="player-name">{self.props.player_a_username}</p>
+					{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_a_score) : null }
 					<p className="seed">vs. #{self.props.player_b_rank}</p>
 					<p className="player-name">{self.props.player_b_username}</p>
+					{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_b_score) : null }
 				</div>
 				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
 			</div>
@@ -183,9 +181,26 @@ export class _MatchDetail extends Component {
 
     render() {
 		var self = this
+		var index = self.props.index
+
+		console.log('_MatchDetail')
+		console.log(self.props)
+		let render_matches
+
+		if (self.props.matches_detail[index].player_a_score || self.props.matches_detail[index].player_b_score) {
+			render_matches = self.renderMatchInfoWithoutForm(true)
+		} else {
+			if (self.props.player_a_username == self.props.username || self.props.player_b_username == self.props.username) {
+				render_matches = self.renderMatchInfoAndForm()
+			} else {
+				render_matches = self.renderMatchInfoWithoutForm(false)
+			}
+		}
+
 		return (
 			<li>
-				{(self.props.player_a_username == self.props.username || self.props.player_b_username == self.props.username) ? self.renderMatchInfoAndForm() : self.renderMatchInfoWithoutForm() }
+				{/*(self.props.player_a_username == self.props.username || self.props.player_b_username == self.props.username) ? self.renderMatchInfoAndForm() : self.renderMatchInfoWithoutForm() */}
+				{ self.props && self.props.matches_detail ? render_matches : null }
 			</li>
 		)
     }

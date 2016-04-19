@@ -11,7 +11,7 @@ export class LaddersList extends Component {
         var self = this
         var data = self.props
 
-        var detail_url = "/ladders/" + data.id
+        var detail_url = "/ladders/" + data.id + "/matches/"
 
         console.log('LaddersList')
         console.log(data)

@@ -13,7 +13,6 @@ export class LadderDetailContainer extends Component {
             player_a_score: this.props.player_a_score,
             liked: false
         }
-
     }
 
     loading() {
@@ -148,7 +147,7 @@ export class LadderDetailContainer extends Component {
                     </ul>
                 </div>
 
-                <a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>
+                {/*<a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>*/}
             </div>
         )
     }
