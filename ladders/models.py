@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class Ladder(models.Model):
     name = models.CharField(max_length=200)
+    manager = model.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -15,6 +16,7 @@ class Ladder(models.Model):
 class User_Ladder(models.Model):
     user = models.ForeignKey(User)
     ladder = models.ForeignKey(Ladder)
+    approved = models.BooleanField(default=False)
     ladder_rank = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

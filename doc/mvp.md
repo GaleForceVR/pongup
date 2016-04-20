@@ -1,6 +1,6 @@
 # MVP Requirements
 
-## Main Funcionality
+## Main Functionality
 
 ##### Pages
 
