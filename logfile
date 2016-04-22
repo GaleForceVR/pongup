@@ -73,3 +73,125 @@ LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 FATAL:  lock file "postmaster.pid" already exists
 HINT:  Is another postmaster (PID 738) running in data directory "/usr/local/var/postgres"?
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-04-20 09:48:44 CDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder"
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder"
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder"
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder"
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column "manager_id" contains null values
+STATEMENT:  ALTER TABLE "ladders_ladder" ADD COLUMN "manager_id" integer NOT NULL
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  column ladders_ladder.manager_id does not exist at character 56
+STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21

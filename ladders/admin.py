@@ -10,7 +10,7 @@ class ChoiceInline(admin.StackedInline):
 
 class LadderAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,          {'fields': ['name']}),
+        (None,          {'fields': ['name', 'manager']}),
     ]
     inlines = [ChoiceInline]
 

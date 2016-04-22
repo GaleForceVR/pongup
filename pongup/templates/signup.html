@@ -26,15 +26,15 @@
 
         {% else %}
 	        <form method="post" action="/signup/">
-	        {% csrf_token %}
+    	        {% csrf_token %}
 
-			{{ form.username }}
-			{{ form.email }}
-	        {{ form.password1 }}
-	        {{ form.password2 }}
+    			{{ form.username }}
+    			{{ form.email }}
+    	        {{ form.password1 }}
+    	        {{ form.password2 }}
 
-	        <input type="submit" value="Create account" />
-	        <input type="hidden" name="next" value="/" />
+    	        <input type="submit" value="Create account" />
+    	        <input type="hidden" name="next" value="/" />
 	        </form>
         {% endif %}
 
