@@ -195,3 +195,227 @@ ERROR:  column ladders_ladder.manager_id does not exist at character 56
 STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
 ERROR:  column ladders_ladder.manager_id does not exist at character 56
 STATEMENT:  SELECT "ladders_ladder"."id", "ladders_ladder"."name", "ladders_ladder"."manager_id", "ladders_ladder"."created_at", "ladders_ladder"."updated_at" FROM "ladders_ladder" LIMIT 21
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (8, 2016-04-24 15:05:33.890853+00, 2016-04-24 15:05:33.890882+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:05:33.890853+00:00'::timestamptz, '2016-04-24T15:05:33.890882+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (9, 2016-04-24 15:06:29.673644+00, 2016-04-24 15:06:29.673689+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:06:29.673644+00:00'::timestamptz, '2016-04-24T15:06:29.673689+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (10, 2016-04-24 15:21:29.88388+00, 2016-04-24 15:21:29.883908+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:21:29.883880+00:00'::timestamptz, '2016-04-24T15:21:29.883908+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (11, 2016-04-24 15:28:15.470216+00, 2016-04-24 15:28:15.470246+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:28:15.470216+00:00'::timestamptz, '2016-04-24T15:28:15.470246+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (12, 2016-04-24 15:34:39.85194+00, 2016-04-24 15:34:39.851968+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:34:39.851940+00:00'::timestamptz, '2016-04-24T15:34:39.851968+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (13, 2016-04-24 15:35:37.949555+00, 2016-04-24 15:35:37.949582+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:35:37.949555+00:00'::timestamptz, '2016-04-24T15:35:37.949582+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (14, 2016-04-24 15:37:49.447976+00, 2016-04-24 15:37:49.448005+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:37:49.447976+00:00'::timestamptz, '2016-04-24T15:37:49.448005+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (15, 2016-04-24 15:38:48.566866+00, 2016-04-24 15:38:48.566894+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:38:48.566866+00:00'::timestamptz, '2016-04-24T15:38:48.566894+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (17, 2016-04-24 15:58:37.294682+00, 2016-04-24 15:58:37.29471+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T15:58:37.294682+00:00'::timestamptz, '2016-04-24T15:58:37.294710+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  column ladders_user_ladder.user_id_id does not exist at character 36
+HINT:  Perhaps you meant to reference the column "ladders_user_ladder.user_id".
+STATEMENT:  SELECT "ladders_user_ladder"."id", "ladders_user_ladder"."user_id_id", "ladders_user_ladder"."ladder_id_id", "ladders_user_ladder"."approved", "ladders_user_ladder"."ladder_rank", "ladders_user_ladder"."created_at", "ladders_user_ladder"."updated_at" FROM "ladders_user_ladder" WHERE "ladders_user_ladder"."ladder_id_id" = 1 ORDER BY "ladders_user_ladder"."ladder_rank" ASC LIMIT 21
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (18, 2016-04-24 16:13:02.619246+00, 2016-04-24 16:13:02.619274+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T16:13:02.619246+00:00'::timestamptz, '2016-04-24T16:13:02.619274+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (19, 2016-04-24 16:37:19.236042+00, 2016-04-24 16:37:19.23607+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T16:37:19.236042+00:00'::timestamptz, '2016-04-24T16:37:19.236070+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (20, 2016-04-24 16:40:35.371354+00, 2016-04-24 16:40:35.371382+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T16:40:35.371354+00:00'::timestamptz, '2016-04-24T16:40:35.371382+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (21, 2016-04-24 16:41:06.617742+00, 2016-04-24 16:41:06.617771+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T16:41:06.617742+00:00'::timestamptz, '2016-04-24T16:41:06.617771+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (22, 2016-04-24 17:22:02.820221+00, 2016-04-24 17:22:02.820248+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T17:22:02.820221+00:00'::timestamptz, '2016-04-24T17:22:02.820248+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (23, 2016-04-24 17:24:04.642517+00, 2016-04-24 17:24:04.642553+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T17:24:04.642517+00:00'::timestamptz, '2016-04-24T17:24:04.642553+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (24, 2016-04-24 17:39:21.966422+00, 2016-04-24 17:39:21.966466+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T17:39:21.966422+00:00'::timestamptz, '2016-04-24T17:39:21.966466+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (25, 2016-04-24 17:51:47.337073+00, 2016-04-24 17:51:47.337118+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T17:51:47.337073+00:00'::timestamptz, '2016-04-24T17:51:47.337118+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (26, 2016-04-24 17:52:26.205083+00, 2016-04-24 17:52:26.20511+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T17:52:26.205083+00:00'::timestamptz, '2016-04-24T17:52:26.205110+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (27, 2016-04-24 17:54:44.438709+00, 2016-04-24 17:54:44.438759+00, null, null, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (NULL, NULL, false, NULL, '2016-04-24T17:54:44.438709+00:00'::timestamptz, '2016-04-24T17:54:44.438759+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (28, 2016-04-24 18:30:54.75473+00, 2016-04-24 18:30:54.754758+00, null, 10, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (10, NULL, false, NULL, '2016-04-24T18:30:54.754730+00:00'::timestamptz, '2016-04-24T18:30:54.754758+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (29, 2016-04-24 18:43:54.30843+00, 2016-04-24 18:43:54.30846+00, null, 10, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (10, NULL, false, NULL, '2016-04-24T18:43:54.308430+00:00'::timestamptz, '2016-04-24T18:43:54.308460+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "ladder_id" violates not-null constraint
+DETAIL:  Failing row contains (30, 2016-04-24 18:49:30.124608+00, 2016-04-24 18:49:30.124637+00, null, 10, null, f).
+STATEMENT:  INSERT INTO "ladders_user_ladder" ("user_id", "ladder_id", "approved", "ladder_rank", "created_at", "updated_at") VALUES (10, NULL, false, NULL, '2016-04-24T18:49:30.124608+00:00'::timestamptz, '2016-04-24T18:49:30.124637+00:00'::timestamptz) RETURNING "ladders_user_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (15, sdfadfad, 2016-04-24 22:25:58.423431+00, 2016-04-24 22:25:58.423457+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdfadfad', NULL, '2016-04-24T22:25:58.423431+00:00'::timestamptz, '2016-04-24T22:25:58.423457+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (16, dsasafasf, 2016-04-24 22:27:25.034232+00, 2016-04-24 22:27:25.034258+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('dsasafasf', NULL, '2016-04-24T22:27:25.034232+00:00'::timestamptz, '2016-04-24T22:27:25.034258+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (18, sdaadf, 2016-04-24 22:41:56.218097+00, 2016-04-24 22:41:56.218123+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdaadf', NULL, '2016-04-24T22:41:56.218097+00:00'::timestamptz, '2016-04-24T22:41:56.218123+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (19, sdaaf, 2016-04-24 22:43:21.043299+00, 2016-04-24 22:43:21.043324+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdaaf', NULL, '2016-04-24T22:43:21.043299+00:00'::timestamptz, '2016-04-24T22:43:21.043324+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (20, sdaaf, 2016-04-24 22:46:32.05701+00, 2016-04-24 22:46:32.057036+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdaaf', NULL, '2016-04-24T22:46:32.057010+00:00'::timestamptz, '2016-04-24T22:46:32.057036+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (21, dsafadsfa, 2016-04-24 22:47:54.369351+00, 2016-04-24 22:47:54.369378+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('dsafadsfa', NULL, '2016-04-24T22:47:54.369351+00:00'::timestamptz, '2016-04-24T22:47:54.369378+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (22, sdfgadfd, 2016-04-24 23:45:44.538882+00, 2016-04-24 23:45:44.53891+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdfgadfd', NULL, '2016-04-24T23:45:44.538882+00:00'::timestamptz, '2016-04-24T23:45:44.538910+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (23, sdafafs, 2016-04-24 23:48:29.039987+00, 2016-04-24 23:48:29.040013+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdafafs', NULL, '2016-04-24T23:48:29.039987+00:00'::timestamptz, '2016-04-24T23:48:29.040013+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (24, sdasdfsa, 2016-04-25 02:08:24.488137+00, 2016-04-25 02:08:24.488168+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdasdfsa', NULL, '2016-04-25T02:08:24.488137+00:00'::timestamptz, '2016-04-25T02:08:24.488168+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (25, asdfasdf, 2016-04-25 02:09:32.869744+00, 2016-04-25 02:09:32.86977+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfasdf', NULL, '2016-04-25T02:09:32.869744+00:00'::timestamptz, '2016-04-25T02:09:32.869770+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (26, asdfasdf, 2016-04-25 02:10:14.602374+00, 2016-04-25 02:10:14.6024+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfasdf', NULL, '2016-04-25T02:10:14.602374+00:00'::timestamptz, '2016-04-25T02:10:14.602400+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (27, asdfasf, 2016-04-25 02:10:52.661604+00, 2016-04-25 02:10:52.66163+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfasf', NULL, '2016-04-25T02:10:52.661604+00:00'::timestamptz, '2016-04-25T02:10:52.661630+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (28, asdfas, 2016-04-25 02:11:58.305556+00, 2016-04-25 02:11:58.305582+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfas', NULL, '2016-04-25T02:11:58.305556+00:00'::timestamptz, '2016-04-25T02:11:58.305582+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (29, asdfasf, 2016-04-25 02:12:26.549451+00, 2016-04-25 02:12:26.549477+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfasf', NULL, '2016-04-25T02:12:26.549451+00:00'::timestamptz, '2016-04-25T02:12:26.549477+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (30, dsaasf, 2016-04-25 02:23:41.782231+00, 2016-04-25 02:23:41.782258+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('dsaasf', NULL, '2016-04-25T02:23:41.782231+00:00'::timestamptz, '2016-04-25T02:23:41.782258+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (31, asdfadsf, 2016-04-25 02:24:13.533906+00, 2016-04-25 02:24:13.533932+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfadsf', NULL, '2016-04-25T02:24:13.533906+00:00'::timestamptz, '2016-04-25T02:24:13.533932+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 5719) running in data directory "/usr/local/var/postgres"?
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (33, sdfasdf, 2016-04-28 01:40:21.648285+00, 2016-04-28 01:40:21.648315+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdfasdf', NULL, '2016-04-28T01:40:21.648285+00:00'::timestamptz, '2016-04-28T01:40:21.648315+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (34, asdfasf, 2016-04-28 02:04:51.079585+00, 2016-04-28 02:04:51.079613+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfasf', NULL, '2016-04-28T02:04:51.079585+00:00'::timestamptz, '2016-04-28T02:04:51.079613+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (36, asdfsf, 2016-04-28 02:21:50.8764+00, 2016-04-28 02:21:50.876426+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfsf', NULL, '2016-04-28T02:21:50.876400+00:00'::timestamptz, '2016-04-28T02:21:50.876426+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (37, adfasfad, 2016-04-28 02:27:30.706293+00, 2016-04-28 02:27:30.706319+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('adfasfad', NULL, '2016-04-28T02:27:30.706293+00:00'::timestamptz, '2016-04-28T02:27:30.706319+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (38, sdfasdf, 2016-04-28 02:31:54.640492+00, 2016-04-28 02:31:54.640518+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdfasdf', NULL, '2016-04-28T02:31:54.640492+00:00'::timestamptz, '2016-04-28T02:31:54.640518+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (39, asdasdf, 2016-04-28 02:33:02.516987+00, 2016-04-28 02:33:02.517013+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdasdf', NULL, '2016-04-28T02:33:02.516987+00:00'::timestamptz, '2016-04-28T02:33:02.517013+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (40, asdadf, 2016-04-28 02:33:31.985426+00, 2016-04-28 02:33:31.985452+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdadf', NULL, '2016-04-28T02:33:31.985426+00:00'::timestamptz, '2016-04-28T02:33:31.985452+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (41, saldkfj, 2016-04-28 02:36:00.20182+00, 2016-04-28 02:36:00.201847+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('saldkfj', NULL, '2016-04-28T02:36:00.201820+00:00'::timestamptz, '2016-04-28T02:36:00.201847+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (42, asdfasf, 2016-04-28 02:38:44.699712+00, 2016-04-28 02:38:44.699739+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdfasf', NULL, '2016-04-28T02:38:44.699712+00:00'::timestamptz, '2016-04-28T02:38:44.699739+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (43, sdfgsd, 2016-04-28 02:39:28.81169+00, 2016-04-28 02:39:28.811717+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('sdfgsd', NULL, '2016-04-28T02:39:28.811690+00:00'::timestamptz, '2016-04-28T02:39:28.811717+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (44, adfasd, 2016-04-28 02:40:46.16235+00, 2016-04-28 02:40:46.162377+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('adfasd', NULL, '2016-04-28T02:40:46.162350+00:00'::timestamptz, '2016-04-28T02:40:46.162377+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (45, kjhkljhkjh, 2016-04-28 02:43:35.841916+00, 2016-04-28 02:43:35.841943+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('kjhkljhkjh', NULL, '2016-04-28T02:43:35.841916+00:00'::timestamptz, '2016-04-28T02:43:35.841943+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (46, asdasdf, 2016-04-28 02:49:05.364297+00, 2016-04-28 02:49:05.364323+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('asdasdf', NULL, '2016-04-28T02:49:05.364297+00:00'::timestamptz, '2016-04-28T02:49:05.364323+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+ERROR:  null value in column "manager_id" violates not-null constraint
+DETAIL:  Failing row contains (47, success, 2016-04-28 02:59:51.86404+00, 2016-04-28 02:59:51.864066+00, null).
+STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('success', NULL, '2016-04-28T02:59:51.864040+00:00'::timestamptz, '2016-04-28T02:59:51.864066+00:00'::timestamptz) RETURNING "ladders_ladder"."id"

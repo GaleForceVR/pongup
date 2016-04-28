@@ -42,7 +42,8 @@ function mapAppContainerStateToProps(state) {
         user_profile: state.pongup_reducer.user_profile,
         is_staff: state.pongup_reducer.is_staff,
         password: state.pongup_reducer.password,
-        email: state.pongup_reducer.email
+        email: state.pongup_reducer.email,
+        current_user: state.pongup_reducer.current_user
         // ladders: state.ladders_reducer.ladders
     };
 }
@@ -66,7 +67,8 @@ function mapLaddersContainerStateToProps(state) {
         is_loading: state.ladders_reducer.is_loading,
         active_app: state.ladders_reducer.active_tab,
         ladders: state.ladders_reducer.ladders,
-        username: state.pongup_reducer.username
+        username: state.pongup_reducer.username,
+        current_user: state.pongup_reducer.current_user
     };
 }
 
@@ -74,7 +76,8 @@ function mapLaddersIndexContainerStateToProps(state) {
     return {
         active_app: state.ladders_reducer.active_tab,
         ladders: state.ladders_reducer.ladders,
-        username: state.pongup_reducer.username
+        username: state.pongup_reducer.username,
+        current_user: state.pongup_reducer.current_user
     }
 }
 
@@ -84,6 +87,7 @@ function mapLadderDetailContainerStateToProps(state) {
         active_app: state.ladders_reducer.active_tab,
         ladders: state.ladders_reducer.ladders,
         username: state.pongup_reducer.username,
+        current_user: state.pongup_reducer.current_user,
         ladder_detail: state.ladders_reducer.ladder_detail,
         matches_detail: state.ladders_reducer.matches_detail,
         errors: state.ladders_reducer.errors,
@@ -92,7 +96,8 @@ function mapLadderDetailContainerStateToProps(state) {
         match_id: state.ladders_reducer.match_id,
         is_editing: state.ladders_reducer.is_editing,
         liked: state.ladders_reducer.liked,
-        force_update: state.ladders_reducer.force_update
+        force_update: state.ladders_reducer.force_update,
+        is_in_ladder: state.ladders_reducer.is_in_ladder
     }
 }
 

@@ -8,6 +8,7 @@ const initialState = {
     is_staff: false,
     password: '',
     email: '',
+    current_user: null
     // ladders: {}
 }
 
@@ -19,8 +20,11 @@ const pongup_reducer = (state = initialState, action) => {
                 active_tab: action.active_tab
             })
         case constants.USER_DATA_LOADED:
+            console.log('%cUSER_DATA_LOADED', 'background-color:red;color:yellow')
+            console.log(action.user_data)
             return Object.assign({}, state, {
                 username: action.user_data.username[0].username,
+                current_user: action.user_data.username[0].id,
                 // user_profile: action.user_data.user_profile,
                 // venues_and_events: action.user_data.venues_and_events,
                 is_loading: action.user_data.is_loading

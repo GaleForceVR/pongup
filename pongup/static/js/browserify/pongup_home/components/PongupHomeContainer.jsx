@@ -30,7 +30,7 @@ export class PongupHomeContainer extends Component {
         var self = this
         return (
             <div className="homepage">
-                <a className="primary homepage-cta" href="/login">Join a Ladder</a>
+                <a className="primary homepage-cta" href="/ladders">Join a Ladder</a>
             </div>
         )
     }

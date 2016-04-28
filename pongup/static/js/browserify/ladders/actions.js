@@ -30,10 +30,14 @@ export function loadLadders() {
 }
 
 export function loadLadderDetail(id) {
-	return (dispatch) => {
+	return (dispatch, getState) => {
 		var client = new LaddersClient()
 		client.fetch_ladder_detail(id)
 			.then( axios.spread( (ladder_data) => {
+				var state = getState().ladders_reducer
+				console.log('%cloadLadderDetail()', 'background-color:blue;color:yellow')
+				console.log(ladder_data.data)
+				console.log(state)
 				dispatch({
 					type: constants.LADDER_DETAIL_LOADED,
 					ladder_data: {
@@ -50,6 +54,87 @@ export function loadLadderDetail(id) {
 					is_loading: false
 				})
 			})
+	}
+}
+
+export function submitJoinLadderRequest(current_ladder_id, current_user_id) {
+	return(dispatch, getState) => {
+		const state = getState().ladders_reducer
+
+		console.log('submitJoinLadderRequest')
+		console.log(state)
+
+		const csrftoken = getTheCookie()
+		const headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+
+		let params = {
+			ladder_id: current_ladder_id,
+			user_id: current_user_id
+		}
+
+		axios.post('/api/ladders/' + current_ladder_id + '/players/', params, headers)
+			.then(function (response) {
+				console.log('success')
+				console.log(response)
+			})
+			.catch(function (response) {
+				console.log('error')
+				console.log(response)
+			})
+	}
+}
+
+export function createLadder(new_ladder_name, current_user_id) {
+	console.log('new_ladder_name')
+	console.log(new_ladder_name)
+	console.log(current_user_id)
+	return(dispatch, getState) => {
+		// const state = getState().ladders_reducer
+
+		// console.log('submitJoinLadderRequest')
+		// console.log(state)
+
+		const csrftoken = getTheCookie()
+		const headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+
+		let params = {
+			name: new_ladder_name,
+			manager: current_user_id
+		}
+
+		axios.post('/api/ladders/', params , headers)
+			.then(function (response) {
+				console.log('success')
+				console.log(response)
+			})
+			.catch(function (response) {
+				console.log('error')
+				console.log(response)
+			})
+	}
+}
+
+export function checkParticipation(current_username) {
+	return (dispatch, getState) => {
+		const state = getState().ladders_reducer
+		console.log('%ccheckParticipation', 'background-color:yellow;color:red')
+		console.log(state)
+		for (var i = 0; i < state.ladder_detail.length; i++) {
+			if (state.ladder_detail[i].user.username == current_username) {
+				dispatch({
+					type: constants.UPDATE_IS_IN_LADDER,
+					is_in_ladder: true
+				})
+			}
+		}
 	}
 }
 

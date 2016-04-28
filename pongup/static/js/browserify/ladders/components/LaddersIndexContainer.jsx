@@ -1,5 +1,5 @@
 import * as actions from '../actions'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 import { LaddersList } from './LaddersList'
 import React, { Component } from 'react'
 
@@ -7,6 +7,11 @@ export class LaddersIndexContainer extends Component {
     constructor(props) {
         //explicit call to super must remain because of es7 weirdness and class property usage below
         super(props);
+
+        this.state = {
+            show_ladder_form: false,
+            new_ladder_name: ''
+        }
 
     }
 
@@ -45,6 +50,46 @@ export class LaddersIndexContainer extends Component {
         )
     }
 
+    handleNewLadderClick() {
+        console.log('handleNewLadderClick()')
+        this.setState({show_ladder_form: true})
+    }
+
+    handleChange(e) {
+        console.log('handleChange()')
+        this.setState({new_ladder_name: e.target.value })
+    }
+
+    handleBlur() {
+        console.log('handleBlur()')
+
+    }
+
+    renderLadderForm() {
+        console.log('renderLadderForm')
+        return (
+            <form className="create-ladder-form">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Ladder Name"
+                    value={this.state.new_ladder_name}
+                    onChange={(e) => {this.handleChange(e)}}
+                    onBlur={this.handleBlur()}
+                />
+                <a
+                    className="primary"
+                    onClick={(e) => {
+                        console.log('submit new Ladder button')
+                        console.log(this.props)
+                        console.log(this.props.current_user)
+                        this.props.dispatch(actions.createLadder(this.state.new_ladder_name, this.props.current_user))
+                    }}
+                >Create ladder</a>
+            </form>
+        )
+    }
+
     render() {
         var self = this
         // var all_ladders = self.props.ladders.map(
@@ -54,11 +99,28 @@ export class LaddersIndexContainer extends Component {
         // console.log(all_ladders)
 
         return (
-            <div>
-                <ul>
-                    {(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null}
-                </ul>
-                <a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>
+            <div className="container-1600">
+
+                <div className="ladder-detail-header">
+                    <p className="header-label ladder-list">Ladders:</p>
+                    <p className="header-label ladder-management-message">Click on a ladder to see who's playing, see match scores, or request to join the league.</p>      
+                </div>
+
+                <div className="right-wrapper">
+                    <a 
+                        className={classNames("primary", { 'hide-element': self.state.show_ladder_form} )}
+                        onClick={(e) => {
+                            self.handleNewLadderClick()
+                        }}
+                    >Start a new ladder</a>
+                    { self.state.show_ladder_form ? self.renderLadderForm() : null }
+                </div>
+
+                <div className="left-wrapper">
+                    <ul className="scheduled-matches-list">
+                        {(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null}
+                    </ul>
+                </div>
             </div>
         )
     }

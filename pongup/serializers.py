@@ -11,18 +11,20 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         depth = 1
-        fields = ('url', 'username', 'email', 'is_staff', 'password')
+        fields = ('id', 'url', 'username', 'email', 'is_staff', 'password')
         write_only_fields = ('password',)
 
        	def create(self, validated_data):
        		user = User.objects.create_user(**validated_data)
        		return user
 
-class LaddersSerializer(serializers.HyperlinkedModelSerializer):
+class LaddersSerializer(serializers.ModelSerializer):
+	manager = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+
 	class Meta:
 		model = Ladder
 		depth = 1
-		fields = ('name', 'id', 'url')
+		fields = ('name', 'id', 'manager')
 
 class LadderDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -30,6 +32,15 @@ class LadderDetailSerializer(serializers.HyperlinkedModelSerializer):
 		depth = 2
 		fields = ('user', 'ladder', 'ladder_rank')
 
+class LadderPlayerSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = User_Ladder
+		depth = 1
+		fields = ('user', 'ladder')
+
+		# def create(self, validated_data):
+		# 	user_ladder = User_Ladder.objects.create(**validated_data)
+		# 	return user_ladder
 
 class MatchDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:

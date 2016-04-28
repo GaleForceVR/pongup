@@ -16,7 +16,8 @@ $formFieldTextBlue: #0d80fd;
 $secondaryButtonBlue: #013e81;
 
 
-$mutedTextBlue: #1c3c5f;
+/*$mutedTextBlue: #1c3c5f;*/
+$mutedTextBlue: #2d5c8e;
 
 $pongupYellow: #fddb40;
 $pongupOrange: #fddb40;
@@ -188,6 +189,7 @@ a {
         background: linear-gradient($yellow, $orange); /* Standard syntax */
         color: black;
         text-shadow: 1px 1px 1px #F0BA85;
+        cursor: pointer;
         &.auth-form {
             display: block;
             width: 300px;
@@ -216,6 +218,10 @@ a {
             color: $backgroundBlue;
         }
     }
+}
+
+.hide-element {
+    display: none;
 }
 
 .logo {
@@ -275,6 +281,15 @@ a {
     }
 }
 
+.ladder-rank-list-wrapper, .scheduled-matches-list {
+    padding-bottom: 140px;
+}
+
+.join-ladder-button {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
 .scheduled-matches-list {
     position: relative;
     a.primary.submit-btn {
@@ -288,7 +303,7 @@ a {
     }
 }
 
-.scheduled-matches-container {
+.scheduled-matches-container, .create-ladder-form {
     p.seed, p.player-name, p.player-score {
         margin-right: 10px;
     }
@@ -321,6 +336,15 @@ a {
     }
 }
 
+.create-ladder-form input {
+    width: 50%;
+    text-align: left;
+    display: block;
+    margin-bottom: 30px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
 p.rank {
     display: inline-block;
     float: left;
@@ -336,6 +360,15 @@ p.rank {
     &.category {
         padding-bottom: 20px;
     }
+    &.ladder-list {
+        /*color: $formFieldLightBlue;*/
+        font-size: 18px;
+    }
+    &.ladder-management-message {
+        /*padding-bottom: 60px;*/
+        /*color: $formFieldLightBlue;*/
+        font-size: 14px;
+    }
 }
 
 .ladder-name {
@@ -345,17 +378,18 @@ p.rank {
 .left-wrapper, .right-wrapper {
     width: 43.75%;
     min-height: 100px;
-    float: left;
 }
 
 .left-wrapper {
     padding-left: 3.75%;
     padding-right: 2.5%;
+    float: left;
 }
 
 .right-wrapper {
     padding-left: 2.5%;
     padding-right: 3.75%;
+    float: right;
 }
 
 .form-wrapper {

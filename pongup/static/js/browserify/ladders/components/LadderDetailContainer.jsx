@@ -31,6 +31,7 @@ export class LadderDetailContainer extends Component {
 
         self.props.dispatch(actions.loadLadders())
         self.props.dispatch(actions.loadLadderDetail(current_ladder_id))
+
         self.props.dispatch(actions.loadMatchesDetail(current_ladder_id))
     }
 
@@ -112,8 +113,36 @@ export class LadderDetailContainer extends Component {
         </li>
     }
 
+    handleJoinLadderClick() {
+        console.log('handleJoinLadderClick')
+        console.log('button clicked')
+        var current_ladder_id = this.getCurrentLadder().id
+        var current_user = this.props.current_user
+        this.props.dispatch(actions.submitJoinLadderRequest(current_ladder_id, current_user))
+    }
+
+    renderJoinLadderButton() {
+        var self = this
+        return (
+            <a 
+                className="primary join-ladder-button" 
+                href="#joinLadder"
+                onClick={(e) => {
+                    self.handleJoinLadderClick()
+                }}
+            >Join this ladder</a>
+
+        )
+    }
+
     render() {
         var self = this
+        // var current_ladder_id = self.getCurrentLadder().id
+        console.log('LadderDetailContainer')
+        console.log(self.props)
+        if (self.props && self.props.ladder_detail && self.props.ladder_detail.length > 0) {
+            self.props.dispatch(actions.checkParticipation(self.props.username))
+        }
         return (
             <div className="container-1600">
 
@@ -122,32 +151,27 @@ export class LadderDetailContainer extends Component {
                     <h3 className="ladder-name">{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h3>
                 </div>
 
+                <div className="right-wrapper">
+                    {(self.props.ladder_detail && !self.props.is_in_ladder) ? self.renderJoinLadderButton() : null }
+                    <p className="header-label category">Rankings:</p>
+
+                    <ul className="ladder-rank-list-wrapper">
+                        {(self.props.ladder_detail && self.props.ladder_detail.length > 0) ? self.buildRankingList() : null}
+                        
+                    </ul>
+
+                </div>
+
                 <div className="left-wrapper">
                     <p className="header-label category">Scheduled Matches:</p>
                     <ul className="scheduled-matches-list">
                         { (this.props.matches_detail && this.props.matches_detail.length > 0) ? this.buildMatches() : this.buildNoMatches() }
-                        <li>
-                            <div className="scheduled-matches-container">
-                                <p className="seed">#1</p>
-                                <p className="player-name">Bob Chappuis</p>
-                                
-                                <p className="seed">vs. #4</p>
-                                <p className="player-name">Ryder Lewis</p>
-                                
-                            </div>
-                            <p className="header-label">Friday, Jan. 15 3:30pm</p>
-                        </li>
                     </ul>
                 </div>
 
-                <div className="right-wrapper">
-                    <p className="header-label category">Rankings:</p>
-                    <ul>
-                        {(self.props.ladder_detail && self.props.ladder_detail.length > 0) ? self.buildRankingList() : null}
-                    </ul>
-                </div>
+                
 
-                {/*<a className="primary homepage-cta" href="#joinLadder">+ Add a ladder</a>*/}
+                
             </div>
         )
     }

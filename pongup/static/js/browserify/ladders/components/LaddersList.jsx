@@ -26,8 +26,10 @@ export class LaddersList extends Component {
 
         return (
 			<li>
-				<h1><a href={detail_url} >{data.name}</a></h1>
-				<h5>{data.id}</h5>
+                <div className="scheduled-matches-container">
+    				<p className="player-name"><a href={detail_url} >{data.name}</a></p>
+                    
+                </div>
 			</li>
         )
     }

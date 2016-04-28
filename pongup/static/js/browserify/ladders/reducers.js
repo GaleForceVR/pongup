@@ -13,8 +13,8 @@ const initialState = {
     match_id: null,
     is_editing: false,
     liked: false,
-    force_update: false
-
+    force_update: false,
+    is_in_ladder: false
 }
 
 const ladders_reducer = (state = initialState, action) => {
@@ -59,6 +59,12 @@ const ladders_reducer = (state = initialState, action) => {
             return Object.assign({}, state,
                 action.new_state
             )
+        case constants.UPDATE_IS_IN_LADDER:
+            console.log('UPDATE_IS_IN_LADDER')
+            console.log(action)
+            return Object.assign({}, state, {
+                is_in_ladder: action.is_in_ladder
+            })
         default:
             return state;
     }

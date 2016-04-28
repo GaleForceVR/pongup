@@ -4,7 +4,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer, MatchDetailSerializer
+from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer, MatchDetailSerializer, LadderPlayerSerializer
 from rest_framework import routers, serializers, viewsets
 from ladders.models import Ladder, User_Ladder
 from matches.models import Match
@@ -78,6 +78,69 @@ class LaddersViewSet(viewsets.ModelViewSet):
     model = Ladder
     serializer_class = LaddersSerializer
 
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    # def post(self, request, *args, **kwargs):
+    #     manager = User.objects.get(pk=request.args.manager)
+    #     name = self.request.name
+    #     return self.create(manager=manager, name=name)
+
+    # def create(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     self.perform_create(serializer)
+    #     headers = self.get_success_headers(serializer.data)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    # def perform_create(self, serializer):
+    #     serializer.save()
+
+    # def get_success_headers(self, data):
+    #     try: 
+    #         return {'Location': data[api_settings.URL_FIELD_NAME]}
+    #     except (TypeError, KeyError):
+    #         return {}
+
+
+
+    def post(self, request, format=None):
+        name = request.data.name
+        manager_id = User.objects.get(pk=request.data.manager_id)
+
+        serializer = LaddersSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save(name=name, manager_id=manager_id)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def perform_create(self, serializer):
+    #     # user_ladder = User_Ladder.objects.get(pk=self.kwargs['pk'])
+    #     # ladder = Ladder.objects.get(pk=self.kwargs['pk'])
+    #     name = self.request.params.name
+    #     serializer.save(manager=self.request.user, name=name)
+
+    # def perform_create(self, serializer):
+    #     # manager = User.objects.get(pk=serializer.data['manager_id'])
+    #     serializer = LaddersSerializer(data=serializer.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         # ladder = serializer.save()
+    #         # data = serializer.data
+    #         # manager = User.objects.get(pk=13)
+            
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def perform_create(self, serializer):
+    # # user_ladder = User_Ladder.objects.get(pk=self.kwargs['pk'])
+    # ladder = Ladder.objects.get(pk=self.kwargs['pk'])
+    # serializer.save(user=self.request.user, ladder=ladder)
+
+    # def perform_create(self, serializer):
+    #     # user_ladder = User_Ladder.objects.get(pk=self.kwargs['pk'])
+    #     ladder = Ladder.objects.get(pk=self.kwargs['pk'])
+    #     serializer.save(user=self.request.user, ladder=ladder)
+
 class LadderDetailViewSet(viewsets.ModelViewSet):
     queryset = Ladder.objects.all()
     model = User_Ladder
@@ -117,19 +180,31 @@ class LadderMatchesViewSet(viewsets.ModelViewSet):
         ladder_id = self.kwargs['pk']
         return Match.objects.filter(ladder_id=ladder_id)
 
-class LadderDetailViewSet(viewsets.ModelViewSet):
-    queryset = Ladder.objects.all()
+class LadderPlayersViewSet(viewsets.ModelViewSet):
+    queryset = User_Ladder.objects.all()
     model = User_Ladder
-    serializer_class = LadderDetailSerializer
-    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
-    ordering = ('ladder_rank',)
+    serializer_class = LadderPlayerSerializer
 
-    def get_queryset(self):
-        # filter Ladder.objects.all() by provided ladder_id
-        ladder_id = self.kwargs['pk']
-        # ladder_id = self.request.ladder.id
-        # ladder_id = self.request.ladder
-        return User_Ladder.objects.filter(ladder_id=ladder_id)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    # def get_queryset(self):
+    #     """
+    #     This view should return a list of players in a given ladder
+    #     """
+    #     ladder_id = self.kwargs['pk']
+    #     return User_Ladder.objects.filter(ladder_id=ladder_id)
+
+    def post(self, request, format=None):
+        serializer = LadderPlayerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def perform_create(self, serializer):
+        # user_ladder = User_Ladder.objects.get(pk=self.kwargs['pk'])
+        ladder = Ladder.objects.get(pk=self.kwargs['pk'])
+        serializer.save(user=self.request.user, ladder=ladder)
 
 class MatchesDetailViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all()
