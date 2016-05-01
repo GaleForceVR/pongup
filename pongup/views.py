@@ -16,6 +16,7 @@ from rest_framework import filters
 from rest_framework import generics
 from rest_framework import permissions
 from matches.permissions import IsPlayerInMatchOrReadOnly
+from rest_framework import mixins
 
 def homepage(request):
     try:
@@ -154,6 +155,28 @@ class LadderDetailViewSet(viewsets.ModelViewSet):
         # ladder_id = self.request.ladder.id
         # ladder_id = self.request.ladder
         return User_Ladder.objects.filter(ladder_id=ladder_id)
+
+class UserLadderViewSet(mixins.RetrieveModelMixin,
+                        mixins.UpdateModelMixin,
+                        # mixins.DestroyModelMixin,
+                        generics.GenericAPIView):
+    queryset = User_Ladder.objects.all()
+    # model = User_Ladder
+    serializer_class = LadderDetailSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    # def put(self, request, pk, format=None):
+    #     user_ladder = self.get_object(pk)
+    #     serializer = LadderDetailSerializer(user_ladder, data=request.data, context={'request': request})
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MyLaddersViewSet(viewsets.ModelViewSet):
     queryset = User_Ladder.objects.all()

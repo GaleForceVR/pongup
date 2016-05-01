@@ -25,14 +25,35 @@ export class LadderDetailContainer extends Component {
         )
     }
 
+    shouldComponentUpdate() {
+        return true
+    }
+
     componentDidMount() {
         var self = this
         var current_ladder_id = self.getCurrentLadder().id
 
-        self.props.dispatch(actions.loadLadders())
+        // self.props.dispatch(actions.loadLadders())
         self.props.dispatch(actions.loadLadderDetail(current_ladder_id))
 
         self.props.dispatch(actions.loadMatchesDetail(current_ladder_id))
+
+        
+    }
+
+    componentDidUpdate() {
+        var self = this
+        if (self.props && self.props.ladder_detail && self.props.ladder_detail.length > 0) {
+            self.props.dispatch(actions.checkParticipation(self.props.username))
+        }
+
+        if (self.props && self.props.ladders) {
+            for (var i = 0; i < self.props.ladders.length; i++) {
+                if (self.props.ladders[i].id.toString() === self.props.params.ladder_id && self.props.ladders[i].manager === self.props.current_user) {
+                    self.props.dispatch(actions.isManager())
+                }
+            }
+        }
     }
 
     getCurrentLadder() {
@@ -45,17 +66,22 @@ export class LadderDetailContainer extends Component {
             }
         }
 
+        // self.props.dispatch(actions.setCurrentLadder(current_ladder))
+
         return current_ladder
     }
 
     buildRankingList() {
         var self = this
-        return self.props.ladder_detail.map(function(player, index) {
+        return self.props.ladder_detail.map(function(user_ladder, index) {
             return (
                 <RankingList 
                     key={index}
-                    rank={player.ladder_rank}
-                    player_name={player.user.username}
+                    index={index}
+                    rank={user_ladder.ladder_rank}
+                    player_name={user_ladder.user.username}
+                    is_editing_rankings={self.state.is_editing_rankings}
+                    user_ladder_id={user_ladder.id}
                     {...self.props}
                 />
             )
@@ -114,8 +140,6 @@ export class LadderDetailContainer extends Component {
     }
 
     handleJoinLadderClick() {
-        console.log('handleJoinLadderClick')
-        console.log('button clicked')
         var current_ladder_id = this.getCurrentLadder().id
         var current_user = this.props.current_user
         this.props.dispatch(actions.submitJoinLadderRequest(current_ladder_id, current_user))
@@ -135,14 +159,39 @@ export class LadderDetailContainer extends Component {
         )
     }
 
+    renderEditRankingsButton() {
+        var self = this
+        return (
+            <span>
+                { self.props.is_editing_rankings ? 
+                        <a
+                            className="edit-btn right cta"
+                            onClick={()=>{
+                                // self.setState({is_editing_rankings: true})
+
+                                self.props.dispatch(actions.submitRankingUpdate())
+                            }}
+                        >Submit rankings</a>
+                    :
+                        <a
+                            className="edit-btn right"
+                            onClick={()=>{
+                                // self.setState({is_editing_rankings: true})
+                                self.props.dispatch(actions.toggleEditRankings())
+                            }}
+                        >Edit rankings</a>
+                }
+            </span>
+        )
+    }
+
     render() {
         var self = this
         // var current_ladder_id = self.getCurrentLadder().id
-        console.log('LadderDetailContainer')
+
+        
+
         console.log(self.props)
-        if (self.props && self.props.ladder_detail && self.props.ladder_detail.length > 0) {
-            self.props.dispatch(actions.checkParticipation(self.props.username))
-        }
         return (
             <div className="container-1600">
 
@@ -153,7 +202,10 @@ export class LadderDetailContainer extends Component {
 
                 <div className="right-wrapper">
                     {(self.props.ladder_detail && !self.props.is_in_ladder) ? self.renderJoinLadderButton() : null }
-                    <p className="header-label category">Rankings:</p>
+                    <div className="clearfix"></div>
+                    <p className="header-label category rankings-header">Rankings:</p>
+                    { self.props.is_manager ? self.renderEditRankingsButton() : null }
+                    <div className="clearfix"></div>
 
                     <ul className="ladder-rank-list-wrapper">
                         {(self.props.ladder_detail && self.props.ladder_detail.length > 0) ? self.buildRankingList() : null}

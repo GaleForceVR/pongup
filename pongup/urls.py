@@ -5,7 +5,7 @@ from rest_framework import routers, serializers, viewsets
 from django.contrib.auth.views import login
 
 from . import views
-from .views import UserViewSet, LaddersViewSet, LadderDetailViewSet, MyLaddersViewSet, MatchesDetailViewSet, LadderMatchesViewSet, LadderPlayersViewSet
+from .views import UserViewSet, LaddersViewSet, LadderDetailViewSet, MyLaddersViewSet, MatchesDetailViewSet, LadderMatchesViewSet, LadderPlayersViewSet, UserLadderViewSet
 
 
 
@@ -51,6 +51,7 @@ urlpatterns = patterns('',
     url(r'^api/ladders/(?P<pk>[-\d]+)/matches', LadderMatchesViewSet.as_view({'get': 'list'})),
     url(r'^api/ladders/(?P<pk>[-\d]+)/players/$', LadderPlayersViewSet.as_view({'get': 'list', 'post': 'create'})),
     url(r'^api/user/ladders/$', MyLaddersViewSet.as_view({'get': 'list'})),
+    url(r'^api/user/ladder/(?P<pk>[-\d]+)/$', UserLadderViewSet.as_view()),
     url(r'^api/', include(router.urls)),
     url(r'^api/match/(?P<pk>[-\d]+)/$', MatchesDetailViewSet.as_view({'get': 'list', 'put': 'update'})),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

@@ -218,6 +218,17 @@ a {
             color: $backgroundBlue;
         }
     }
+    &.cta {
+        /*padding: 8px 45px;*/
+        background: $orange; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient($yellow, $orange); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient($yellow, $orange); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient($yellow, $orange); /* For Firefox 3.6 to 15 */
+        background: linear-gradient($yellow, $orange); /* Standard syntax */
+        color: black;
+        text-shadow: 1px 1px 1px #F0BA85;
+        cursor: pointer;
+    }
 }
 
 .hide-element {
@@ -303,13 +314,13 @@ a {
     }
 }
 
-.scheduled-matches-container, .create-ladder-form {
+.scheduled-matches-container, .create-ladder-form, .ladder-rank-list {
     p.seed, p.player-name, p.player-score {
         margin-right: 10px;
     }
     input {
         background-color: $mutedTextBlue;
-        border: none;
+        border: 2px solid transparent;
         padding: 3px 8px;
         color: $formFieldLightBlue;
         width: 40px;
@@ -333,6 +344,43 @@ a {
         &:-ms-input-placeholder {
             color:    $backgroundBlue;
         }
+    }
+}
+
+.ladder-rank-list input {
+    text-align: left;
+    width: 28px;
+    background-color: $backgroundBlue;
+    color: $mutedTextBlue;
+    font-size: 24px;
+    padding: 1px 5px;
+    position: relative;
+    top: 1px;
+    &.active {
+        background-color: $mutedTextBlue;
+        color: $formFieldLightBlue;
+    }
+}
+
+.rankings-header {
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.right {
+    float: right;
+}
+
+.edit-btn {
+    padding: 5px 10px;
+    font-size: 10px;
+    color: $backgroundBlue;
+    background-color: $mutedTextBlue;
+    &:hover {
+        cursor: pointer;
     }
 }
 

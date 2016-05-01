@@ -9,6 +9,7 @@ export function loadLadders() {
 			var client = new LaddersClient()
 			client.fetch_ladders()
 				.then( axios.spread( (ladders_data) => {
+					console.log(ladders_data)
 					dispatch({
 						type: constants.LADDER_DATA_LOADED,
 						ladder_data: {
@@ -35,9 +36,6 @@ export function loadLadderDetail(id) {
 		client.fetch_ladder_detail(id)
 			.then( axios.spread( (ladder_data) => {
 				var state = getState().ladders_reducer
-				console.log('%cloadLadderDetail()', 'background-color:blue;color:yellow')
-				console.log(ladder_data.data)
-				console.log(state)
 				dispatch({
 					type: constants.LADDER_DETAIL_LOADED,
 					ladder_data: {
@@ -57,12 +55,95 @@ export function loadLadderDetail(id) {
 	}
 }
 
+export function toggleEditRankings() {
+	return (dispatch, getState) => {
+		var state = getState().ladders_reducer
+		dispatch({
+			type: constants.IS_EDITING_RANKINGS,
+			is_editing_rankings: !state.is_editing_rankings
+		})
+	}
+}
+
+export function setNewRankings(index, ladder_rank) {
+	return (dispatch, getState) => {
+		var state = getState().ladders_reducer
+		console.log('setNewRankings()')
+		console.log(index)
+		console.log(ladder_rank)
+		console.log(state)
+		let rankings = state.new_rankings
+
+		let updated_rank_obj = Object.assign({}, rankings[index], {
+			ladder_rank: ladder_rank
+		})
+
+		console.log(rankings)
+		console.log(updated_rank_obj)
+
+		var new_rankings = [
+			...rankings.slice(0, index),
+			updated_rank_obj,
+			...rankings.slice(index + 1)
+		]
+
+		console.log(new_rankings)
+
+		dispatch({
+			type: constants.SET_NEW_RANKINGS,
+			new_rankings: new_rankings
+		})
+
+		// for (var i = 0; i < state.new_rankings.length )
+
+		// dispatch(
+
+		// )
+	}
+}
+
+export function submitRankingUpdate() {
+	return (dispatch, getState) => {
+		let state = getState().ladders_reducer
+		const csrftoken = getTheCookie()
+
+		const headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+		console.log('submitRankingUpdate()')
+		console.log(state)
+
+		let params = {
+			id: 6,
+			ladder_rank: 4
+		}
+
+		// axios.put('/api/user/ladder/' + params.id + '/', params, headers)
+		// 	.then(function (response) {
+		// 		console.log('success')
+		// 		console.log(response)
+		// 	})
+		// 	.catch(function (response) {
+		// 		console.log('error')
+		// 		console.log(response)
+		// 	})
+	}
+}
+
+export function isManager() {
+	return(dispatch) => {
+		dispatch({
+			type: constants.IS_MANAGER,
+			is_manager: true
+		})
+	}
+}
+
 export function submitJoinLadderRequest(current_ladder_id, current_user_id) {
 	return(dispatch, getState) => {
 		const state = getState().ladders_reducer
-
-		console.log('submitJoinLadderRequest')
-		console.log(state)
 
 		const csrftoken = getTheCookie()
 		const headers = {
@@ -78,20 +159,13 @@ export function submitJoinLadderRequest(current_ladder_id, current_user_id) {
 
 		axios.post('/api/ladders/' + current_ladder_id + '/players/', params, headers)
 			.then(function (response) {
-				console.log('success')
-				console.log(response)
 			})
 			.catch(function (response) {
-				console.log('error')
-				console.log(response)
 			})
 	}
 }
 
 export function createLadder(new_ladder_name, current_user_id) {
-	console.log('new_ladder_name')
-	console.log(new_ladder_name)
-	console.log(current_user_id)
 	return(dispatch, getState) => {
 		// const state = getState().ladders_reducer
 
@@ -125,8 +199,6 @@ export function createLadder(new_ladder_name, current_user_id) {
 export function checkParticipation(current_username) {
 	return (dispatch, getState) => {
 		const state = getState().ladders_reducer
-		console.log('%ccheckParticipation', 'background-color:yellow;color:red')
-		console.log(state)
 		for (var i = 0; i < state.ladder_detail.length; i++) {
 			if (state.ladder_detail[i].user.username == current_username) {
 				dispatch({
@@ -192,14 +264,12 @@ export function submitScores(match_id, index) {
 
 		var err_data = state.errors[index]
 		if (err_data.player_a_score || err_data.player_b_score) {
-			console.log('%cerrors exist', 'background-color:red;color:white')
 			let new_state = Object.assign({}, state, {errors: err_data.errors, focus_on_component: err_data.focus_on_component})
 			dispatch({
 				type: constants.VALIDATE,
 				new_state
 			})
 		} else {
-			console.log('%cno errors', 'background-color:green;color:white')
 			var csrftoken = getTheCookie()
 			var headers = {
 				xsrfCookieName: 'csrftoken',
@@ -257,6 +327,20 @@ export function checkValidations(field, value = null, index, all = false) {
 					errors[index] = Object.assign({}, errors[index], temp_obj)
 				} else {
 					temp_obj = {player_b_score: 'Score must be a number between 0 and 99'}
+					var new_temp_obj = {}
+					new_temp_obj[index] = temp_obj
+					errors[index] = Object.assign({}, errors[index], temp_obj)
+				}
+				break;
+			case 'ladder_rank':
+
+				if (validator.isInt(val, {min: 0, max: 999})) {
+					temp_obj = {ladder_rank: undefined}
+					var new_temp_obj = {}
+					new_temp_obj[index] = temp_obj
+					errors[index] = Object.assign({}, errors[index], temp_obj)
+				} else {
+					temp_obj = {ladder_rank: 'Score must be a number between 0 and 999'}
 					var new_temp_obj = {}
 					new_temp_obj[index] = temp_obj
 					errors[index] = Object.assign({}, errors[index], temp_obj)

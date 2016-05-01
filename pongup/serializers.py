@@ -30,7 +30,7 @@ class LadderDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = User_Ladder
 		depth = 2
-		fields = ('user', 'ladder', 'ladder_rank')
+		fields = ('id', 'user', 'ladder', 'ladder_rank')
 
 class LadderPlayerSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:

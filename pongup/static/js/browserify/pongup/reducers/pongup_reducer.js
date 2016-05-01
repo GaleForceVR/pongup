@@ -20,8 +20,6 @@ const pongup_reducer = (state = initialState, action) => {
                 active_tab: action.active_tab
             })
         case constants.USER_DATA_LOADED:
-            console.log('%cUSER_DATA_LOADED', 'background-color:red;color:yellow')
-            console.log(action.user_data)
             return Object.assign({}, state, {
                 username: action.user_data.username[0].username,
                 current_user: action.user_data.username[0].id,

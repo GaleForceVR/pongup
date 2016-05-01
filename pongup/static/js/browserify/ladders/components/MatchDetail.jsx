@@ -26,11 +26,6 @@ export class _MatchDetail extends Component {
     }
 
     handleSubmit(e, index) {
-		console.log('handleSubmit()')
-		console.log(e)
-		console.log('index')
-		console.log(index)
-		console.log(this.props.player_a_score[index])
 		this.props.dispatch(actions.submitScores(this.props.match.id, index))
     }
 
@@ -154,15 +149,8 @@ export class _MatchDetail extends Component {
 		var self = this
 		var index = self.props.index
 
-		console.log('renderMatchInfoWithoutForm()')
-		console.log(scores_exist)
-
 		// needs to be self.props.match_detail[index].player_a_score
-		console.log(self.props.matches_detail)
-
-		console.log(self.props.matches_detail[index].player_a_score)
-		console.log(self.props.matches_detail[index].player_b_score)
-
+		// console.log(self.props.matches_detail)
 
 		return (
 			<div>
@@ -183,8 +171,6 @@ export class _MatchDetail extends Component {
 		var self = this
 		var index = self.props.index
 
-		console.log('_MatchDetail')
-		console.log(self.props)
 		let render_matches
 
 		if (self.props.matches_detail[index].player_a_score || self.props.matches_detail[index].player_b_score) {

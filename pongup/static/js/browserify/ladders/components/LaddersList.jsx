@@ -13,9 +13,6 @@ export class LaddersList extends Component {
 
         var detail_url = "/ladders/" + data.id + "/matches/"
 
-        console.log('LaddersList')
-        console.log(data)
-        console.log(detail_url)
 
         // var hiddenClasses = "primary upgrade-button"
         // var visibleClasses = hiddenClasses + " active"

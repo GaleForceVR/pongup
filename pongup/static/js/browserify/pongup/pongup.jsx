@@ -97,7 +97,11 @@ function mapLadderDetailContainerStateToProps(state) {
         is_editing: state.ladders_reducer.is_editing,
         liked: state.ladders_reducer.liked,
         force_update: state.ladders_reducer.force_update,
-        is_in_ladder: state.ladders_reducer.is_in_ladder
+        is_in_ladder: state.ladders_reducer.is_in_ladder,
+        current_ladder: state.ladders_reducer.current_ladder,
+        is_manager: state.ladders_reducer.is_manager,
+        is_editing_rankings: state.ladders_reducer.is_editing_rankings,
+        new_rankings: state.ladders_reducer.new_rankings
     }
 }
 

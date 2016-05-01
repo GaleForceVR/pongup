@@ -51,12 +51,10 @@ export class LaddersIndexContainer extends Component {
     }
 
     handleNewLadderClick() {
-        console.log('handleNewLadderClick()')
         this.setState({show_ladder_form: true})
     }
 
     handleChange(e) {
-        console.log('handleChange()')
         this.setState({new_ladder_name: e.target.value })
     }
 
@@ -66,7 +64,6 @@ export class LaddersIndexContainer extends Component {
     }
 
     renderLadderForm() {
-        console.log('renderLadderForm')
         return (
             <form className="create-ladder-form">
                 <input
@@ -80,9 +77,6 @@ export class LaddersIndexContainer extends Component {
                 <a
                     className="primary"
                     onClick={(e) => {
-                        console.log('submit new Ladder button')
-                        console.log(this.props)
-                        console.log(this.props.current_user)
                         this.props.dispatch(actions.createLadder(this.state.new_ladder_name, this.props.current_user))
                     }}
                 >Create ladder</a>

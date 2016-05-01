@@ -13,8 +13,6 @@ export class PongupClient {
     fetch_user_profile() {
         var url = '/api/users/'
         var data = axios.get(url)
-        console.log('hit api in PongupClient')
-        console.log(data)
         return axios.get(url)
     }
 }
