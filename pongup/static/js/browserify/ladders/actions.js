@@ -3,6 +3,7 @@ import axios from 'axios'
 import { LaddersClient } from './ladders_client'
 import validator from 'validator'
 import { getTheCookie } from '../login/login_client'
+import { push } from 'react-router-redux'
 
 export function loadLadders() {
 		return (dispatch) => {
@@ -31,6 +32,7 @@ export function loadLadders() {
 }
 
 export function loadLadderDetail(id) {
+	console.log('%cloadLadderDetail(id=' + id + ')', 'background-color:red;color:yellow')
 	return (dispatch, getState) => {
 		var client = new LaddersClient()
 		client.fetch_ladder_detail(id)
@@ -102,10 +104,48 @@ export function setNewRankings(index, ladder_rank) {
 	}
 }
 
-export function submitRankingUpdate() {
+function triangular(num) {
+	let sum = (num * (num + 1)) / 2
+	console.log('triangular of ' + num)
+	console.log(sum)
+	return sum
+}
+
+function is_valid(rankings) {
+	let sum_ranks = 0
+	let are_ranks_valid = false
+	console.log(rankings)
+
+	let sorted_ranks = rankings.sort(function(a, b) { return a.b - b.b })
+	console.log(sorted_ranks)
+
+	for (var i = 0; i < sorted_ranks.length; i++) {
+		sum_ranks = sum_ranks + parseInt(sorted_ranks[i].ladder_rank)
+		if (i < sorted_ranks.length - 1) {
+			if (sorted_ranks[i].ladder_rank == sorted_ranks[i + 1].ladder_rank ) {
+				console.log('failed on duplicate check')
+				return false
+			}
+		}
+	}
+
+	if (sum_ranks !== triangular(rankings.length)) {
+		console.log('failed on triangular check')
+		console.log('sum_ranks: ' + sum_ranks)
+		console.log('triangular: ' + triangular(rankings.length))
+		return false
+	}
+
+	return true
+}
+
+export function submitRankingUpdate(ladder_id) {
+	console.log('submitRankingUpdate(ladder_id)')
+	console.log(ladder_id)
 	return (dispatch, getState) => {
 		let state = getState().ladders_reducer
 		const csrftoken = getTheCookie()
+		let changes = 0
 
 		const headers = {
 			xsrfCookieName: 'csrftoken',
@@ -114,21 +154,90 @@ export function submitRankingUpdate() {
 		}
 		console.log('submitRankingUpdate()')
 		console.log(state)
+		const old_ranks = state.ladder_detail
+		const new_ranks = state.new_rankings
+		
 
-		let params = {
-			id: 6,
-			ladder_rank: 4
+		if (is_valid(new_ranks)) {
+			for (var i = 0; i < old_ranks.length; i++) {
+				if (old_ranks[i].ladder_rank !== new_ranks[i].ladder_rank && old_ranks[i].id == new_ranks[i].id) {
+
+					let params = {
+						id: new_ranks[i].id,
+						ladder_rank: new_ranks[i].ladder_rank
+					}
+
+					changes++
+					console.log('changes:')
+					console.log(changes)
+					console.log('params:')
+					console.log(params)
+
+					axios.put('/api/user/ladder/' + params.id + '/', params, headers)
+						.then(function (response) {
+							console.log('success')
+							console.log(response)
+						})
+						.catch(function (response) {
+							console.log('error')
+							console.log(response)
+						})
+				}
+
+				if (i == old_ranks.length - 1) {
+					
+					setTimeout(function() {
+						console.log('get request')
+						var client = new LaddersClient()
+						client.fetch_ladder_detail(ladder_id)
+							.then( axios.spread( (ladder_data) => {
+								var state = getState().ladders_reducer
+								console.log('ladder_data')
+								console.log(ladder_data)
+								dispatch({
+									type: constants.LADDER_DETAIL_LOADED,
+									ladder_data: {
+										ladder_data: ladder_data.data,
+										is_loading: false
+									}
+
+								})
+							}))
+							.catch(function (response) {
+								console.log('error')
+								console.log(response)
+							})
+					
+					}, 1000)
+				}
+			}
+		} else {
+			console.log('error: invalid rankings')
 		}
 
-		// axios.put('/api/user/ladder/' + params.id + '/', params, headers)
-		// 	.then(function (response) {
-		// 		console.log('success')
-		// 		console.log(response)
-		// 	})
+
+		// console.log('get request')
+		// axios.get('/api/ladder/' + id)
+		// 	.then( axios.spread( (ladder_data) => {
+		// 		var state = getState().ladders_reducer
+		// 		dispatch({
+		// 			type: constants.LADDER_DETAIL_LOADED,
+		// 			ladder_data: {
+		// 				ladder_data: ladder_data.data,
+		// 				is_loading: false
+		// 			}
+
+		// 		})
+		// 	}))
 		// 	.catch(function (response) {
 		// 		console.log('error')
 		// 		console.log(response)
 		// 	})
+			
+
+		// if (changes > 0) {
+		// 	loadLadderDetail(ladder_id, true)
+		// }
 	}
 }
 
@@ -159,6 +268,30 @@ export function submitJoinLadderRequest(current_ladder_id, current_user_id) {
 
 		axios.post('/api/ladders/' + current_ladder_id + '/players/', params, headers)
 			.then(function (response) {
+				setTimeout(function() {
+					console.log('get request')
+					var client = new LaddersClient()
+					client.fetch_ladder_detail(current_ladder_id)
+						.then( axios.spread( (ladder_data) => {
+							var state = getState().ladders_reducer
+							console.log('ladder_data')
+							console.log(ladder_data)
+							dispatch({
+								type: constants.LADDER_DETAIL_LOADED,
+								ladder_data: {
+									ladder_data: ladder_data.data,
+									is_loading: false
+								}
+
+							})
+						}))
+						.catch(function (response) {
+							console.log('error')
+							console.log(response)
+						})
+				
+				}, 500)
+
 			})
 			.catch(function (response) {
 			})
@@ -188,6 +321,11 @@ export function createLadder(new_ladder_name, current_user_id) {
 			.then(function (response) {
 				console.log('success')
 				console.log(response)
+				// dispatch(push('/ladder/' + response.data.id + '/matches/'))
+				// setTimeout(function() {
+					window.location.href = `/ladders/${response.data.id}/matches/`
+				// }, 500)
+
 			})
 			.catch(function (response) {
 				console.log('error')

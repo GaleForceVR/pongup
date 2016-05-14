@@ -419,3 +419,11 @@ STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "u
 ERROR:  null value in column "manager_id" violates not-null constraint
 DETAIL:  Failing row contains (47, success, 2016-04-28 02:59:51.86404+00, 2016-04-28 02:59:51.864066+00, null).
 STATEMENT:  INSERT INTO "ladders_ladder" ("name", "manager_id", "created_at", "updated_at") VALUES ('success', NULL, '2016-04-28T02:59:51.864040+00:00'::timestamptz, '2016-04-28T02:59:51.864066+00:00'::timestamptz) RETURNING "ladders_ladder"."id"
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-05-02 19:30:28 CDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started

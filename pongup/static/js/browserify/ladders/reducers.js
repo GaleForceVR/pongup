@@ -41,6 +41,8 @@ const ladders_reducer = (state = initialState, action) => {
                 current_ladder: action.current_ladder
             })
         case constants.LADDER_DETAIL_LOADED:
+            console.log('LADDER_DETAIL_LOADED')
+            console.log(action.ladder_data.ladder_data)
             return Object.assign({}, state, {
                 ladder_detail: action.ladder_data.ladder_data,
                 new_rankings: action.ladder_data.ladder_data,

@@ -161,6 +161,9 @@ export class LadderDetailContainer extends Component {
 
     renderEditRankingsButton() {
         var self = this
+        console.log('renderEditRankingsButton()')
+        console.log(this.props)
+        const ladder_id = parseInt(this.props.params.ladder_id)
         return (
             <span>
                 { self.props.is_editing_rankings ? 
@@ -169,7 +172,8 @@ export class LadderDetailContainer extends Component {
                             onClick={()=>{
                                 // self.setState({is_editing_rankings: true})
 
-                                self.props.dispatch(actions.submitRankingUpdate())
+                                self.props.dispatch(actions.submitRankingUpdate(ladder_id))
+                                self.props.dispatch(actions.toggleEditRankings())
                             }}
                         >Submit rankings</a>
                     :
