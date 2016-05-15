@@ -11,4 +11,41 @@ $(document).ready(function(){
     $("#id_password1").attr('placeholder', 'Password')
     $("#id_password2").attr('placeholder', 'Confirm password')
     $("#id_email").attr('placeholder', 'Email')
+
+    var showDropdown = false
+
+    var toggleDropdown = function() {
+    	showDropdown = !showDropdown
+
+    	if (showDropdown) {
+    		$("#dropdown").css("display", "block")
+    	} else {
+    		$("#dropdown").css("display", "none")
+    	}
+    }
+
+    $("#dropdown-toggle").on("click", function(e) {
+    	e.preventDefault()
+    	console.log('clicked')
+    	toggleDropdown()
+    })
+
+    $("#dropdown-container").on("mouseleave", function(e) {
+    	// e.preventDefault()
+    	console.log('mouseleave')
+    	if (showDropdown) {
+	    	toggleDropdown()
+	    }
+    })
+
+    $("#dropdown-close").on("click", function(e) {
+    	e.preventDefault()
+    	toggleDropdown()
+    	// console.log('mouseleave')
+    	// if (showDropdown) {
+	    // 	toggleDropdown()
+	    // }
+    })
+
+
 });

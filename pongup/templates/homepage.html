@@ -19,9 +19,24 @@
                     {% csrf_token %}
                 </form>
                 <ul>
-                    <li><a href="/ladders">Ladders</a></li>
+                    <li><a href="/ladders">ladders</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="#profile"><img src="{% static "img/user-icon.png" %}">{{ user.username }}</a></li>
+                        <li class="dropdown-container">
+                            <a href="#profile" id="dropdown-toggle"><img src="{% static "img/user-icon.png" %}">{{ user.username }}</a>
+                            <div id="dropdown-container">
+                                <div class="dropdown-close" id="dropdown-close"></div>
+                                <ul class="dropdown" id="dropdown">
+                                    <div class="horizontal-divider dropdown-top-border"></div>
+                                    {#<li><a href="/ladders">my ladders</a></li>#}
+                                    {#<li><a href="#profile">profile</a></li>#}
+                                    {#<div class="clearfix"></div>#}
+                                    {#<div class="horizontal-divider"></div>#}
+                                    <li><a href="/logout">logout</a></li>
+                                    <div class="clearfix"></div>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
                     {% else %}
                         <li class="sign-up"><a href="/signup">Sign up</a></li>
                         <li class="log-in"><a href="/login">Log in</a></li>
