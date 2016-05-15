@@ -78,6 +78,8 @@ class LaddersViewSet(viewsets.ModelViewSet):
     queryset = Ladder.objects.all()
     model = Ladder
     serializer_class = LaddersSerializer
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
+    ordering = ('-created_at',)
 
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
@@ -101,8 +103,6 @@ class LaddersViewSet(viewsets.ModelViewSet):
     #         return {'Location': data[api_settings.URL_FIELD_NAME]}
     #     except (TypeError, KeyError):
     #         return {}
-
-
 
     def post(self, request, format=None):
         name = request.data.name

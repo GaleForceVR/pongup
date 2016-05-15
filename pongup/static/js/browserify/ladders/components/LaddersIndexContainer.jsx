@@ -10,7 +10,10 @@ export class LaddersIndexContainer extends Component {
 
         this.state = {
             show_ladder_form: false,
-            new_ladder_name: ''
+            new_ladder_name: '',
+            new_ladder_location: '',
+            new_ladder_start_date: null,
+            new_ladder_end_date: null
         }
 
     }
@@ -34,12 +37,20 @@ export class LaddersIndexContainer extends Component {
         var self = this
         return self.props.ladders.map(function(ladder, index) {
             return (
-                <LaddersList
-                    key={index}
-                    id={ladder.id}
-                    name={ladder.name}
-                    {...self.props}
-                />
+                <span>
+                    {/* in production, ladder.id == 1 will be the 'global' ladder */}
+                    {/* ladder 1 is the default ladder used for friendly matches */}
+                    {ladder.id != 0 ?
+                        <LaddersList
+                            key={index}
+                            id={ladder.id}
+                            name={ladder.name}
+                            {...self.props}
+                        />
+                    :
+                        null
+                    }
+                </span>
             )
         })
     }
@@ -54,8 +65,12 @@ export class LaddersIndexContainer extends Component {
         this.setState({show_ladder_form: true})
     }
 
-    handleChange(e) {
+    handleNameChange(e) {
         this.setState({new_ladder_name: e.target.value })
+    }
+
+    handleLocationChange(e) {
+        this.setState({new_ladder_location: e.target.value})
     }
 
     handleBlur() {
@@ -71,7 +86,15 @@ export class LaddersIndexContainer extends Component {
                     name="name"
                     placeholder="Ladder Name"
                     value={this.state.new_ladder_name}
-                    onChange={(e) => {this.handleChange(e)}}
+                    onChange={(e) => {this.handleNameChange(e)}}
+                    onBlur={this.handleBlur()}
+                />
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Location (optional)"
+                    value={this.state.new_ladder_location}
+                    onChange={(e) => {this.handleLocationChange(e)}}
                     onBlur={this.handleBlur()}
                 />
                 <a

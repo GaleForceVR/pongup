@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 
 class Ladder(models.Model):
     name = models.CharField(max_length=200)
+    location = models.CharField(max_length=200, blank=True, null=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     manager = models.ForeignKey(User, related_name='manager')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

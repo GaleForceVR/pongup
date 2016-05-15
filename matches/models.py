@@ -10,7 +10,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Match(models.Model):
-    ladder = models.ForeignKey(Ladder)
+    ladder = models.ForeignKey(Ladder, default=1)
     name = models.CharField(max_length=200, blank=True, null=True)
     player_a = models.ForeignKey(User, related_name='player_a')
     player_b = models.ForeignKey(User, related_name='player_b')
