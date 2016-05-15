@@ -107,10 +107,13 @@ class LaddersViewSet(viewsets.ModelViewSet):
     def post(self, request, format=None):
         name = request.data.name
         manager_id = User.objects.get(pk=request.data.manager_id)
+        location = request.data.location
+        start_date = request.data.start_date
+        end_date = request.data.end_date
 
         serializer = LaddersSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save(name=name, manager_id=manager_id)
+            serializer.save(name=name, manager_id=manager_id, location=location, start_date=start_date, end_date=end_date)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

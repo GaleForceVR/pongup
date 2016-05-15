@@ -125,7 +125,7 @@ export class _MatchDetail extends Component {
 						className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_b_score)})}
 						/>
 				</div>
-				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
+				<p className="header-label match-date">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
 				<a 
 					className="primary submit-btn" 
 					href="#submit"
@@ -162,7 +162,7 @@ export class _MatchDetail extends Component {
 					<p className="player-name">{self.props.player_b_username}</p>
 					{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_b_score) : null }
 				</div>
-				<p className="header-label">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
+				<p className="header-label match-date">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
 			</div>
 		)
     }

@@ -2,6 +2,8 @@ import * as actions from '../actions'
 import classNames from 'classnames'
 import { LaddersList } from './LaddersList'
 import React, { Component } from 'react'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 
 export class LaddersIndexContainer extends Component {
     constructor(props) {
@@ -13,8 +15,17 @@ export class LaddersIndexContainer extends Component {
             new_ladder_name: '',
             new_ladder_location: '',
             new_ladder_start_date: null,
-            new_ladder_end_date: null
+            new_ladder_end_date: null,
+            start_date_picked: false
         }
+
+        this.handleStartChange = this.handleStartChange.bind(this)
+        this.handleNewLadderClick = this.handleNewLadderClick.bind(this)
+        this.handleNameChange = this.handleNameChange.bind(this)
+        this.handleLocationChange = this.handleLocationChange.bind(this)
+        this.handleStartChange = this.handleStartChange.bind(this)
+        this.handleEndChange = this.handleEndChange.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
 
     }
 
@@ -73,6 +84,14 @@ export class LaddersIndexContainer extends Component {
         this.setState({new_ladder_location: e.target.value})
     }
 
+    handleStartChange(date) {
+        this.setState({new_ladder_start_date: date, start_date_picked: true})
+    }
+
+    handleEndChange(date) {
+        this.setState({new_ladder_end_date: date})
+    }
+
     handleBlur() {
         console.log('handleBlur()')
 
@@ -97,10 +116,29 @@ export class LaddersIndexContainer extends Component {
                     onChange={(e) => {this.handleLocationChange(e)}}
                     onBlur={this.handleBlur()}
                 />
+                <div className="datepicker-container" >
+                    <DatePicker 
+                        name="start_date"
+                        placeholderText="Start Date"
+                        minDate={moment()}
+                        selected={this.state.new_ladder_start_date}
+                        onChange={this.handleStartChange}
+                    />
+                </div>
+                
+                    <DatePicker 
+                        name="end_date"
+                        placeholderText="End Date"
+                        minDate={this.state.new_ladder_start_date}
+                        // disabled={!this.state.start_date_picked}
+                        selected={this.state.new_ladder_end_date}
+                        onChange={this.handleEndChange}
+                    />
+                
                 <a
                     className="primary"
                     onClick={(e) => {
-                        this.props.dispatch(actions.createLadder(this.state.new_ladder_name, this.props.current_user))
+                        this.props.dispatch(actions.createLadder(this.state.new_ladder_name, this.props.current_user, this.state.new_ladder_location, this.state.new_ladder_start_date, this.state.new_ladder_end_date))
                     }}
                 >Create ladder</a>
             </form>

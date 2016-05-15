@@ -39,12 +39,21 @@ export class RankingList extends Component {
     }
 
     renderUnEditableRank() {
+        const index = this.props.index
+        let rank = this.props.rank
+        if (this.props.new_rankings[index].ladder_rank && this.props.rankings_updated) {
+            rank = this.props.rank
+        }
+        console.log('renderUnEditableRank')
+        console.log(this.props.rank)
+
         return (
             <span>
                 {/*<p className="rank">{this.props.rank}</p>*/}
                 <input 
                     className="rank-input" 
-                    defaultValue={this.props.rank}
+                    defaultValue={rank}
+                    value={rank}
                     readOnly={true}
                 />
             </span>

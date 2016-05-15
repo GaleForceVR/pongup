@@ -298,7 +298,7 @@ export function submitJoinLadderRequest(current_ladder_id, current_user_id) {
 	}
 }
 
-export function createLadder(new_ladder_name, current_user_id) {
+export function createLadder(new_ladder_name, current_user_id, new_ladder_location, new_ladder_start_date, new_ladder_end_date) {
 	return(dispatch, getState) => {
 		// const state = getState().ladders_reducer
 
@@ -314,7 +314,10 @@ export function createLadder(new_ladder_name, current_user_id) {
 
 		let params = {
 			name: new_ladder_name,
-			manager: current_user_id
+			manager: current_user_id,
+			location: new_ladder_location,
+			start_date: new_ladder_start_date,
+			end_date: new_ladder_end_date
 		}
 
 		axios.post('/api/ladders/', params , headers)

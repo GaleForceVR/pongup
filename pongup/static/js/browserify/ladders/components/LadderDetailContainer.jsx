@@ -3,6 +3,7 @@ import * as actions from '../actions'
 import { RankingList } from './RankingList'
 import { MatchDetail } from './MatchDetail'
 import React, { Component } from 'react'
+import moment from 'moment'
 
 export class LadderDetailContainer extends Component {
     constructor(props) {
@@ -193,15 +194,20 @@ export class LadderDetailContainer extends Component {
         var self = this
         // var current_ladder_id = self.getCurrentLadder().id
 
-        
-
+        var current_ladder = self.getCurrentLadder()
+        console.log('LadderDetailContainer render()')
         console.log(self.props)
+        console.log('current_ladder:')
+        console.log(current_ladder)
         return (
             <div className="container-1600">
 
                 <div className="ladder-detail-header">
                     <p className="header-label">Ladder:</p>
-                    <h3 className="ladder-name">{ self.props.is_loading ? self.loading() : self.getCurrentLadder().name }</h3>
+                    <h3 className="ladder-name">{ self.props.is_loading ? self.loading() : current_ladder.name }</h3>
+                    <p className="header-label start-date">Start: <span className="emphasis">{moment(current_ladder.start_date).format('M / D / Y')}</span></p>
+                    <p className="header-label end-date">End: <span className="emphasis">{moment(current_ladder.end_date).format('M / D / Y')}</span></p>
+                    {current_ladder.location ? <p className="header-label location">{current_ladder.location}</p> : null}
                 </div>
 
                 <div className="right-wrapper">

@@ -24,7 +24,7 @@ class LaddersSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Ladder
 		depth = 1
-		fields = ('name', 'id', 'manager')
+		fields = ('name', 'id', 'manager', 'location', 'start_date', 'end_date')
 
 class LadderDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
