@@ -429,3 +429,11 @@ LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 ERROR:  cannot ALTER TABLE "ladders_ladder" because it has pending trigger events
 STATEMENT:  ALTER TABLE "ladders_ladder" ALTER COLUMN "start_date" SET NOT NULL
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-05-15 19:05:51 CDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
