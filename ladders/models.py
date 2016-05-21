@@ -21,6 +21,8 @@ class User_Ladder(models.Model):
     ladder = models.ForeignKey(Ladder)
     approved = models.BooleanField(default=False)
     ladder_rank = models.IntegerField(blank=True, null=True)
+    weekly_challenge_completed = models.BooleanField(default=False)
+    last_conqueror = models.ForeignKey(User, related_name='last_conqueror', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

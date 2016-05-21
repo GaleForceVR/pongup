@@ -16,6 +16,7 @@ from rest_framework import filters
 from rest_framework import generics
 from rest_framework import permissions
 from matches.permissions import IsPlayerInMatchOrReadOnly
+from ladders.permissions import IsManagerOrReadOnly
 from rest_framework import mixins
 
 def homepage(request):
@@ -167,6 +168,8 @@ class UserLadderViewSet(mixins.RetrieveModelMixin,
     # model = User_Ladder
     serializer_class = LadderDetailSerializer
 
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsManagerOrReadOnly,)
+
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
@@ -197,6 +200,8 @@ class LadderMatchesViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all()
     model = Match
     serializer_class = MatchDetailSerializer
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
+    ordering = ('-match_date',)
 
     def get_queryset(self):
         """

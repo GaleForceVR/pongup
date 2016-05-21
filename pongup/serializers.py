@@ -30,7 +30,7 @@ class LadderDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = User_Ladder
 		depth = 2
-		fields = ('id', 'user', 'ladder', 'ladder_rank')
+		fields = ('id', 'user', 'ladder', 'ladder_rank', 'approved', 'weekly_challenge_completed', 'last_conqueror', 'created_at')
 
 class LadderPlayerSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -46,7 +46,7 @@ class MatchDetailSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Match 
 		depth = 2
-		fields = ('id', 'ladder', 'name', 'player_a', 'player_b', 'player_a_score', 'player_b_score', 'match_date')
+		fields = ('id', 'ladder', 'name', 'player_a', 'player_b', 'player_a_score', 'player_b_score', 'match_date', 'accepted', 'is_challenge_match', 'alternate_date', 'created_at')
 
 		def update(self, instance, validated_data):
 			instance.id = validated_data.get('id', instance.id)

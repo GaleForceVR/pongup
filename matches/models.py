@@ -17,6 +17,9 @@ class Match(models.Model):
     player_a_score = models.IntegerField(blank=True, null=True)
     player_b_score = models.IntegerField(blank=True, null=True)
     match_date = models.DateTimeField()
+    accepted = models.BooleanField(default=False)
+    is_challenge_match = models.BooleanField(default=False)
+    alternate_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)      
 

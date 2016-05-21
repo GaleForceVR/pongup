@@ -215,6 +215,7 @@ export class LadderDetailContainer extends Component {
                     <div className="clearfix"></div>
                     <p className="header-label category rankings-header">Rankings:</p>
                     { self.props.is_manager ? self.renderEditRankingsButton() : null }
+                    {/*self.renderEditRankingsButton()*/}
                     <div className="clearfix"></div>
 
                     <ul className="ladder-rank-list-wrapper">

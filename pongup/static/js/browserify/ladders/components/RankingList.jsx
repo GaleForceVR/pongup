@@ -41,6 +41,8 @@ export class RankingList extends Component {
     renderUnEditableRank() {
         const index = this.props.index
         let rank = this.props.rank
+        console.log('before conditional')
+        console.log(this.props)
         if (this.props.new_rankings[index].ladder_rank && this.props.rankings_updated) {
             rank = this.props.rank
         }
