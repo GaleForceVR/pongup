@@ -2,11 +2,15 @@ import * as actions from '../actions'
 // import classNames from 'classnames'
 import React, { Component } from 'react'
 import classNames from 'classNames'
+import ReactTooltip from 'react-tooltip'
 
 export class RankingList extends Component {
 	constructor(props) {
 		//explicit call to super must remain because of es7 weirdness and class property usage below
 		super(props);
+        this.state = {
+            show_schedule_match_form: false
+        }
 	}
 
     handleChange(e, index) {
@@ -25,8 +29,9 @@ export class RankingList extends Component {
         this.props.dispatch(actions.approvePlayer(this.props.user_ladder_id, this.props.ladder_id))
     }
 
-    handleScheduleMatchClick(e) {
+    handleScheduleMatchClick(e, match_type) {
         console.log('handleScheduleMatchClick')
+        console.log(match_type)
     }
 
     renderEditableRank() {
@@ -134,39 +139,78 @@ export class RankingList extends Component {
         )
     }
 
-    renderMatchScheduler() {
+
+
+    renderMatchSchedulerForm() {
+        return (
+            <form className="create-match-form">
+                
+                <input
+                    type="text"
+                    name="match_date"
+                />
+            </form>
+        )
+    }
+
+    renderMatchSchedulerButton() {
 
         const rank = this.props.rank
         const current_user_rank = this.props.current_user_rank
 
-        console.log('%crenderMatchScheduler', 'background-color:blue;color:yellow')
+        console.log('%crenderMatchSchedulerButton', 'background-color:blue;color:yellow')
         console.log(rank < current_user_rank && rank > current_user_rank - 2)
 
         return (
             <span>
                 { (rank < current_user_rank && rank >= current_user_rank - 2) ? 
-                        <a
-                            className="schedule-btn challenge"
-                            onClick={(e)=>{
-                                this.handleScheduleMatchClick(e)
-                            }}
-                        >
-                            <div className="pongup-ball-btn">
-                                {/*<p>Challenge</p>*/}
-                            </div>
-                        </a>
+                        <span>
+                            <a
+                                className="schedule-btn challenge"
+                                data-tip="schedule a CHALLENGE match"
+                                data-for="challenge-match"
+                                onClick={(e)=>{
+                                    this.handleScheduleMatchClick(e, 'challenge')
+                                }}
+                            >
+                                <div className="pongup-ball-btn">
+                                    {/*<p>Challenge</p>*/}
+                                </div>
+                            </a>
+                            <ReactTooltip 
+                                id="challenge-match"
+                                class="tooltip"
+                                place="right"
+                                type="light"
+                                effect="solid"
+                            />
+                        </span>
                     :
                         (rank == current_user_rank ? 
 
                                 null
                             :
-                                <a
-                                     className="schedule-btn friendly"
-                                >
-                                    <div className="pongup-ball-btn">
-                                        {/*<p>Friendly</p>*/}
-                                    </div>
-                                </a>
+                                <span>
+                                    <a
+                                         className="schedule-btn friendly"
+                                         data-tip="schedule a FRIENDLY match"
+                                         data-for="friendly-match"
+                                         onClick={(e)=>{
+                                             this.handleScheduleMatchClick(e, 'friendly')
+                                         }}
+                                    >
+                                        <div className="pongup-ball-btn">
+                                            {/*<p>Friendly</p>*/}
+                                        </div>
+                                    </a>
+                                    <ReactTooltip
+                                        id="friendly-match"
+                                        class="tooltip"
+                                        place="right"
+                                        type="light"
+                                        effect="solid"
+                                    />
+                                </span>
                         )
                         
                 }
@@ -186,7 +230,8 @@ export class RankingList extends Component {
                 <a href="#" >
                     <p className="name">{self.props.player_name}</p>
                 </a>
-                {self.props.is_manager && !self.props.approved ? self.renderApprovalButton() : (!self.props.approved ? self.renderApprovalPending() : self.renderMatchScheduler())}
+                {self.props.is_manager && !self.props.approved ? self.renderApprovalButton() : (!self.props.approved ? self.renderApprovalPending() : self.renderMatchSchedulerButton())}
+                {self.state.show_schedule_match_form ? self.renderMatchSchedulerForm() : null }
 			</li>
         )
     }

@@ -406,6 +406,15 @@ a {
     
 }
 
+.__react_component_tooltip.place-right.type-light.tooltip {
+    background: $formFieldLightBlue;
+    color: $backgroundBlue;
+}
+
+.__react_component_tooltip.type-light.place-right.tooltip:after {
+    border-right-color: $formFieldLightBlue;
+}
+
 .join-ladder-button {
     display: inline-block;
     margin-bottom: 30px;
