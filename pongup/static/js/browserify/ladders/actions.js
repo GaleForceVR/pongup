@@ -114,23 +114,27 @@ function triangular(num) {
 function is_valid(rankings) {
 	let sum_ranks = 0
 	let are_ranks_valid = false
+	let unapproved_players = 0
 	console.log(rankings)
 
 	let sorted_ranks = rankings.sort(function(a, b) { return a.b - b.b })
 	console.log(sorted_ranks)
 
 	for (var i = 0; i < sorted_ranks.length; i++) {
-		sum_ranks = sum_ranks + parseInt(sorted_ranks[i].ladder_rank)
-		if (i < sorted_ranks.length - 1) {
-			if (sorted_ranks[i].ladder_rank == sorted_ranks[i + 1].ladder_rank ) {
-				console.log('failed on duplicate check')
+		
+		if (!sorted_ranks[i].approved) {
+			unapproved_players = unapproved_players + 1
+		} else if (i < sorted_ranks.length - 1) {
+			sum_ranks = sum_ranks + parseInt(sorted_ranks[i].ladder_rank)
+			if (sorted_ranks[i].ladder_rank == sorted_ranks[i + 1].ladder_rank) {
+				console.error('failed on duplicate check')
 				return false
 			}
 		}
 	}
 
-	if (sum_ranks !== triangular(rankings.length)) {
-		console.log('failed on triangular check')
+	if (sum_ranks !== triangular(rankings.length - unapproved_players)) {
+		console.error('failed on triangular check')
 		console.log('sum_ranks: ' + sum_ranks)
 		console.log('triangular: ' + triangular(rankings.length))
 		return false
@@ -160,7 +164,7 @@ export function submitRankingUpdate(ladder_id) {
 
 		if (is_valid(new_ranks)) {
 			for (var i = 0; i < old_ranks.length; i++) {
-				if (old_ranks[i].ladder_rank !== new_ranks[i].ladder_rank && old_ranks[i].id == new_ranks[i].id) {
+				if (old_ranks[i].approved && old_ranks[i].ladder_rank !== new_ranks[i].ladder_rank && old_ranks[i].id == new_ranks[i].id) {
 
 					let params = {
 						id: new_ranks[i].id,
@@ -214,30 +218,88 @@ export function submitRankingUpdate(ladder_id) {
 		} else {
 			console.log('error: invalid rankings')
 		}
+	}
+}
 
+export function approvePlayer(user_ladder_id, ladder_id) {
+	return (dispatch, getState) => {
+		let state = getState().ladders_reducer
+		const csrftoken = getTheCookie()
 
-		// console.log('get request')
-		// axios.get('/api/ladder/' + id)
-		// 	.then( axios.spread( (ladder_data) => {
-		// 		var state = getState().ladders_reducer
-		// 		dispatch({
-		// 			type: constants.LADDER_DETAIL_LOADED,
-		// 			ladder_data: {
-		// 				ladder_data: ladder_data.data,
-		// 				is_loading: false
-		// 			}
+		const headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+		console.log('approvePlayer()')
+		console.log(state)
+		console.log('user_ladder_id: ' + user_ladder_id)
 
-		// 		})
-		// 	}))
-		// 	.catch(function (response) {
-		// 		console.log('error')
-		// 		console.log(response)
-		// 	})
-			
+		let params = {
+			approved: true
+		}
 
-		// if (changes > 0) {
-		// 	loadLadderDetail(ladder_id, true)
-		// }
+		console.log('params:')
+		console.log(params)
+
+		axios.put('/api/user/ladder/' + user_ladder_id + '/', params, headers)
+			.then(function (response) {
+				console.log('success')
+				console.log(response)
+				var client = new LaddersClient()
+					client.fetch_ladder_detail(ladder_id)
+						.then( axios.spread( (ladder_data) => {
+							var state = getState().ladders_reducer
+							console.log('ladder_data')
+							console.log(ladder_data)
+							dispatch({
+								type: constants.LADDER_DETAIL_LOADED,
+								ladder_data: {
+									ladder_data: ladder_data.data,
+									is_loading: false
+								}
+
+							})
+						}))
+						.catch(function (response) {
+							console.log('error')
+							console.log(response)
+						})
+			})
+			.catch(function (response) {
+				console.log('error')
+				console.log(response)
+			})
+				
+
+				// if (i == old_ranks.length - 1) {
+					
+				// 	setTimeout(function() {
+				// 		console.log('get request')
+				// 		var client = new LaddersClient()
+				// 		client.fetch_ladder_detail(ladder_id)
+				// 			.then( axios.spread( (ladder_data) => {
+				// 				var state = getState().ladders_reducer
+				// 				console.log('ladder_data')
+				// 				console.log(ladder_data)
+				// 				dispatch({
+				// 					type: constants.LADDER_DETAIL_LOADED,
+				// 					ladder_data: {
+				// 						ladder_data: ladder_data.data,
+				// 						is_loading: false
+				// 					}
+
+				// 				})
+				// 			}))
+				// 			.catch(function (response) {
+				// 				console.log('error')
+				// 				console.log(response)
+				// 			})
+					
+				// 	}, 1000)
+				// }
+
+		
 	}
 }
 

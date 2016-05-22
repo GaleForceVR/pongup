@@ -74,12 +74,26 @@ export class LadderDetailContainer extends Component {
 
     buildRankingList() {
         var self = this
+
+        let current_user_rank = null
+
+        for (var i = 0; i < self.props.ladder_detail.length; i++) {
+            if (self.props.ladder_detail[i].user.username == self.props.username) {
+                current_user_rank = self.props.ladder_detail[i].ladder_rank
+            }
+        }
+        console.log('%ccurrent_user_rank', 'background-color:red;color:yellow;font-size:24px')
+        console.log(current_user_rank)
+
         return self.props.ladder_detail.map(function(user_ladder, index) {
             return (
                 <RankingList 
                     key={index}
                     index={index}
+                    approved={user_ladder.approved}
                     rank={user_ladder.ladder_rank}
+                    current_user_rank={current_user_rank}
+                    ladder_id={self.props.params.ladder_id}
                     player_name={user_ladder.user.username}
                     is_editing_rankings={self.state.is_editing_rankings}
                     user_ladder_id={user_ladder.id}

@@ -18,6 +18,17 @@ export class RankingList extends Component {
         this.props.dispatch(actions.checkValidations(e.target.name, e.target.value, index))
     }
 
+    handleApprovalClick(e) {
+        console.log('handleApprovalClick')
+        console.log(this.props.user_ladder_id)
+        console.log(this.props)
+        this.props.dispatch(actions.approvePlayer(this.props.user_ladder_id, this.props.ladder_id))
+    }
+
+    handleScheduleMatchClick(e) {
+        console.log('handleScheduleMatchClick')
+    }
+
     renderEditableRank() {
         const index = this.props.index
         return (
@@ -91,9 +102,74 @@ export class RankingList extends Component {
 
         return (
             <span>
-                {self.props.is_manager && self.props.is_editing_rankings ? self.renderEditableRank() : self.renderUnEditableRank()}
+                {self.props.approved && self.props.is_manager && self.props.is_editing_rankings ? self.renderEditableRank() : self.renderUnEditableRank()}
                 {/*self.renderUnEditableRank()*/}
                 {/*self.renderEditableRank()*/}
+            </span>
+        )
+    }
+
+    renderApprovalButton() {
+        return (
+            <span>
+                <a 
+                    className="edit-btn approval cta"
+                    onClick={(e)=>{
+                        this.handleApprovalClick(e)
+                    }}
+                >
+                    <p>Approve</p>
+                </a>
+            </span>
+        )
+    }
+
+    renderApprovalPending() {
+        return (
+            <span>
+                <a className="edit-btn friendly approval-pending">
+                    <p>Approval pending</p>
+                </a>
+            </span>
+        )
+    }
+
+    renderMatchScheduler() {
+
+        const rank = this.props.rank
+        const current_user_rank = this.props.current_user_rank
+
+        console.log('%crenderMatchScheduler', 'background-color:blue;color:yellow')
+        console.log(rank < current_user_rank && rank > current_user_rank - 2)
+
+        return (
+            <span>
+                { (rank < current_user_rank && rank >= current_user_rank - 2) ? 
+                        <a
+                            className="schedule-btn challenge"
+                            onClick={(e)=>{
+                                this.handleScheduleMatchClick(e)
+                            }}
+                        >
+                            <div className="pongup-ball-btn">
+                                {/*<p>Challenge</p>*/}
+                            </div>
+                        </a>
+                    :
+                        (rank == current_user_rank ? 
+
+                                null
+                            :
+                                <a
+                                     className="schedule-btn friendly"
+                                >
+                                    <div className="pongup-ball-btn">
+                                        {/*<p>Friendly</p>*/}
+                                    </div>
+                                </a>
+                        )
+                        
+                }
             </span>
         )
     }
@@ -101,12 +177,16 @@ export class RankingList extends Component {
     render() {
         var self = this
 
+        console.log('RankingList.jsx')
+        console.log(self.props)
+
         return (
 			<li className="ladder-rank-list">
                 {self.renderRanking()}
                 <a href="#" >
                     <p className="name">{self.props.player_name}</p>
                 </a>
+                {self.props.is_manager && !self.props.approved ? self.renderApprovalButton() : (!self.props.approved ? self.renderApprovalPending() : self.renderMatchScheduler())}
 			</li>
         )
     }

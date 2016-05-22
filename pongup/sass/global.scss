@@ -289,6 +289,11 @@ a {
         color: black;
         text-shadow: 1px 1px 1px #F0BA85;
         cursor: pointer;
+        &.approval p {
+            color: initial;
+            font-size: 10px;
+            display: initial;
+        }
     }
 }
 
@@ -353,8 +358,52 @@ a {
     }
 }
 
+.ladder-rank-list a.cta.approval {
+    font-size: 10px;
+}
+
 .ladder-rank-list-wrapper, .scheduled-matches-list {
     padding-bottom: 140px;
+}
+
+.ladder-rank-list a.edit-btn.friendly {
+    position: relative;
+    top: -4px;
+    left: 15px;
+    font-size: 10px;
+    &.approval-pending {
+        cursor: default;
+    }
+    p {
+        font-size: 10px;
+        color: black;
+        top: -4px;
+    }
+}
+
+.ladder-rank-list a.schedule-btn {
+    .pongup-ball-btn {
+        width: 18px;
+        height: 18px;
+        background-repeat: no-repeat;
+        background-size: 18px 18px;
+        /*background-position: 0 2px;*/
+        margin-left: 15px;
+        position: relative;
+        top: 1px;
+        cursor: pointer;
+    }
+    &.challenge {
+        .pongup-ball-btn {
+            background-image: url('../img/pong-up-ball.png');    
+        }
+    }
+    &.friendly {
+        .pongup-ball-btn {
+            background-image: url('../img/pong-up-ball-blue.png');
+        }
+    }
+    
 }
 
 .join-ladder-button {
@@ -443,7 +492,22 @@ a {
     &:hover {
         cursor: pointer;
     }
+    &.approval {
+        position: relative;
+        top: -5px;
+        left: 15px;
+    }
 }
+
+/*p.approval-pending {
+    position: relative;
+    left: 15px;
+    background-color: $formFieldLightBlue;
+    color: $backgroundBlue;
+    padding: 3px 7px;
+    font-size: 10px;
+    top: -4px;
+}*/
 
 .create-ladder-form input {
     width: 50%;
