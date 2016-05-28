@@ -444,6 +444,17 @@ export function checkAllValidations(state) {
 	}
 }
 
+export function updateMatchDate(match_date, match_time) {
+	console.log('updateMatchDate')
+	console.log('match_date: ' + match_date)
+	console.log(typeof(match_date))
+	let formatted_match_date = match_date.format('M/D/YYYY')
+	console.log('formatted_match_date' + formatted_match_date)
+	console.log('typeof formatted_match_date: ' + typeof(formatted_match_date))
+	console.log('match_time: ' + match_time)
+	console.log(typeof(match_time))
+}
+
 export function updateScore(new_score) {
 	return (dispatch, getState) => {
 		let new_state = Object.assign({}, getState().ladders_reducer, new_score)

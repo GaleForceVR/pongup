@@ -3,13 +3,19 @@ import * as actions from '../actions'
 import React, { Component } from 'react'
 import classNames from 'classNames'
 import ReactTooltip from 'react-tooltip'
+import moment from 'moment'
+// import TimePicker from 'rc-time-picker'
+import TimePicker from 'react-time-picker'
+import DatePicker from 'react-datepicker'
 
 export class RankingList extends Component {
 	constructor(props) {
 		//explicit call to super must remain because of es7 weirdness and class property usage below
 		super(props);
         this.state = {
-            show_schedule_match_form: false
+            show_schedule_match_form: false,
+            match_time: moment().format('h:mm a'),
+            match_date: moment()
         }
 	}
 
@@ -139,16 +145,47 @@ export class RankingList extends Component {
         )
     }
 
+    onChange(match_time) {
+        console.log('onChange')
+        console.log(match_time)
+        let match_date = this.state.match_date
+        this.setState({match_time: match_time})
+        this.props.dispatch(actions.updateMatchDate(match_date, match_time))
+    }
 
+    handleDateChange(match_date) {
+        let match_time = this.state.match_time
+        this.setState({match_date: match_date})
+        console.log(this.state.match_date)
+        this.props.dispatch(actions.updateMatchDate(match_date, match_time))
+    }
 
     renderMatchSchedulerForm() {
+        console.log('%crenderMatchSchedulerForm', 'background-color:yellow;color:red')
+        console.log(this.state.match_date)
         return (
             <form className="create-match-form">
-                
+                <div className="datepicker-container">
+                    <DatePicker 
+                        name="match_date"
+                        placeholderText="Match Date"
+                        minDate={moment()}
+                        selected={this.state.match_date}
+                        onChange={this.handleDateChange.bind(this)}
+                        dateFormat="M/D/YYYY"
+                    />
+                </div>
                 <input
                     type="text"
                     name="match_date"
                 />
+                <div style={{'position': 'relative'}}>
+                    <TimePicker 
+                        value={this.state.match_time}
+                        onChange={(e)=>{this.onChange(e)}}
+                        format="h:mm a"
+                    />
+                </div>
             </form>
         )
     }
@@ -171,6 +208,7 @@ export class RankingList extends Component {
                                 data-for="challenge-match"
                                 onClick={(e)=>{
                                     this.handleScheduleMatchClick(e, 'challenge')
+                                    this.setState({show_schedule_match_form: true})
                                 }}
                             >
                                 <div className="pongup-ball-btn">
@@ -197,6 +235,7 @@ export class RankingList extends Component {
                                          data-for="friendly-match"
                                          onClick={(e)=>{
                                              this.handleScheduleMatchClick(e, 'friendly')
+                                             this.setState({show_schedule_match_form: true})
                                          }}
                                     >
                                         <div className="pongup-ball-btn">
