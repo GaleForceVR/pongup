@@ -159,7 +159,7 @@ export class RankingList extends Component {
         let match_time = this.state.match_time
         this.setState({match_date: match_date})
         console.log(this.state.match_date)
-        this.props.dispatch(actions.updateMatchDate(match_date, match_time))
+        // this.props.dispatch(actions.updateMatchDate(match_date, match_time))
     }
 
     scheduleMatch() {
@@ -169,6 +169,7 @@ export class RankingList extends Component {
     renderMatchSchedulerForm() {
         console.log('%crenderMatchSchedulerForm', 'background-color:yellow;color:red')
         console.log(this.state.match_date)
+        console.log(this.props)
         return (
             <form className="create-match-form">
                 <div className="datepicker-container match-scheduler-date-adjust">
