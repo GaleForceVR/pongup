@@ -17,6 +17,8 @@ export class RankingList extends Component {
             match_time: moment().format('h:mm a'),
             match_date: moment()
         }
+
+        this.handleDateChange = this.handleDateChange.bind(this)
 	}
 
     handleChange(e, index) {
@@ -160,32 +162,45 @@ export class RankingList extends Component {
         this.props.dispatch(actions.updateMatchDate(match_date, match_time))
     }
 
+    scheduleMatch() {
+        console.log('scheduleMatch()')
+    }
+
     renderMatchSchedulerForm() {
         console.log('%crenderMatchSchedulerForm', 'background-color:yellow;color:red')
         console.log(this.state.match_date)
         return (
             <form className="create-match-form">
-                <div className="datepicker-container">
+                <div className="datepicker-container match-scheduler-date-adjust">
                     <DatePicker 
+                        className="match-date"
                         name="match_date"
                         placeholderText="Match Date"
                         minDate={moment()}
                         selected={this.state.match_date}
-                        onChange={this.handleDateChange.bind(this)}
+                        onChange={this.handleDateChange}
                         dateFormat="M/D/YYYY"
                     />
                 </div>
-                <input
+                {/*<input
+                    className="match-date"
                     type="text"
                     name="match_date"
-                />
-                <div style={{'position': 'relative'}}>
+                />*/}
+                <div className="timepicker-container" style={{'position': 'relative'}}>
                     <TimePicker 
+                        style={{padding: '2px', border: 'none'}}
                         value={this.state.match_time}
                         onChange={(e)=>{this.onChange(e)}}
                         format="h:mm a"
                     />
                 </div>
+                <a
+                    className="edit-btn cta submit"
+                    onClick={()=>{
+                        this.props.dispatch(actions.scheduleMatch())
+                    }}
+                >Submit challenge</a>
             </form>
         )
     }

@@ -4,6 +4,7 @@ import { LaddersClient } from './ladders_client'
 import validator from 'validator'
 import { getTheCookie } from '../login/login_client'
 import { push } from 'react-router-redux'
+import moment from 'moment'
 
 export function loadLadders() {
 		return (dispatch) => {
@@ -444,15 +445,25 @@ export function checkAllValidations(state) {
 	}
 }
 
-export function updateMatchDate(match_date, match_time) {
+export function updateMatchDate(unformatted_match_date, match_time) {
 	console.log('updateMatchDate')
-	console.log('match_date: ' + match_date)
-	console.log(typeof(match_date))
-	let formatted_match_date = match_date.format('M/D/YYYY')
-	console.log('formatted_match_date' + formatted_match_date)
-	console.log('typeof formatted_match_date: ' + typeof(formatted_match_date))
+	console.log('match_date: ' + unformatted_match_date)
+	console.log(typeof(unformatted_match_date))
+	let match_date = unformatted_match_date.format('M/D/YYYY')
+	console.log('match_date' + match_date)
+	console.log('typeof match_date: ' + typeof(match_date))
 	console.log('match_time: ' + match_time)
 	console.log(typeof(match_time))
+
+	// this.state = {
+	//   show_date_picker: false,
+	//   current_time: moment().subtract(1, 'h').subtract(3,'m').format('h:mm a'),
+	//   current_date: moment().format('M/D/YYYY')
+	// }
+
+	let match_datetime = match_date + ' ' + match_time
+	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
+	console.log('match_datetime = ' + match_datetime.format('M/D/YYYY hh:mm a'))
 }
 
 export function updateScore(new_score) {

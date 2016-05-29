@@ -356,6 +356,10 @@ a {
         font-size: 24px;
         display: inline-block;
     }
+    a.cta.submit {
+        font-size: 10px;
+        color: black;
+    }
 }
 
 .ladder-rank-list a.cta.approval {
@@ -466,6 +470,24 @@ a {
     }
 }
 
+.datepicker-container {
+    display: inline-block;
+    width: inherit;
+    .react-datepicker {
+        top: 0;
+    }
+    &.match-scheduler-date-adjust {
+        position: relative;
+        top: 30px;
+        padding-left: 52px;
+    }
+}
+
+.timepicker-container {
+    display: inline-block;
+    border: none;
+}
+
 .ladder-rank-list input {
     text-align: left;
     width: 28px;
@@ -478,6 +500,20 @@ a {
     &.active {
         background-color: $mutedTextBlue;
         color: $formFieldLightBlue;
+    }
+    &.match-date {
+        /*width: inherit;*/
+        font-size: 14px;
+        background-color: $mutedTextBlue;
+        color: $backgroundBlue;
+        top: -30px;
+        padding: 3px 8px;
+        text-align: center;
+        width: 100px;
+        margin-top: 15px;
+        /*margin-bottom: 30px;*/
+        /*margin-left: 52px;*/
+        margin-bottom: 0;
     }
 }
 
