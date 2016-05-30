@@ -4,7 +4,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer, MatchDetailSerializer, LadderPlayerSerializer
+from .serializers import UserSerializer, LaddersSerializer, LadderDetailSerializer, MatchDetailSerializer, MatchCreationSerializer, LadderPlayerSerializer
 from rest_framework import routers, serializers, viewsets
 from ladders.models import Ladder, User_Ladder
 from matches.models import Match
@@ -250,4 +250,43 @@ class MatchesDetailViewSet(viewsets.ModelViewSet):
         """
         match_id = self.kwargs['pk']
         return Match.objects.filter(pk=match_id)
+
+class CreateMatchViewSet(viewsets.ModelViewSet):
+    queryset = Match.objects.all()
+    model = Match 
+    serializer_class = MatchCreationSerializer
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    # def post(self, request, format=None):
+    #     name = request.data.name
+    #     manager_id = User.objects.get(pk=request.data.manager_id)
+    #     location = request.data.location
+    #     start_date = request.data.start_date
+    #     end_date = request.data.end_date
+
+    #     serializer = LaddersSerializer(data=request.data, context={'request': request})
+    #     if serializer.is_valid():
+    #         serializer.save(name=name, manager_id=manager_id, location=location, start_date=start_date, end_date=end_date)
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request, format=None):
+        player_a = User.objects.get(username=request.data.player_a)
+        player_b = User.objects.get(username=request.data.player_b)
+        is_challenge_match = request.data.is_challenge_match
+        match_date = request.data.match_date
+        ladder = Ladder.objects.get(pk=request.data.ladder_id)
+
+        serializer = MatchCreationSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            # self.pre_save(serializer.object)
+            serializer.save(player_a_id=player_a, player_b_id=player_b, is_challenge_match=is_challenge_match, match_date=match_date, ladder_id=ladder)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def perform_create(self, serializer):
+    #     player_a = User.objects.get(username='admin')
+    #     player_b = User.objects.get(username='galeforcevr')
+    #     serializer.save(player_a=player_a, player_b=player_b, is_challenge_match=self.request.is_challenge_match, match_date=self.request.match_date)
     

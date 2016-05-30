@@ -113,6 +113,7 @@ function triangular(num) {
 }
 
 function is_valid(rankings) {
+	console.log('%cThis is what you are looking for: ', 'background-color:yellow;color:red;font-size:60px')
 	let sum_ranks = 0
 	let are_ranks_valid = false
 	let unapproved_players = 0
@@ -122,17 +123,26 @@ function is_valid(rankings) {
 	console.log(sorted_ranks)
 
 	for (var i = 0; i < sorted_ranks.length; i++) {
-		
+		console.log('i = ' + i)
+		console.log('sorted_ranks[i].ladder_rank = ' + sorted_ranks[i].ladder_rank)
 		if (!sorted_ranks[i].approved) {
 			unapproved_players = unapproved_players + 1
 		} else if (i < sorted_ranks.length - 1) {
 			sum_ranks = sum_ranks + parseInt(sorted_ranks[i].ladder_rank)
+			console.log('after increment sum_ranks = ' + sum_ranks)
 			if (sorted_ranks[i].ladder_rank == sorted_ranks[i + 1].ladder_rank) {
 				console.error('failed on duplicate check')
 				return false
 			}
+		} else {
+			sum_ranks = sum_ranks + parseInt(sorted_ranks[i].ladder_rank)
 		}
 	}
+
+	
+
+	console.log('rankings.length = ' + rankings.length)
+	console.log('unapproved_players = ' + unapproved_players)
 
 	if (sum_ranks !== triangular(rankings.length - unapproved_players)) {
 		console.error('failed on triangular check')
@@ -464,6 +474,57 @@ export function updateMatchDate(unformatted_match_date, match_time) {
 	let match_datetime = match_date + ' ' + match_time
 	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
 	console.log('match_datetime = ' + match_datetime.format('M/D/YYYY hh:mm a'))
+}
+
+export function scheduleMatch(date_obj, hour, min, period, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id) {
+	console.log('scheduleMatch()')
+	console.log(typeof(date_obj) + ' date_obj: ' + date_obj)
+	console.log(typeof(hour) + ' hour: ' + hour)
+	console.log(typeof(min) + ' min: ' + min)
+	console.log(typeof(period) + ' period: ' + period)
+	let date = date_obj.format('M/D/YYYY')
+	let match_datetime = date + ' ' + hour + ':' + min + ' ' + period
+	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
+	console.log('match_datetime = ' + match_datetime)
+	console.log('champion_name: ' + champion_name + ' - rank: ' + champion_rank)
+	console.log('challenger_name: ' + challenger_name + ' - rank: ' + challenger_rank)
+
+	let is_challenge_match = (challenger_rank - champion_rank < 3) ? true : false
+	console.log('is_challenge_match: ' + is_challenge_match)
+
+
+
+	return (dispatch, getState) => {
+		let state = getState().ladders_reducer
+
+		console.log('state: ')
+		console.log(state)
+	
+		let csrftoken = getTheCookie()
+		let headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+
+		let params = {
+			player_a: champion_name,
+			player_b: challenger_name,
+			match_date: match_datetime,
+			is_challenge_match: is_challenge_match,
+			ladder: ladder_id
+		}
+
+		axios.post('/api/match/', params, headers)
+			.then(function (response) {
+				console.log('success')
+				console.log(response)
+			})
+			.catch(function (response) {
+				console.log('error')
+				console.log(response)
+			})
+	}
 }
 
 export function updateScore(new_score) {

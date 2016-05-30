@@ -7,6 +7,7 @@ import moment from 'moment'
 // import TimePicker from 'rc-time-picker'
 import TimePicker from 'react-time-picker'
 import DatePicker from 'react-datepicker'
+import Select from 'react-select'
 
 export class RankingList extends Component {
 	constructor(props) {
@@ -15,10 +16,14 @@ export class RankingList extends Component {
         this.state = {
             show_schedule_match_form: false,
             match_time: moment().format('h:mm a'),
-            match_date: moment()
+            match_date: moment(),
+            match_hour: '12',
+            match_min: '00',
+            match_am: 'am'
         }
 
         this.handleDateChange = this.handleDateChange.bind(this)
+        this.scheduleMatch = this.scheduleMatch.bind(this)
 	}
 
     handleChange(e, index) {
@@ -162,14 +167,56 @@ export class RankingList extends Component {
         // this.props.dispatch(actions.updateMatchDate(match_date, match_time))
     }
 
-    scheduleMatch() {
+    scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank) {
         console.log('scheduleMatch()')
+        // console.log('ladder_id: ' + this.props)
+        console.log(this.props)
+        // let date = this.state.match_date
+        // let hour = this.state.match_hour
+        // let min = this.state.match_min
+        // let am = this.state.match_am
+        // this.props.dispatch(actions.scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank))
     }
 
     renderMatchSchedulerForm() {
         console.log('%crenderMatchSchedulerForm', 'background-color:yellow;color:red')
         console.log(this.state.match_date)
         console.log(this.props)
+        let hour_options = [
+            {value: '1', label: ' 1'},
+            {value: '2', label: ' 2'},
+            {value: '3', label: ' 3'},
+            {value: '4', label: ' 4'},
+            {value: '5', label: ' 5'},
+            {value: '6', label: ' 6'},
+            {value: '7', label: ' 7'},
+            {value: '8', label: ' 8'},
+            {value: '9', label: ' 9'},
+            {value: '10', label: '10'},
+            {value: '11', label: '11'},
+            {value: '12', label: '12'}
+        ]
+
+        let min_options = [
+            {value: '00', label: '00'},
+            {value: '05', label: '05'},
+            {value: '10', label: '10'},
+            {value: '15', label: '15'},
+            {value: '20', label: '20'},
+            {value: '25', label: '25'},
+            {value: '30', label: '30'},
+            {value: '35', label: '35'},
+            {value: '40', label: '40'},
+            {value: '45', label: '45'},
+            {value: '50', label: '50'},
+            {value: '55', label: '55'}
+        ]
+
+        let am_options = [
+            {value: 'am', label: 'am'},
+            {value: 'pm', label: 'pm'}
+        ]
+
         return (
             <form className="create-match-form">
                 <div className="datepicker-container match-scheduler-date-adjust">
@@ -189,17 +236,76 @@ export class RankingList extends Component {
                     name="match_date"
                 />*/}
                 <div className="timepicker-container" style={{'position': 'relative'}}>
-                    <TimePicker 
+                    <Select 
+                        simpleValue
+                        name="match_hour"
+                        className="match-hour-picker"
+                        clearable={false}
+                        options={hour_options}
+                        placeholder={'0'}
+                        onChange={(val)=>{
+                            this.setState({match_hour: val})
+                        }}
+                        // onBlur={()=>{
+
+                        // }}
+                        value={this.state.match_hour}
+                        searchable={false}
+                    />
+                    <span className="time-separator">:</span>
+                    <Select 
+                        simpleValue
+                        name="match_min"
+                        className="match-min-picker"
+                        clearable={false}
+                        options={min_options}
+                        placeholder={'0'}
+                        onChange={(val)=>{
+                            this.setState({match_min: val})
+                        }}
+                        // onBlur={()=>{
+
+                        // }}
+                        value={this.state.match_min}
+                        searchable={false}
+                    />
+                    <Select 
+                        simpleValue
+                        name="match_am"
+                        className="match-am-picker"
+                        clearable={false}
+                        options={am_options}
+                        placeholder={'0'}
+                        onChange={(val)=>{
+                            this.setState({match_am: val})
+                        }}
+                        // onBlur={()=>{
+
+                        // }}
+                        value={this.state.match_am}
+                        searchable={false}
+                    />    
+
+                    {/*<TimePicker 
                         style={{padding: '2px', border: 'none'}}
                         value={this.state.match_time}
                         onChange={(e)=>{this.onChange(e)}}
                         format="h:mm a"
-                    />
+                    />*/}
                 </div>
                 <a
                     className="edit-btn cta submit"
                     onClick={()=>{
-                        this.props.dispatch(actions.scheduleMatch())
+                        let date = this.state.match_date
+                        let hour = this.state.match_hour
+                        let min = this.state.match_min
+                        let am = this.state.match_am
+                        let champion_name = this.props.player_name
+                        let challenger_name = this.props.username
+                        let champion_rank = this.props.rank
+                        let challenger_rank = this.props.current_user_rank
+                        let ladder_id = this.props.params.ladder_id
+                        this.props.dispatch(actions.scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id))
                     }}
                 >Submit challenge</a>
             </form>

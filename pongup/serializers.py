@@ -56,3 +56,13 @@ class MatchDetailSerializer(serializers.HyperlinkedModelSerializer):
 			return instance
 
 			# match = Match.objects.get(pk=validated_data)
+
+class MatchCreationSerializer(serializers.ModelSerializer):
+	player_a = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
+	player_b = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
+	ladder = serializers.PrimaryKeyRelatedField(queryset=Ladder.objects.all())
+
+	class Meta:
+		model = Match 
+		depth = 2
+		fields = ('id', 'ladder', 'name', 'player_a', 'player_b', 'player_a_score', 'player_b_score', 'match_date', 'accepted', 'is_challenge_match', 'alternate_date', 'created_at')
