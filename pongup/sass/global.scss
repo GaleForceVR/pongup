@@ -370,6 +370,10 @@ a {
     padding-bottom: 140px;
 }
 
+.scheduled-matches-list.challenge-matches {
+    padding-bottom: 50px;
+}
+
 .ladder-rank-list a.edit-btn.friendly {
     position: relative;
     top: -4px;
@@ -433,7 +437,22 @@ a {
     }
     li {
         position: relative;
-        padding-bottom: 20px;
+        padding-bottom: 40px;
+    }
+}
+
+.acceptance-button-container {
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+    font-size: 10px;
+    .submit-btn {
+        padding: 5px 8px;
+        margin-left: 5px;
+        &.secondary {
+            background-color: $mutedTextBlue;
+            color: $backgroundBlue;
+        }
     }
 }
 
@@ -518,6 +537,21 @@ a {
         margin-bottom: 0;
         margin-right: 5px;
     }
+}
+
+.scheduled-matches-list input.match-date {
+    font-size: 14px;
+    background-color: $mutedTextBlue;
+    color: $backgroundBlue;
+    border: 2px solid transparent;
+    top: -30px;
+    position: relative;
+    padding: 3px 8px;
+    text-align: center;
+    width: 100px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    margin-right: 5px;
 }
 
 .rankings-header {
@@ -680,10 +714,15 @@ p.rank {
     color: $mutedTextBlue;
 }
 
+p.seed.no-matches-msg {
+    font-size: 15px;
+}
+
 .header-label {
     padding-bottom: 7px;
     &.category {
         padding-bottom: 20px;
+        color: $formFieldLightBlue;
     }
     &.ladder-list {
         /*color: $formFieldLightBlue;*/
@@ -823,8 +862,24 @@ p.rank {
     }
 }
 
+p.header-label.match-date {
+    float: left;
+}
+
 .start-date, .end-date, .location, .match-date {
     font-size: 0.75em;
+}
+
+.pending-match {
+    font-size: 0.55em;
+    color: $formFieldLightBlue;
+    /*background-color: $mutedTextBlue;*/
+    float: left;
+    font-weight: 100;
+    padding: 2px 8px 2px 8px;
+    margin-left: 5px;
+    position: relative;
+    top: 1px;
 }
 
 ///////////

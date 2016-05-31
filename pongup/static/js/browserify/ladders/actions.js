@@ -537,6 +537,66 @@ export function updateScore(new_score) {
 	}
 }
 
+export function rescheduleMatch(date_obj, hour, min, period, match_id, orig_date) {
+	let date = date_obj.format('M/D/YYYY')
+	let match_datetime = date + ' ' + hour + ':' + min + ' ' + period
+	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
+
+	return (dispatch, getState) => {
+		var csrftoken = getTheCookie()
+		var headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+
+		var params = {
+			id: match_id,
+			// player_a_score: state.player_a_score[index],
+			// player_b_score: state.player_b_score[index],
+			match_date: match_datetime, 
+			alternate_date: orig_date
+		}
+
+		axios.put('/api/match/' + match_id + '/', params, headers)
+			.then(function (response) {
+				console.log('success')
+				console.log(response)
+			})
+			.catch(function (response) {
+				console.log('error')
+				console.log(response)
+			})
+	}
+}
+
+export function acceptChallenge(match_id, match_date) {
+	return (dispatch, getState) => {
+		var csrftoken = getTheCookie()
+		var headers = {
+			xsrfCookieName: 'csrftoken',
+			xsrfHeaderName: 'X-CSRFToken',
+			'X-CSRFToken': csrftoken
+		}
+
+		var params = {
+			id: match_id,
+			accepted: true,
+			match_date: match_date
+		}
+
+		axios.put('/api/match/' + match_id + '/', params, headers)
+			.then(function (response) {
+				console.log('success')
+				console.log(response)
+			})
+			.catch(function (response) {
+				console.log('error')
+				console.log(response)
+			})
+	}
+}
+
 export function submitScores(match_id, index) {
 	return (dispatch, getState) => {
 		var state = getState().ladders_reducer;

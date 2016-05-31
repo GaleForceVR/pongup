@@ -52,6 +52,7 @@ class MatchDetailSerializer(serializers.HyperlinkedModelSerializer):
 			instance.id = validated_data.get('id', instance.id)
 			instance.player_a_score = validated_data.get('player_a_score', instance.player_a_score)
 			instance.player_b_score = validated_data.get('player_b_score', instance.player_b_score)
+			instance.accepted = validated_data.get('accepted', instance.accepted)
 			instance.save()
 			return instance
 

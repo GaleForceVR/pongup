@@ -103,55 +103,92 @@ export class LadderDetailContainer extends Component {
         })
     }
 
-    buildMatches() {
-        var self = this
+    buildMatch(match, index) {
+        var ladder_list = this.props.ladder_detail
 
+        var player_a_username = match.player_a.username
+        var player_b_username = match.player_b.username
 
-        return self.props.matches_detail.map(function(match, index) {
+        var player_a_rank
+        var player_b_rank
 
-            var ladder_list = self.props.ladder_detail
-
-            var player_a_username = match.player_a.username
-            var player_b_username = match.player_b.username
-
-            var player_a_rank
-            var player_b_rank
-
-            // TODO iterate over self.props.ladder_detail to get ladder_rank
-            // TODO iterate over self.props.match_detail to get 
-            for (var i = 0; i < ladder_list.length; i++) {
-                var next_username = ladder_list[i].user.username
-                
-                if (next_username == player_a_username) {
-                    player_a_rank = ladder_list[i].ladder_rank
-                } else if (next_username == player_b_username) {
-                    player_b_rank = ladder_list[i].ladder_rank
-                }
+        // TODO iterate over self.props.ladder_detail to get ladder_rank
+        // TODO iterate over self.props.match_detail to get 
+        for (var i = 0; i < ladder_list.length; i++) {
+            var next_username = ladder_list[i].user.username
+            
+            if (next_username == player_a_username) {
+                player_a_rank = ladder_list[i].ladder_rank
+            } else if (next_username == player_b_username) {
+                player_b_rank = ladder_list[i].ladder_rank
             }
-            return (
-                <MatchDetail
-                    key={index}
-                    index={index}
-                    match={match}
-                    ladder_detail={match.ladder_detail}
-                    matches_detail={match.matches_detail}
-                    player_a_rank={player_a_rank}
-                    player_a_username={player_a_username}
-                    player_b_rank={player_b_rank}
-                    player_b_username={player_b_username}
-                    {...self.props}
-                />
-            )
+        }
 
+        console.log('buildMatch')
+        console.log(this.props)
+        console.log(match)
+
+        return (
+            <MatchDetail
+                key={index}
+                index={index}
+                match={match}
+                ladder_detail={match.ladder_detail}
+                matches_detail={match.matches_detail}
+                player_a_rank={player_a_rank}
+                player_a_username={player_a_username}
+                player_b_rank={player_b_rank}
+                player_b_username={player_b_username}
+                alternate_date={match.alternate_date}
+                {...this.props}
+            />
+        )
+    }
+
+    buildChallengeMatches() {
+        var self = this
+        return self.props.matches_detail.map(function(match, index) {
+            if (match.is_challenge_match) {
+                return (
+                    <span>
+                        { self.buildMatch(match, index) }
+                    </span>
+                )    
+            }
         })
     }
 
-    buildNoMatches() {
-        <li>
-            <div className="scheduled-matches-container">
-                <p className="seed">There are no matches scheduled at this time.</p>
-            </div>
-        </li>
+    buildFriendlyMatches() {
+        var self = this
+        return self.props.matches_detail.map(function(match, index) {
+            if (!match.is_challenge_match) {
+                return (
+                    <span>
+                        { self.buildMatch(match, index)}
+                    </span>
+                )
+            }
+        })
+    }
+
+    buildNoChallengeMatches() {
+        return (
+            <li>
+                <div className="scheduled-matches-container">
+                    <p className="seed no-matches-msg">There are no Challenge Matches scheduled at this time.</p>
+                </div>
+            </li>
+        )
+    }
+
+    buildNoFriendlyMatches() {
+        return (
+            <li>
+                <div className="scheduled-matches-container">
+                    <p className="seed no-matches-msg">There are no Friendly Matches scheduled at this time.</p>
+                </div>
+            </li>
+        )
     }
 
     handleJoinLadderClick() {
@@ -240,9 +277,13 @@ export class LadderDetailContainer extends Component {
                 </div>
 
                 <div className="left-wrapper">
-                    <p className="header-label category">Scheduled Matches:</p>
+                    <p className="header-label category">Challenge Matches:</p>
+                    <ul className="scheduled-matches-list challenge-matches">
+                        { (this.props.matches_detail && this.props.matches_detail.length > 0) ? this.buildChallengeMatches() : this.buildNoChallengeMatches() }
+                    </ul>
+                    <p className="header-label category">Friendly Matches:</p>
                     <ul className="scheduled-matches-list">
-                        { (this.props.matches_detail && this.props.matches_detail.length > 0) ? this.buildMatches() : this.buildNoMatches() }
+                        { (this.props.matches_detail && this.props.matches_detail.length > 0) ? this.buildFriendlyMatches() : this.buildNoFriendlyMatches() }
                     </ul>
                 </div>
 
