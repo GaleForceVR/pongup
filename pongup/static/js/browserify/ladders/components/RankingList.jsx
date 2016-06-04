@@ -316,13 +316,51 @@ export class RankingList extends Component {
 
         const rank = this.props.rank
         const current_user_rank = this.props.current_user_rank
+        const current_username = this.props.username
+
+        const ranked_player_name = this.props.player_name
+        const current_time = moment()
+
+        console.log('current_time:')
+        console.log(current_time)
+
+
+        let challenge_match_scheduled = false
+
+        for (var i = 0; i < this.props.matches_detail.length; i++) {
+            let match = this.props.matches_detail[i]
+
+            console.log(match)
+            console.log(moment(match.match_date))
+            console.log(moment(match.match_date) > current_time)
+            console.log(match.player_a_score)
+            console.log(match.player_b_score)
+            console.log(!(match.player_a_score || match.player_b_score))
+
+            if (match.is_challenge_match) {
+                console.log('this is a challenge match')
+                if (ranked_player_name == match.player_a.username || ranked_player_name == match.player_b.username) {
+                    console.log('the other player is in this match')
+                    if (current_username == match.player_a.username || current_username == match.player_b.username) {
+                        if (moment(match.match_date) > current_time && !(match.player_a_score || match.player_b_score)) {
+                            console.log('%cchallenge match scheduled', 'background-color:red;color:white')
+                            console.log(match)
+                            console.log(ranked_player_name)
+                            challenge_match_scheduled = true
+                        }
+                    }
+                }
+            }
+        }
 
         console.log('%crenderMatchSchedulerButton', 'background-color:blue;color:yellow')
         console.log(rank < current_user_rank && rank > current_user_rank - 2)
 
+        console.log(this.props)
+
         return (
             <span>
-                { (rank < current_user_rank && rank >= current_user_rank - 2) ? 
+                { (rank < current_user_rank && rank >= current_user_rank - 2 && !challenge_match_scheduled) ? 
                         <span>
                             <a
                                 className="schedule-btn challenge"

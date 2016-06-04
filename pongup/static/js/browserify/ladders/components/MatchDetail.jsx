@@ -115,7 +115,7 @@ export class _MatchDetail extends Component {
 
 		if (this.props.username == this.props.player_b_username && !accepted && reschedule_needs_approval) {
 			show_buttons = true
-		} else if (this.props.username == this.props.player_a_username && !accepted && !this.props.alternate_date ) {
+		} else if (this.props.username == this.props.player_a_username && !accepted) {
 			show_buttons = true
 		} else if (!accepted) {
 			pending_match = true

@@ -479,3 +479,11 @@ STATEMENT:  INSERT INTO "matches_match" ("ladder_id", "name", "player_a_id", "pl
 ERROR:  null value in column "player_a_id" violates not-null constraint
 DETAIL:  Failing row contains (28, null, null, null, 2016-05-31 11:00:00+00, 2016-05-30 12:48:47.31356+00, 2016-05-30 12:48:47.313579+00, 1, null, null, f, null, t).
 STATEMENT:  INSERT INTO "matches_match" ("ladder_id", "name", "player_a_id", "player_b_id", "player_a_score", "player_b_score", "match_date", "accepted", "is_challenge_match", "alternate_date", "created_at", "updated_at") VALUES (1, NULL, NULL, NULL, NULL, NULL, '2016-05-31T11:00:00+00:00'::timestamptz, false, true, NULL, '2016-05-30T12:48:47.313560+00:00'::timestamptz, '2016-05-30T12:48:47.313579+00:00'::timestamptz) RETURNING "matches_match"."id"
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-06-04 13:56:40 CDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
