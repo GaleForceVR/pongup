@@ -362,6 +362,68 @@ a {
     }
 }
 
+.scheduled-matches-container {
+    height: 1.5em;
+    a, p {
+        font-size: 20px;
+    }
+}
+
+.player-a-container, .player-b-container {
+    display: inline-block;
+    width: 47%;
+}
+
+.player-a-container {
+    float: left;
+    text-align: right;
+    padding-right: 2.5%;
+    input.score {
+        margin-right: 0;
+    }
+    p.player-name.no-margin {
+        margin: 0;
+    }
+}
+
+.player-b-container {
+    float: right;
+    text-align: left;
+    padding-left: 2.5%;
+    p.seed.no-margin {
+        margin: 0;
+        margin-right: 10px;
+    }
+}
+
+.vs-container {
+    width: 1%;
+    float: left;
+    position: relative;
+    height: 10px;
+}
+
+.scheduled-matches-container p.vs, .scheduled-matches-container p.dash {
+    position: absolute;
+    left: -4px;
+    color: $mutedTextBlue;
+    font-size: 14px;
+    top: 4px;
+    &.score-entry {
+        top: 8px;
+    }
+}
+
+.scheduled-matches-container p.dash {
+    color: $mutedTextBlue;
+    left: 0;
+    font-size: initial;
+    top: 0;
+    &.score-entry {
+        top: 4px;
+    }
+}
+
 .ladder-rank-list a.cta.approval {
     font-size: 10px;
 }
@@ -438,17 +500,28 @@ a {
     li {
         position: relative;
         padding-bottom: 40px;
+        padding: 18px 15px 33px 15px;
+        /*border: 1px solid #002146;*/
+        border: 1px solid #002752;
+        /*border: 1px solid $mutedTextBlue;*/
+        /*border: 1px solid #1A3552;*/
+        margin-bottom: 10px;
+        border-radius: 3px;
+        box-shadow: 3px 3px 10px #00152d;
+        text-align: center;
     }
 }
 
-.acceptance-button-container {
+.acceptance-button-container, .submit-scores-button-container {
     position: absolute;
-    right: 0;
-    bottom: 25px;
+    right: 8px;
+    bottom: 8px;
     font-size: 10px;
     .submit-btn {
         padding: 5px 8px;
         margin-left: 5px;
+        display: block;
+        float: left;
         &.secondary {
             background-color: $mutedTextBlue;
             color: $backgroundBlue;
@@ -457,7 +530,7 @@ a {
 }
 
 .scheduled-matches-container, .create-ladder-form, .ladder-rank-list {
-    p.seed, p.player-name, p.player-score {
+    p.seed {
         margin-right: 10px;
     }
     input {
@@ -489,6 +562,26 @@ a {
     }
 }
 
+.player-a-container, .player-b-container {
+    position: relative;
+}
+
+.player-a-container input {
+    margin-left: 10px;
+}
+
+.player-a-container p.player-name {
+    margin-right: 25px;
+}
+
+.player-b-container p.seed {
+    margin-left: 25px;
+}
+
+.score-container {
+    display: inline-block;
+}
+
 .datepicker-container {
     display: inline-block;
     width: inherit;
@@ -501,6 +594,10 @@ a {
         padding-left: 52px;
         margin-right: 3px;
     }
+}
+
+.update-match-date-form .datepicker-container.match-scheduler-date-adjust {
+    padding-left: 8px;
 }
 
 .timepicker-container {
@@ -862,8 +959,15 @@ p.seed.no-matches-msg {
     }
 }
 
+.match-date-container {
+    position: absolute;
+    left: 15px;
+    bottom: 8px;
+}
+
 p.header-label.match-date {
     float: left;
+    padding-bottom: 0;
 }
 
 .start-date, .end-date, .location, .match-date {

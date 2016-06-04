@@ -106,52 +106,104 @@ export class _MatchDetail extends Component {
 
     }
 
+    renderMatchInfoWithoutForm(scores_exist, accepted=true, reschedule_needs_approval=false) {
+		var self = this
+		var index = self.props.index
+
+		let show_buttons = false
+		let pending_match = false
+
+		if (this.props.username == this.props.player_b_username && !accepted && reschedule_needs_approval) {
+			show_buttons = true
+		} else if (this.props.username == this.props.player_a_username && !accepted && !this.props.alternate_date ) {
+			show_buttons = true
+		} else if (!accepted) {
+			pending_match = true
+		}
+
+		return (
+			<div>
+				<div className="scheduled-matches-container">
+					<div className="player-a-container">
+						<p className="seed">#{self.props.player_a_rank}</p>
+						<p className="player-name">{self.props.player_a_username}</p>
+						<div className="score-container">
+							{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_a_score) : null }
+						</div>
+					</div>
+					<div className="vs-container">
+						{ scores_exist ? <p className="dash">-</p> : <p className="vs">vs.</p> }
+					</div>
+					<div className="player-b-container">
+						<div className="score-container">
+							{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_b_score) : null }
+						</div>
+						<p className="seed"> #{self.props.player_b_rank}</p>
+						<p className="player-name">{self.props.player_b_username}</p>
+					</div>
+				</div>
+				<div className="match-date-container">
+					{ this.state.reschedule_match ? this.renderAlternateDateForm() : this.renderDate() }
+					{ pending_match ? <div className="pending-match">Approval pending</div> : null }
+				</div>
+				{ show_buttons ? self.renderAcceptanceButtons() : null }
+			</div>
+		)
+    }
+
     renderMatchInfoAndForm() {
 		var self = this
 		var index = self.props.index
 		// var text = this.state.liked ? 'like' : 'haven\'t liked'
 		return (
 			<div className={classNames({'force-update': self.props.force_update})}>
-				<div 
-					className="scheduled-matches-container"
-					>
-					
-					<p className="seed">#{self.props.player_a_rank}</p>
-					<p className="player-name">{self.props.player_a_username}</p>
-					{self.props.errors && self.props.errors[index] && self.props.errors[index].player_a_score && <div>{self.props.errors[index].player_a_score}</div>}
-					<input 
-						type="text" 
-						name="player_a_score"
-						placeholder="Score"
-						value={this.props.player_a_score[index]}
-						onChange={this.handleChange.bind(this)}
-						onBlur={this.handleBlur.bind(this)}
-						className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_a_score) })} 
-						/>
-					<p className="seed">vs. #{self.props.player_b_rank}</p>
-					<p className="player-name">{self.props.player_b_username}</p>
-					{self.props.errors && self.props.errors[index] && self.props.errors[index].player_b_score && <div>{self.props.errors[index].player_b_score}</div>}
-					<input 
-
-						type="text" 
-						name="player_b_score" 
-						placeholder="Score"
-						value={this.props.player_b_score[index]}
-						onChange={this.handleChange.bind(this)}
-						onBlur={this.handleBlur.bind(this)}
-						className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_b_score)})}
-						/>
+				<div className="scheduled-matches-container">
+					<div className="player-a-container">
+						<p className="seed">#{self.props.player_a_rank}</p>
+						<p className="player-name no-margin">{self.props.player_a_username}</p>
+						{self.props.errors && self.props.errors[index] && self.props.errors[index].player_a_score && <div>{self.props.errors[index].player_a_score}</div>}
+						<input 
+							type="text" 
+							name="player_a_score"
+							placeholder="Score"
+							value={this.props.player_a_score[index]}
+							onChange={this.handleChange.bind(this)}
+							onBlur={this.handleBlur.bind(this)}
+							className={classNames("score", {'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_a_score) })} 
+							/>
+					</div>
+					<div className="vs-container">
+						<p className="dash score-entry">-</p>
+					</div>
+					<div className="player-b-container">
+						<input 
+							type="text" 
+							name="player_b_score" 
+							placeholder="Score"
+							value={this.props.player_b_score[index]}
+							onChange={this.handleChange.bind(this)}
+							onBlur={this.handleBlur.bind(this)}
+							className={classNames({'error': (this.props.errors && this.props.errors[index] && this.props.errors[index].player_b_score)})}
+							/>
+						<p className="seed no-margin"> #{self.props.player_b_rank}</p>
+						<p className="player-name">{self.props.player_b_username}</p>
+						{self.props.errors && self.props.errors[index] && self.props.errors[index].player_b_score && <div>{self.props.errors[index].player_b_score}</div>}
+					</div>
 				</div>
-				<p className="header-label match-date">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
-				<a 
-					className="primary submit-btn" 
-					href="#submit"
-					onClick={(e)=> {
-						this.handleSubmit(e, self.props.index)
-					}}
-					>
-					Submit scores
-				</a>
+				<div className="match-date-container">
+					<p className="header-label match-date">{moment(self.props.matches_detail[self.props.index].match_date).format('ddd, MMM D YYYY, h:mm a')}</p>
+				</div>
+				<div className="submit-scores-button-container">
+					<a 
+						className="submit-btn cta" 
+						href="#submit"
+						onClick={(e)=> {
+							this.handleSubmit(e, self.props.index)
+						}}
+						>
+						Submit scores
+					</a>
+				</div>
 			</div>
 		)
     }
@@ -224,7 +276,7 @@ export class _MatchDetail extends Component {
         ]
 
         return (
-            <form className="create-match-form">
+            <form className="update-match-date-form">
                 <div className="datepicker-container match-scheduler-date-adjust">
                     <DatePicker 
                         className="match-date"
@@ -354,38 +406,6 @@ export class _MatchDetail extends Component {
     			</a>
     		</div>
     	)
-    }
-
-    renderMatchInfoWithoutForm(scores_exist, accepted=true, reschedule_needs_approval=false) {
-		var self = this
-		var index = self.props.index
-
-		let show_buttons = false
-		let pending_match = false
-
-		if (this.props.username == this.props.player_b_username && !accepted && reschedule_needs_approval) {
-			show_buttons = true
-		} else if (this.props.username == this.props.player_a_username && !accepted && !this.props.alternate_date ) {
-			show_buttons = true
-		} else if (!accepted) {
-			pending_match = true
-		}
-
-		return (
-			<div>
-				<div className="scheduled-matches-container">
-					<p className="seed">#{self.props.player_a_rank}</p>
-					<p className="player-name">{self.props.player_a_username}</p>
-					{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_a_score) : null }
-					<p className="seed">vs. #{self.props.player_b_rank}</p>
-					<p className="player-name">{self.props.player_b_username}</p>
-					{ scores_exist ? self.renderScore(self.props.matches_detail[index].player_b_score) : null }
-				</div>
-				{ this.state.reschedule_match ? this.renderAlternateDateForm() : this.renderDate() }
-				{ pending_match ? <div className="pending-match">Approval pending</div> : null }
-				{ show_buttons ? self.renderAcceptanceButtons() : null }
-			</div>
-		)
     }
 
     render() {
