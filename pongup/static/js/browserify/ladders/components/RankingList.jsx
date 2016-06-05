@@ -15,6 +15,7 @@ export class RankingList extends Component {
 		super(props);
         this.state = {
             show_schedule_match_form: false,
+            schedule_challenge_match: false,
             match_time: moment().format('h:mm a'),
             match_date: moment(),
             match_hour: '12',
@@ -36,9 +37,6 @@ export class RankingList extends Component {
     }
 
     handleApprovalClick(e) {
-        console.log('handleApprovalClick')
-        console.log(this.props.user_ladder_id)
-        console.log(this.props)
         this.props.dispatch(actions.approvePlayer(this.props.user_ladder_id, this.props.ladder_id))
     }
 
@@ -70,13 +68,9 @@ export class RankingList extends Component {
     renderUnEditableRank() {
         const index = this.props.index
         let rank = this.props.rank
-        console.log('before conditional')
-        console.log(this.props)
         if (this.props.new_rankings[index].ladder_rank && this.props.rankings_updated) {
             rank = this.props.rank
         }
-        console.log('renderUnEditableRank')
-        console.log(this.props.rank)
 
         return (
             <span>
@@ -93,8 +87,6 @@ export class RankingList extends Component {
 
     renderRanking() {
         var self = this
-        console.log('RankingList')
-        console.log(self.props)
 
         // if (self.props.rank) {
         //     return (
@@ -153,8 +145,6 @@ export class RankingList extends Component {
     }
 
     onChange(match_time) {
-        console.log('onChange')
-        console.log(match_time)
         let match_date = this.state.match_date
         this.setState({match_time: match_time})
         this.props.dispatch(actions.updateMatchDate(match_date, match_time))
@@ -163,7 +153,6 @@ export class RankingList extends Component {
     handleDateChange(match_date) {
         let match_time = this.state.match_time
         this.setState({match_date: match_date})
-        console.log(this.state.match_date)
         // this.props.dispatch(actions.updateMatchDate(match_date, match_time))
     }
 
@@ -178,10 +167,7 @@ export class RankingList extends Component {
         // this.props.dispatch(actions.scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank))
     }
 
-    renderMatchSchedulerForm() {
-        console.log('%crenderMatchSchedulerForm', 'background-color:yellow;color:red')
-        console.log(this.state.match_date)
-        console.log(this.props)
+    renderMatchSchedulerForm(is_challenge_match) {
         let hour_options = [
             {value: '1', label: ' 1'},
             {value: '2', label: ' 2'},
@@ -305,7 +291,7 @@ export class RankingList extends Component {
                         let champion_rank = this.props.rank
                         let challenger_rank = this.props.current_user_rank
                         let ladder_id = this.props.params.ladder_id
-                        this.props.dispatch(actions.scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id))
+                        this.props.dispatch(actions.scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id, is_challenge_match))
                     }}
                 >Submit challenge</a>
             </form>
@@ -321,42 +307,21 @@ export class RankingList extends Component {
         const ranked_player_name = this.props.player_name
         const current_time = moment()
 
-        console.log('current_time:')
-        console.log(current_time)
-
-
         let challenge_match_scheduled = false
 
         for (var i = 0; i < this.props.matches_detail.length; i++) {
             let match = this.props.matches_detail[i]
 
-            console.log(match)
-            console.log(moment(match.match_date))
-            console.log(moment(match.match_date) > current_time)
-            console.log(match.player_a_score)
-            console.log(match.player_b_score)
-            console.log(!(match.player_a_score || match.player_b_score))
-
             if (match.is_challenge_match) {
-                console.log('this is a challenge match')
                 if (ranked_player_name == match.player_a.username || ranked_player_name == match.player_b.username) {
-                    console.log('the other player is in this match')
                     if (current_username == match.player_a.username || current_username == match.player_b.username) {
                         if (moment(match.match_date) > current_time && !(match.player_a_score || match.player_b_score)) {
-                            console.log('%cchallenge match scheduled', 'background-color:red;color:white')
-                            console.log(match)
-                            console.log(ranked_player_name)
                             challenge_match_scheduled = true
                         }
                     }
                 }
             }
         }
-
-        console.log('%crenderMatchSchedulerButton', 'background-color:blue;color:yellow')
-        console.log(rank < current_user_rank && rank > current_user_rank - 2)
-
-        console.log(this.props)
 
         return (
             <span>
@@ -368,7 +333,7 @@ export class RankingList extends Component {
                                 data-for="challenge-match"
                                 onClick={(e)=>{
                                     this.handleScheduleMatchClick(e, 'challenge')
-                                    this.setState({show_schedule_match_form: true})
+                                    this.setState({show_schedule_match_form: true, schedule_challenge_match: true})
                                 }}
                             >
                                 <div className="pongup-ball-btn">
@@ -395,7 +360,7 @@ export class RankingList extends Component {
                                          data-for="friendly-match"
                                          onClick={(e)=>{
                                              this.handleScheduleMatchClick(e, 'friendly')
-                                             this.setState({show_schedule_match_form: true})
+                                             this.setState({show_schedule_match_form: true, schedule_challenge_match: false})
                                          }}
                                     >
                                         <div className="pongup-ball-btn">
@@ -420,9 +385,6 @@ export class RankingList extends Component {
     render() {
         var self = this
 
-        console.log('RankingList.jsx')
-        console.log(self.props)
-
         return (
 			<li className="ladder-rank-list">
                 {self.renderRanking()}
@@ -430,7 +392,7 @@ export class RankingList extends Component {
                     <p className="name">{self.props.player_name}</p>
                 </a>
                 {self.props.is_manager && !self.props.approved ? self.renderApprovalButton() : (!self.props.approved ? self.renderApprovalPending() : self.renderMatchSchedulerButton())}
-                {self.state.show_schedule_match_form ? self.renderMatchSchedulerForm() : null }
+                {self.state.show_schedule_match_form ? self.renderMatchSchedulerForm(this.state.schedule_challenge_match) : null }
 			</li>
         )
     }

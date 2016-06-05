@@ -476,7 +476,7 @@ export function updateMatchDate(unformatted_match_date, match_time) {
 	console.log('match_datetime = ' + match_datetime.format('M/D/YYYY hh:mm a'))
 }
 
-export function scheduleMatch(date_obj, hour, min, period, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id) {
+export function scheduleMatch(date_obj, hour, min, period, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id, is_challenge_match) {
 	console.log('scheduleMatch()')
 	console.log(typeof(date_obj) + ' date_obj: ' + date_obj)
 	console.log(typeof(hour) + ' hour: ' + hour)
@@ -489,7 +489,7 @@ export function scheduleMatch(date_obj, hour, min, period, champion_name, challe
 	console.log('champion_name: ' + champion_name + ' - rank: ' + champion_rank)
 	console.log('challenger_name: ' + challenger_name + ' - rank: ' + challenger_rank)
 
-	let is_challenge_match = (challenger_rank - champion_rank < 3) ? true : false
+	// let is_challenge_match = (challenger_rank - champion_rank < 3) ? true : false
 	console.log('is_challenge_match: ' + is_challenge_match)
 
 

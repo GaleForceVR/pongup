@@ -510,7 +510,16 @@ a {
         box-shadow: 3px 3px 10px #00152d;
         text-align: center;
     }
+    &.ladder-list {
+        li {
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            text-align: left;
+        }
+    }
 }
+
 
 .acceptance-button-container, .submit-scores-button-container {
     position: absolute;

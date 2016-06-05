@@ -172,7 +172,7 @@ export class LaddersIndexContainer extends Component {
                 </div>
 
                 <div className="left-wrapper">
-                    <ul className="scheduled-matches-list">
+                    <ul className="scheduled-matches-list ladder-list">
                         {(self.props.ladders && self.props.ladders.length > 0) ? self.buildLadderList() : null}
                     </ul>
                 </div>

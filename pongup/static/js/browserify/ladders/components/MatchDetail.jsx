@@ -215,9 +215,6 @@ export class _MatchDetail extends Component {
     }
 
     handleAcceptMatch(e, index) {
-    	console.log('acceptMatch')
-    	console.log(e)
-    	console.log(index)
     	this.props.dispatch(actions.acceptChallenge(this.props.match.id, this.props.match.match_date))
     }
 
@@ -232,14 +229,10 @@ export class _MatchDetail extends Component {
     handleDateChange(match_date) {
         // let match_time = this.state.match_time
         this.setState({match_date: match_date})
-        console.log(this.state.match_date)
         // this.props.dispatch(actions.updateMatchDate(match_date, match_time))
     }
 
     renderAlternateDateForm() {
-    	console.log('%crenderMatchSchedulerForm', 'background-color:yellow;color:red')
-        console.log(this.state.match_date)
-        console.log(this.props)
         let hour_options = [
             {value: '1', label: ' 1'},
             {value: '2', label: ' 2'},
@@ -386,8 +379,6 @@ export class _MatchDetail extends Component {
     					    this.props.dispatch(actions.rescheduleMatch(date, hour, min, am, match_id, orig_date/*, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id*/))
     						
     					} else {
-    						console.log('click')
-    						console.log(this.props)
     						this.handleAcceptMatch(e, this.props.index)
     					}
     				}}
@@ -413,28 +404,18 @@ export class _MatchDetail extends Component {
 		var index = self.props.index
 
 		let render_matches
-		console.log('MatchDetail render()')
-		console.log(this.props)
-
-		// if (this.props.matches_loaded)
 
 		if (this.props.matches_detail[index].player_a_score || this.props.matches_detail[index].player_b_score) {
 			render_matches = this.renderMatchInfoWithoutForm(true)
 		} else {
 			if (this.props.match.accepted && (this.props.player_a_username == this.props.username || this.props.player_b_username == this.props.username)) {
-				console.log('%cBINGO', 'background-color:pink;color:blue;font-size:60px')
 				render_matches = this.renderMatchInfoAndForm() 
 			} else if (!this.props.match.accepted && (this.props.player_a_username == this.props.username || this.props.player_b_username == this.props.username)) { 
 				// render_matches = this.renderMatchAcceptanceForm()
-				console.log('caught')
-				console.log(this.props.alternate_date)
-				console.log((this.props.username == this.props.player_b_username) && this.props.alternate_date)
 				let reschedule_needs_approval = false
 				if ((this.props.username == this.props.player_b_username) && this.props.alternate_date) {
 					reschedule_needs_approval = true
 				}
-				console.log(this.props.player_b_username)
-				console.log(reschedule_needs_approval)
 				render_matches = this.renderMatchInfoWithoutForm(false, false, reschedule_needs_approval)
 			} else {
 				render_matches = this.renderMatchInfoWithoutForm(false)
