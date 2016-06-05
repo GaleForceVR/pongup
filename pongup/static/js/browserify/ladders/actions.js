@@ -11,7 +11,6 @@ export function loadLadders() {
 			var client = new LaddersClient()
 			client.fetch_ladders()
 				.then( axios.spread( (ladders_data) => {
-					console.log(ladders_data)
 					dispatch({
 						type: constants.LADDER_DATA_LOADED,
 						ladder_data: {
@@ -33,7 +32,6 @@ export function loadLadders() {
 }
 
 export function loadLadderDetail(id) {
-	console.log('%cloadLadderDetail(id=' + id + ')', 'background-color:red;color:yellow')
 	return (dispatch, getState) => {
 		var client = new LaddersClient()
 		client.fetch_ladder_detail(id)
@@ -71,26 +69,17 @@ export function toggleEditRankings() {
 export function setNewRankings(index, ladder_rank) {
 	return (dispatch, getState) => {
 		var state = getState().ladders_reducer
-		console.log('setNewRankings()')
-		console.log(index)
-		console.log(ladder_rank)
-		console.log(state)
 		let rankings = state.new_rankings
 
 		let updated_rank_obj = Object.assign({}, rankings[index], {
 			ladder_rank: ladder_rank
 		})
 
-		console.log(rankings)
-		console.log(updated_rank_obj)
-
 		var new_rankings = [
 			...rankings.slice(0, index),
 			updated_rank_obj,
 			...rankings.slice(index + 1)
 		]
-
-		console.log(new_rankings)
 
 		dispatch({
 			type: constants.SET_NEW_RANKINGS,
@@ -107,31 +96,22 @@ export function setNewRankings(index, ladder_rank) {
 
 function triangular(num) {
 	let sum = (num * (num + 1)) / 2
-	console.log('triangular of ' + num)
-	console.log(sum)
 	return sum
 }
 
 function is_valid(rankings) {
-	console.log('%cThis is what you are looking for: ', 'background-color:yellow;color:red;font-size:60px')
 	let sum_ranks = 0
 	let are_ranks_valid = false
 	let unapproved_players = 0
-	console.log(rankings)
 
 	let sorted_ranks = rankings.sort(function(a, b) { return a.b - b.b })
-	console.log(sorted_ranks)
 
 	for (var i = 0; i < sorted_ranks.length; i++) {
-		console.log('i = ' + i)
-		console.log('sorted_ranks[i].ladder_rank = ' + sorted_ranks[i].ladder_rank)
 		if (!sorted_ranks[i].approved) {
 			unapproved_players = unapproved_players + 1
 		} else if (i < sorted_ranks.length - 1) {
 			sum_ranks = sum_ranks + parseInt(sorted_ranks[i].ladder_rank)
-			console.log('after increment sum_ranks = ' + sum_ranks)
 			if (sorted_ranks[i].ladder_rank == sorted_ranks[i + 1].ladder_rank) {
-				console.error('failed on duplicate check')
 				return false
 			}
 		} else {
@@ -139,15 +119,7 @@ function is_valid(rankings) {
 		}
 	}
 
-	
-
-	console.log('rankings.length = ' + rankings.length)
-	console.log('unapproved_players = ' + unapproved_players)
-
 	if (sum_ranks !== triangular(rankings.length - unapproved_players)) {
-		console.error('failed on triangular check')
-		console.log('sum_ranks: ' + sum_ranks)
-		console.log('triangular: ' + triangular(rankings.length))
 		return false
 	}
 
@@ -155,8 +127,6 @@ function is_valid(rankings) {
 }
 
 export function submitRankingUpdate(ladder_id) {
-	console.log('submitRankingUpdate(ladder_id)')
-	console.log(ladder_id)
 	return (dispatch, getState) => {
 		let state = getState().ladders_reducer
 		const csrftoken = getTheCookie()
@@ -167,8 +137,6 @@ export function submitRankingUpdate(ladder_id) {
 			xsrfHeaderName: 'X-CSRFToken',
 			'X-CSRFToken': csrftoken
 		}
-		console.log('submitRankingUpdate()')
-		console.log(state)
 		const old_ranks = state.ladder_detail
 		const new_ranks = state.new_rankings
 		
@@ -183,10 +151,6 @@ export function submitRankingUpdate(ladder_id) {
 					}
 
 					changes++
-					console.log('changes:')
-					console.log(changes)
-					console.log('params:')
-					console.log(params)
 
 					axios.put('/api/user/ladder/' + params.id + '/', params, headers)
 						.then(function (response) {
@@ -202,13 +166,10 @@ export function submitRankingUpdate(ladder_id) {
 				if (i == old_ranks.length - 1) {
 					
 					setTimeout(function() {
-						console.log('get request')
 						var client = new LaddersClient()
 						client.fetch_ladder_detail(ladder_id)
 							.then( axios.spread( (ladder_data) => {
 								var state = getState().ladders_reducer
-								console.log('ladder_data')
-								console.log(ladder_data)
 								dispatch({
 									type: constants.LADDER_DETAIL_LOADED,
 									ladder_data: {
@@ -242,27 +203,17 @@ export function approvePlayer(user_ladder_id, ladder_id) {
 			xsrfHeaderName: 'X-CSRFToken',
 			'X-CSRFToken': csrftoken
 		}
-		console.log('approvePlayer()')
-		console.log(state)
-		console.log('user_ladder_id: ' + user_ladder_id)
 
 		let params = {
 			approved: true
 		}
 
-		console.log('params:')
-		console.log(params)
-
 		axios.put('/api/user/ladder/' + user_ladder_id + '/', params, headers)
 			.then(function (response) {
-				console.log('success')
-				console.log(response)
 				var client = new LaddersClient()
 					client.fetch_ladder_detail(ladder_id)
 						.then( axios.spread( (ladder_data) => {
 							var state = getState().ladders_reducer
-							console.log('ladder_data')
-							console.log(ladder_data)
 							dispatch({
 								type: constants.LADDER_DETAIL_LOADED,
 								ladder_data: {
@@ -342,13 +293,10 @@ export function submitJoinLadderRequest(current_ladder_id, current_user_id) {
 		axios.post('/api/ladders/' + current_ladder_id + '/players/', params, headers)
 			.then(function (response) {
 				setTimeout(function() {
-					console.log('get request')
 					var client = new LaddersClient()
 					client.fetch_ladder_detail(current_ladder_id)
 						.then( axios.spread( (ladder_data) => {
 							var state = getState().ladders_reducer
-							console.log('ladder_data')
-							console.log(ladder_data)
 							dispatch({
 								type: constants.LADDER_DETAIL_LOADED,
 								ladder_data: {
@@ -456,14 +404,7 @@ export function checkAllValidations(state) {
 }
 
 export function updateMatchDate(unformatted_match_date, match_time) {
-	console.log('updateMatchDate')
-	console.log('match_date: ' + unformatted_match_date)
-	console.log(typeof(unformatted_match_date))
 	let match_date = unformatted_match_date.format('M/D/YYYY')
-	console.log('match_date' + match_date)
-	console.log('typeof match_date: ' + typeof(match_date))
-	console.log('match_time: ' + match_time)
-	console.log(typeof(match_time))
 
 	// this.state = {
 	//   show_date_picker: false,
@@ -473,33 +414,20 @@ export function updateMatchDate(unformatted_match_date, match_time) {
 
 	let match_datetime = match_date + ' ' + match_time
 	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
-	console.log('match_datetime = ' + match_datetime.format('M/D/YYYY hh:mm a'))
 }
 
 export function scheduleMatch(date_obj, hour, min, period, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id, is_challenge_match) {
-	console.log('scheduleMatch()')
-	console.log(typeof(date_obj) + ' date_obj: ' + date_obj)
-	console.log(typeof(hour) + ' hour: ' + hour)
-	console.log(typeof(min) + ' min: ' + min)
-	console.log(typeof(period) + ' period: ' + period)
 	let date = date_obj.format('M/D/YYYY')
 	let match_datetime = date + ' ' + hour + ':' + min + ' ' + period
 	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
-	console.log('match_datetime = ' + match_datetime)
-	console.log('champion_name: ' + champion_name + ' - rank: ' + champion_rank)
-	console.log('challenger_name: ' + challenger_name + ' - rank: ' + challenger_rank)
 
 	// let is_challenge_match = (challenger_rank - champion_rank < 3) ? true : false
-	console.log('is_challenge_match: ' + is_challenge_match)
 
 
 
 	return (dispatch, getState) => {
 		let state = getState().ladders_reducer
 
-		console.log('state: ')
-		console.log(state)
-	
 		let csrftoken = getTheCookie()
 		let headers = {
 			xsrfCookieName: 'csrftoken',

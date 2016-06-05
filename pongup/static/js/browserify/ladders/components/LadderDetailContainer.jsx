@@ -82,8 +82,6 @@ export class LadderDetailContainer extends Component {
                 current_user_rank = self.props.ladder_detail[i].ladder_rank
             }
         }
-        console.log('%ccurrent_user_rank', 'background-color:red;color:yellow;font-size:24px')
-        console.log(current_user_rank)
 
         return self.props.ladder_detail.map(function(user_ladder, index) {
             return (
@@ -123,10 +121,6 @@ export class LadderDetailContainer extends Component {
                 player_b_rank = ladder_list[i].ladder_rank
             }
         }
-
-        console.log('buildMatch')
-        console.log(this.props)
-        console.log(match)
 
         return (
             <MatchDetail
@@ -213,8 +207,6 @@ export class LadderDetailContainer extends Component {
 
     renderEditRankingsButton() {
         var self = this
-        console.log('renderEditRankingsButton()')
-        console.log(this.props)
         const ladder_id = parseInt(this.props.params.ladder_id)
         return (
             <span>
@@ -246,10 +238,6 @@ export class LadderDetailContainer extends Component {
         // var current_ladder_id = self.getCurrentLadder().id
 
         var current_ladder = self.getCurrentLadder()
-        console.log('LadderDetailContainer render()')
-        console.log(self.props)
-        console.log('current_ladder:')
-        console.log(current_ladder)
         return (
             <div className="container-1600">
 
