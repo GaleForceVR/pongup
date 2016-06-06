@@ -323,9 +323,12 @@ export class RankingList extends Component {
             }
         }
 
+        console.log('renderMatchSchedulerButton')
+        console.log(this.props)
+
         return (
             <span>
-                { (rank < current_user_rank && rank >= current_user_rank - 2 && !challenge_match_scheduled) ? 
+                { (this.props.current_user_approved && rank < current_user_rank && rank >= current_user_rank - 2 && !challenge_match_scheduled) ? 
                         <span>
                             <a
                                 className="schedule-btn challenge"

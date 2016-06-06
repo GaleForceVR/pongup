@@ -76,12 +76,17 @@ export class LadderDetailContainer extends Component {
         var self = this
 
         let current_user_rank = null
+        let current_user_approved = false
 
         for (var i = 0; i < self.props.ladder_detail.length; i++) {
             if (self.props.ladder_detail[i].user.username == self.props.username) {
                 current_user_rank = self.props.ladder_detail[i].ladder_rank
+                current_user_approved = self.props.ladder_detail[i].approved
             }
         }
+        console.log('buildRankingList')
+        console.log(self.props)
+        console.log(self.props.ladder_detail)
 
         return self.props.ladder_detail.map(function(user_ladder, index) {
             return (
@@ -89,6 +94,7 @@ export class LadderDetailContainer extends Component {
                     key={index}
                     index={index}
                     approved={user_ladder.approved}
+                    current_user_approved={current_user_approved}
                     rank={user_ladder.ladder_rank}
                     current_user_rank={current_user_rank}
                     ladder_id={self.props.params.ladder_id}

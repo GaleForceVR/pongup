@@ -20,6 +20,7 @@ class Match(models.Model):
     accepted = models.BooleanField(default=False)
     is_challenge_match = models.BooleanField(default=False)
     alternate_date = models.DateTimeField(blank=True, null=True)
+    completion_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)      
 

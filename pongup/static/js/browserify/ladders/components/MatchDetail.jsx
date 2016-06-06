@@ -35,7 +35,7 @@ export class _MatchDetail extends Component {
     }
 
     handleSubmit(e, index) {
-		this.props.dispatch(actions.submitScores(this.props.match.id, index))
+		this.props.dispatch(actions.submitScores(this.props.match, index, this.props.params.ladder_id))
     }
 
     handleChange(e) {	
@@ -155,6 +155,8 @@ export class _MatchDetail extends Component {
 		var self = this
 		var index = self.props.index
 		// var text = this.state.liked ? 'like' : 'haven\'t liked'
+        console.log('renderMatchInfoAndForm')
+        console.log(this.props)
 		return (
 			<div className={classNames({'force-update': self.props.force_update})}>
 				<div className="scheduled-matches-container">

@@ -67,7 +67,15 @@ export function toggleEditRankings() {
 }
 
 export function setNewRankings(index, ladder_rank) {
+	console.log('setNewRankings')
+	console.log(typeof(index))
+	console.log('index: ' + index)
+	console.log(typeof(ladder_rank))
+	console.log('ladder_rank: ' + ladder_rank)
 	return (dispatch, getState) => {
+
+		console.log('setNewRankings - state')
+		console.log(state)
 		var state = getState().ladders_reducer
 		let rankings = state.new_rankings
 
@@ -80,6 +88,9 @@ export function setNewRankings(index, ladder_rank) {
 			updated_rank_obj,
 			...rankings.slice(index + 1)
 		]
+
+		console.log('new_rankings')
+		console.log(new_rankings)
 
 		dispatch({
 			type: constants.SET_NEW_RANKINGS,
@@ -126,7 +137,7 @@ function is_valid(rankings) {
 	return true
 }
 
-export function submitRankingUpdate(ladder_id) {
+export function submitRankingUpdate(ladder_id, challenge_old_ranks=null) {
 	return (dispatch, getState) => {
 		let state = getState().ladders_reducer
 		const csrftoken = getTheCookie()
@@ -137,11 +148,21 @@ export function submitRankingUpdate(ladder_id) {
 			xsrfHeaderName: 'X-CSRFToken',
 			'X-CSRFToken': csrftoken
 		}
-		const old_ranks = state.ladder_detail
-		const new_ranks = state.new_rankings
+		let old_ranks = state.ladder_detail
+		let new_ranks = state.new_rankings
 		
+		if (challenge_old_ranks) {
+			console.log('challenge_ranks exist')
+			old_ranks = challenge_old_ranks
+			// new_ranks = challenge_new_ranks
+		} else {
+			console.log('NO challenge_ranks')
+		}
 
-		if (is_valid(new_ranks)) {
+		console.log('new_ranks')
+		console.log(new_ranks)
+
+		if (challenge_old_ranks || is_valid(new_ranks)) {
 			for (var i = 0; i < old_ranks.length; i++) {
 				if (old_ranks[i].approved && old_ranks[i].ladder_rank !== new_ranks[i].ladder_rank && old_ranks[i].id == new_ranks[i].id) {
 
@@ -525,16 +546,11 @@ export function acceptChallenge(match_id, match_date) {
 	}
 }
 
-export function submitScores(match_id, index) {
+export function submitScores(match, index, ladder_id=null) {
 	return (dispatch, getState) => {
 		var state = getState().ladders_reducer;
 
-		let current_match
-		for (var i = 0; i < state.matches_detail.length; i++) {
-			if (state.matches_detail[i].id === match_id) {
-				current_match = state.matches_detail[i]
-			}
-		}
+
 
 		var err_data = state.errors[index]
 		if (err_data.player_a_score || err_data.player_b_score) {
@@ -552,13 +568,16 @@ export function submitScores(match_id, index) {
 			}
 
 			var params = {
-				id: match_id,
+				id: match.id,
 				player_a_score: state.player_a_score[index],
 				player_b_score: state.player_b_score[index],
-				match_date: current_match.match_date 
+				match_date: match.match_date,
+				completion_date: moment()
 			}
 
-			axios.put('/api/match/' + match_id + '/', params, headers)
+	// COMMENT BACK IN to actually submit scores
+
+			axios.put('/api/match/' + match.id + '/', params, headers)
 				.then(function (response) {
 					console.log('success')
 					console.log(response)
@@ -567,6 +586,109 @@ export function submitScores(match_id, index) {
 					console.log('error')
 					console.log(response)
 				})
+
+			if (match.is_challenge_match) {
+				var client = new LaddersClient()
+				client.fetch_ladder_detail(ladder_id)
+					.then( axios.spread( (ladder_data) => {
+						console.log('submitScores - is_challenge_match')
+						// console.log(ladder_data)
+						// console.log(ladder_data.data)
+						const current_rank_list = ladder_data.data
+						console.log('current_rank_list')
+						console.log(current_rank_list)
+
+						console.log('match')
+						console.log(match)
+
+						// start process of updating new_ranks
+
+						let winner = null
+						let old_winner_rank = null
+						let old_winner_rank_index = null
+						let new_winner_rank = null
+
+						let loser = null
+						let old_loser_rank = null
+						let old_loser_rank_index = null
+						let new_loser_rank = null
+
+						if (state.player_a_score[index] > state.player_b_score[index]) {
+							winner = match.player_a
+							loser = match.player_b
+						} else {
+							winner = match.player_b
+							loser = match.player_a
+						}
+
+						for (var i = 0; i < current_rank_list.length; i++) {
+							if (current_rank_list[i].user.username == winner.username) {
+								old_winner_rank = current_rank_list[i].ladder_rank
+								old_winner_rank_index = i
+							} else if (current_rank_list[i].user.username == loser.username) {
+								old_loser_rank = current_rank_list[i].ladder_rank
+								old_loser_rank_index = i
+							}
+						}
+
+						console.log('old_winner_rank_index')
+						console.log(old_winner_rank_index)
+						console.log('old_loser_rank_index')
+						console.log(old_loser_rank_index)
+
+						console.log('old_winner_rank')
+						console.log(old_winner_rank)
+						console.log('old_loser_rank')
+						console.log(old_loser_rank)
+
+						if (old_winner_rank > old_loser_rank) {
+							console.log('old_winner_rank > old_loser_rank')
+							
+							new_winner_rank = old_loser_rank
+							new_loser_rank = old_loser_rank + 1
+
+							console.log('new_winner_rank')
+							console.log(new_winner_rank)
+							console.log('new_loser_rank')
+							console.log(new_loser_rank)
+							if (old_winner_rank - old_loser_rank > 1) {
+								for (var i = old_loser_rank_index + 1; i < old_winner_rank_index; i++) {
+									dispatch(setNewRankings(i, (parseInt(current_rank_list[i].ladder_rank) + 1).toString()))
+								}
+							}
+						}
+
+						dispatch(setNewRankings(old_winner_rank_index, new_winner_rank.toString())) // player_a
+
+						dispatch(setNewRankings(old_loser_rank_index, new_loser_rank.toString())) // player_b
+
+
+						console.log('state')
+						console.log(state)
+
+						
+
+						dispatch(submitRankingUpdate(ladder_id, current_rank_list))
+
+
+						// var state = getState().ladders_reducer
+						// dispatch({
+						// 	type: constants.LADDER_DETAIL_LOADED,
+						// 	ladder_data: {
+						// 		ladder_data: ladder_data.data,
+						// 		is_loading: false
+						// 	}
+
+						// })
+					}))
+					// .then( () => {
+					// 	dispatch({
+					// 		type: constants.UPDATE_TAB,
+					// 		active_tab: 'ladder',
+					// 		is_loading: false
+					// 	})
+					// })
+			}
 		}
 	}	
 	
