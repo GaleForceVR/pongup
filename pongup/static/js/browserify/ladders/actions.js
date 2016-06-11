@@ -613,13 +613,38 @@ export function submitScores(match, index, ladder_id=null) {
 						let old_loser_rank_index = null
 						let new_loser_rank = null
 
-						if (state.player_a_score[index] > state.player_b_score[index]) {
+						console.log('match.player_a: ' + match.player_a.username)
+						console.log('match.player_b: ' + match.player_b.username)
+
+						console.log('************************* before')
+
+						console.log('state.player_a_score[index]')
+						console.log(state.player_a_score[index])
+						console.log('state.player_b_score[index]')
+						console.log(state.player_b_score[index])
+
+						console.log(typeof(state.player_a_score[index]))
+						console.log(typeof(state.player_b_score[index]))
+
+						if (parseInt(state.player_a_score[index]) > parseInt(state.player_b_score[index])) {
+							console.log('player_a wins')
 							winner = match.player_a
 							loser = match.player_b
 						} else {
+							console.log('player_b wins')
 							winner = match.player_b
 							loser = match.player_a
 						}
+
+						console.log('winner: ' + winner.username)
+						console.log('loser: ' + loser.username)
+
+						console.log('************************* after')
+
+						console.log('state.player_a_score[index]')
+						console.log(state.player_a_score[index])
+						console.log('state.player_b_score[index]')
+						console.log(state.player_b_score[index])
 
 						for (var i = 0; i < current_rank_list.length; i++) {
 							if (current_rank_list[i].user.username == winner.username) {
@@ -656,19 +681,13 @@ export function submitScores(match, index, ladder_id=null) {
 									dispatch(setNewRankings(i, (parseInt(current_rank_list[i].ladder_rank) + 1).toString()))
 								}
 							}
+
+							dispatch(setNewRankings(old_winner_rank_index, new_winner_rank.toString())) // player_a
+							dispatch(setNewRankings(old_loser_rank_index, new_loser_rank.toString())) // player_b
+							dispatch(submitRankingUpdate(ladder_id, current_rank_list))
 						}
 
-						dispatch(setNewRankings(old_winner_rank_index, new_winner_rank.toString())) // player_a
-
-						dispatch(setNewRankings(old_loser_rank_index, new_loser_rank.toString())) // player_b
-
-
-						console.log('state')
-						console.log(state)
-
 						
-
-						dispatch(submitRankingUpdate(ladder_id, current_rank_list))
 
 
 						// var state = getState().ladders_reducer
