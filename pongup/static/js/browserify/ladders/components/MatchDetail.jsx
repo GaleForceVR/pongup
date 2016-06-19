@@ -217,7 +217,8 @@ export class _MatchDetail extends Component {
     }
 
     handleAcceptMatch(e, index) {
-    	this.props.dispatch(actions.acceptChallenge(this.props.match.id, this.props.match.match_date))
+        const ladder_id = this.props.params.ladder_id
+    	this.props.dispatch(actions.acceptChallenge(this.props.match.id, this.props.match.match_date, ladder_id))
     }
 
     handleRescheduleSubmit() {
@@ -366,6 +367,8 @@ export class _MatchDetail extends Component {
     				onClick={(e)=> {
     					if (this.state.reschedule_match) {
     						// this.handleRescheduleSubmit(e, self.props.index)
+
+                            this.setState({reschedule_match: !this.state.reschedule_match})
     						
     					    let date = this.state.match_date
     					    let hour = this.state.match_hour
@@ -373,12 +376,13 @@ export class _MatchDetail extends Component {
     					    let am = this.state.match_am
     					    let match_id = this.props.match.id
     					    let orig_date = this.props.match.match_date
+                            let ladder_id = this.props.params.ladder_id
     					    // let champion_name = this.props.player_name
     					    // let challenger_name = this.props.username
     					    // let champion_rank = this.props.rank
     					    // let challenger_rank = this.props.current_user_rank
     					    // let ladder_id = this.props.params.ladder_id
-    					    this.props.dispatch(actions.rescheduleMatch(date, hour, min, am, match_id, orig_date/*, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id*/))
+    					    this.props.dispatch(actions.rescheduleMatch(date, hour, min, am, match_id, orig_date, ladder_id/*, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id*/))
     						
     					} else {
     						this.handleAcceptMatch(e, this.props.index)

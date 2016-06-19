@@ -239,14 +239,31 @@ export class LadderDetailContainer extends Component {
         )
     }
 
-    render() {
+    renderLoggedOutMessage() {
+        return(
+            <span>
+                <div className="ladder-detail-header login-message">
+                    <h3 className="ladder-name">You must be logged in to view this page</h3>
+                    <a className="primary join-ladder-button" href="/signup">Sign up</a>
+                    <a 
+                        className="secondary join-ladder-button" 
+                        href="/login"
+                        // onClick={(e) => {
+                        //     self.handleJoinLadderClick()
+                        // }}
+                    >Log in</a>
+                </div>
+            </span>
+        )
+    }
+
+    renderPage() {
         var self = this
-        // var current_ladder_id = self.getCurrentLadder().id
 
         var current_ladder = self.getCurrentLadder()
-        return (
-            <div className="container-1600">
 
+        return (
+            <span>
                 <div className="ladder-detail-header">
                     <p className="header-label">Ladder:</p>
                     <h3 className="ladder-name">{ self.props.is_loading ? self.loading() : current_ladder.name }</h3>
@@ -280,10 +297,22 @@ export class LadderDetailContainer extends Component {
                         { (this.props.matches_detail && this.props.matches_detail.length > 0) ? this.buildFriendlyMatches() : this.buildNoFriendlyMatches() }
                     </ul>
                 </div>
+            </span>
+        )
+    }
 
-                
+    render() {
+        var self = this
+        // var current_ladder_id = self.getCurrentLadder().id
 
-                
+        console.log('LadderDetailContainer render()')
+        console.log(this.props)
+
+        return (
+            <div className="container-1600">
+
+                { this.props.current_user ? this.renderPage() : this.renderLoggedOutMessage() }
+
             </div>
         )
     }

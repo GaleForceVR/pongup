@@ -168,7 +168,7 @@ class UserLadderViewSet(mixins.RetrieveModelMixin,
     # model = User_Ladder
     serializer_class = LadderDetailSerializer
 
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsManagerOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

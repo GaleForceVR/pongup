@@ -291,6 +291,7 @@ export class RankingList extends Component {
                         let champion_rank = this.props.rank
                         let challenger_rank = this.props.current_user_rank
                         let ladder_id = this.props.params.ladder_id
+                        this.setState({show_schedule_match_form: !this.state.show_schedule_match_form})
                         this.props.dispatch(actions.scheduleMatch(date, hour, min, am, champion_name, challenger_name, champion_rank, challenger_rank, ladder_id, is_challenge_match))
                     }}
                 >Submit challenge</a>
@@ -336,7 +337,7 @@ export class RankingList extends Component {
                                 data-for="challenge-match"
                                 onClick={(e)=>{
                                     this.handleScheduleMatchClick(e, 'challenge')
-                                    this.setState({show_schedule_match_form: true, schedule_challenge_match: true})
+                                    this.setState({show_schedule_match_form: !this.state.show_schedule_match_form, schedule_challenge_match: true})
                                 }}
                             >
                                 <div className="pongup-ball-btn">
@@ -363,7 +364,7 @@ export class RankingList extends Component {
                                          data-for="friendly-match"
                                          onClick={(e)=>{
                                              this.handleScheduleMatchClick(e, 'friendly')
-                                             this.setState({show_schedule_match_form: true, schedule_challenge_match: false})
+                                             this.setState({show_schedule_match_form: !this.state.show_schedule_match_form, schedule_challenge_match: false})
                                          }}
                                     >
                                         <div className="pongup-ball-btn">

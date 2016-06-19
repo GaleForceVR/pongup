@@ -468,6 +468,18 @@ export function scheduleMatch(date_obj, hour, min, period, champion_name, challe
 			.then(function (response) {
 				console.log('success')
 				console.log(response)
+				var client = new LaddersClient()
+				client.fetch_matches_detail(ladder_id)
+					.then( axios.spread( (matches_data) => {
+						dispatch({
+							type: constants.MATCHES_DETAIL_LOADED,
+							matches_data: {
+								matches_data: matches_data.data,
+								is_loading: false
+							}
+
+						})
+					}))
 			})
 			.catch(function (response) {
 				console.log('error')
@@ -486,7 +498,7 @@ export function updateScore(new_score) {
 	}
 }
 
-export function rescheduleMatch(date_obj, hour, min, period, match_id, orig_date) {
+export function rescheduleMatch(date_obj, hour, min, period, match_id, orig_date, ladder_id) {
 	let date = date_obj.format('M/D/YYYY')
 	let match_datetime = date + ' ' + hour + ':' + min + ' ' + period
 	match_datetime = moment(match_datetime, 'M/D/YYYY hh:mm a')
@@ -511,6 +523,18 @@ export function rescheduleMatch(date_obj, hour, min, period, match_id, orig_date
 			.then(function (response) {
 				console.log('success')
 				console.log(response)
+				var client = new LaddersClient()
+				client.fetch_matches_detail(ladder_id)
+					.then( axios.spread( (matches_data) => {
+						dispatch({
+							type: constants.MATCHES_DETAIL_LOADED,
+							matches_data: {
+								matches_data: matches_data.data,
+								is_loading: false
+							}
+
+						})
+					}))
 			})
 			.catch(function (response) {
 				console.log('error')
@@ -519,7 +543,7 @@ export function rescheduleMatch(date_obj, hour, min, period, match_id, orig_date
 	}
 }
 
-export function acceptChallenge(match_id, match_date) {
+export function acceptChallenge(match_id, match_date, ladder_id) {
 	return (dispatch, getState) => {
 		var csrftoken = getTheCookie()
 		var headers = {
@@ -538,6 +562,18 @@ export function acceptChallenge(match_id, match_date) {
 			.then(function (response) {
 				console.log('success')
 				console.log(response)
+				var client = new LaddersClient()
+				client.fetch_matches_detail(ladder_id)
+					.then( axios.spread( (matches_data) => {
+						dispatch({
+							type: constants.MATCHES_DETAIL_LOADED,
+							matches_data: {
+								matches_data: matches_data.data,
+								is_loading: false
+							}
+
+						})
+					}))
 			})
 			.catch(function (response) {
 				console.log('error')
@@ -581,6 +617,18 @@ export function submitScores(match, index, ladder_id=null) {
 				.then(function (response) {
 					console.log('success')
 					console.log(response)
+					var client = new LaddersClient()
+					client.fetch_matches_detail(ladder_id)
+						.then( axios.spread( (matches_data) => {
+							dispatch({
+								type: constants.MATCHES_DETAIL_LOADED,
+								matches_data: {
+									matches_data: matches_data.data,
+									is_loading: false
+								}
+
+							})
+						}))
 				})
 				.catch(function (response) {
 					console.log('error')
@@ -591,17 +639,7 @@ export function submitScores(match, index, ladder_id=null) {
 				var client = new LaddersClient()
 				client.fetch_ladder_detail(ladder_id)
 					.then( axios.spread( (ladder_data) => {
-						console.log('submitScores - is_challenge_match')
-						// console.log(ladder_data)
-						// console.log(ladder_data.data)
 						const current_rank_list = ladder_data.data
-						console.log('current_rank_list')
-						console.log(current_rank_list)
-
-						console.log('match')
-						console.log(match)
-
-						// start process of updating new_ranks
 
 						let winner = null
 						let old_winner_rank = null
@@ -613,38 +651,13 @@ export function submitScores(match, index, ladder_id=null) {
 						let old_loser_rank_index = null
 						let new_loser_rank = null
 
-						console.log('match.player_a: ' + match.player_a.username)
-						console.log('match.player_b: ' + match.player_b.username)
-
-						console.log('************************* before')
-
-						console.log('state.player_a_score[index]')
-						console.log(state.player_a_score[index])
-						console.log('state.player_b_score[index]')
-						console.log(state.player_b_score[index])
-
-						console.log(typeof(state.player_a_score[index]))
-						console.log(typeof(state.player_b_score[index]))
-
 						if (parseInt(state.player_a_score[index]) > parseInt(state.player_b_score[index])) {
-							console.log('player_a wins')
 							winner = match.player_a
 							loser = match.player_b
 						} else {
-							console.log('player_b wins')
 							winner = match.player_b
 							loser = match.player_a
 						}
-
-						console.log('winner: ' + winner.username)
-						console.log('loser: ' + loser.username)
-
-						console.log('************************* after')
-
-						console.log('state.player_a_score[index]')
-						console.log(state.player_a_score[index])
-						console.log('state.player_b_score[index]')
-						console.log(state.player_b_score[index])
 
 						for (var i = 0; i < current_rank_list.length; i++) {
 							if (current_rank_list[i].user.username == winner.username) {
@@ -656,26 +669,11 @@ export function submitScores(match, index, ladder_id=null) {
 							}
 						}
 
-						console.log('old_winner_rank_index')
-						console.log(old_winner_rank_index)
-						console.log('old_loser_rank_index')
-						console.log(old_loser_rank_index)
-
-						console.log('old_winner_rank')
-						console.log(old_winner_rank)
-						console.log('old_loser_rank')
-						console.log(old_loser_rank)
-
 						if (old_winner_rank > old_loser_rank) {
-							console.log('old_winner_rank > old_loser_rank')
 							
 							new_winner_rank = old_loser_rank
 							new_loser_rank = old_loser_rank + 1
 
-							console.log('new_winner_rank')
-							console.log(new_winner_rank)
-							console.log('new_loser_rank')
-							console.log(new_loser_rank)
 							if (old_winner_rank - old_loser_rank > 1) {
 								for (var i = old_loser_rank_index + 1; i < old_winner_rank_index; i++) {
 									dispatch(setNewRankings(i, (parseInt(current_rank_list[i].ladder_rank) + 1).toString()))
