@@ -173,7 +173,7 @@ export class LadderDetailContainer extends Component {
 
     buildNoChallengeMatches() {
         return (
-            <li>
+            <li className="no-matches-list-item">
                 <div className="scheduled-matches-container">
                     <p className="seed no-matches-msg">There are no Challenge Matches scheduled at this time.</p>
                 </div>
@@ -183,7 +183,7 @@ export class LadderDetailContainer extends Component {
 
     buildNoFriendlyMatches() {
         return (
-            <li>
+            <li className="no-matches-list-item">
                 <div className="scheduled-matches-container">
                     <p className="seed no-matches-msg">There are no Friendly Matches scheduled at this time.</p>
                 </div>
@@ -245,13 +245,7 @@ export class LadderDetailContainer extends Component {
                 <div className="ladder-detail-header login-message">
                     <h3 className="ladder-name">You must be logged in to view this page</h3>
                     <a className="primary join-ladder-button" href="/signup">Sign up</a>
-                    <a 
-                        className="secondary join-ladder-button" 
-                        href="/login"
-                        // onClick={(e) => {
-                        //     self.handleJoinLadderClick()
-                        // }}
-                    >Log in</a>
+                    <a className="secondary join-ladder-button" href="/login">Log in</a>
                 </div>
             </span>
         )

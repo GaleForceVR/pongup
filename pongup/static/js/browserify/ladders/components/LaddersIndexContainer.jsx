@@ -98,50 +98,63 @@ export class LaddersIndexContainer extends Component {
     }
 
     renderLadderForm() {
+        console.log('renderLadderForm')
+        console.log(this.props)
         return (
-            <form className="create-ladder-form">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Ladder Name"
-                    value={this.state.new_ladder_name}
-                    onChange={(e) => {this.handleNameChange(e)}}
-                    onBlur={this.handleBlur()}
-                />
-                <input
-                    type="text"
-                    name="location"
-                    placeholder="Location (optional)"
-                    value={this.state.new_ladder_location}
-                    onChange={(e) => {this.handleLocationChange(e)}}
-                    onBlur={this.handleBlur()}
-                />
-                <div className="datepicker-container" >
-                    <DatePicker 
-                        name="start_date"
-                        placeholderText="Start Date"
-                        minDate={moment()}
-                        selected={this.state.new_ladder_start_date}
-                        onChange={this.handleStartChange}
-                    />
-                </div>
-                
-                    <DatePicker 
-                        name="end_date"
-                        placeholderText="End Date"
-                        minDate={this.state.new_ladder_start_date}
-                        // disabled={!this.state.start_date_picked}
-                        selected={this.state.new_ladder_end_date}
-                        onChange={this.handleEndChange}
-                    />
-                
-                <a
-                    className="primary"
-                    onClick={(e) => {
-                        this.props.dispatch(actions.createLadder(this.state.new_ladder_name, this.props.current_user, this.state.new_ladder_location, this.state.new_ladder_start_date, this.state.new_ladder_end_date))
-                    }}
-                >Create ladder</a>
-            </form>
+            <span>
+                { this.props.current_user ?
+
+                    <form className="create-ladder-form">
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Ladder Name"
+                            value={this.state.new_ladder_name}
+                            onChange={(e) => {this.handleNameChange(e)}}
+                            onBlur={this.handleBlur()}
+                        />
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Location (optional)"
+                            value={this.state.new_ladder_location}
+                            onChange={(e) => {this.handleLocationChange(e)}}
+                            onBlur={this.handleBlur()}
+                        />
+                        <div className="datepicker-container" >
+                            <DatePicker 
+                                name="start_date"
+                                placeholderText="Start Date"
+                                minDate={moment()}
+                                selected={this.state.new_ladder_start_date}
+                                onChange={this.handleStartChange}
+                            />
+                        </div>
+                        
+                            <DatePicker 
+                                name="end_date"
+                                placeholderText="End Date"
+                                minDate={this.state.new_ladder_start_date}
+                                // disabled={!this.state.start_date_picked}
+                                selected={this.state.new_ladder_end_date}
+                                onChange={this.handleEndChange}
+                            />
+                        
+                        <a
+                            className="primary"
+                            onClick={(e) => {
+                                this.props.dispatch(actions.createLadder(this.state.new_ladder_name, this.props.current_user, this.state.new_ladder_location, this.state.new_ladder_start_date, this.state.new_ladder_end_date))
+                            }}
+                        >Create ladder</a>
+                    </form>
+                : 
+                    <span>
+                        <p className="login-message">You must be logged in to create a new ladder.</p>
+                        <a className="primary join-ladder-button" href="/signup">Sign up</a>
+                        <a className="secondary join-ladder-button" href="/login">Log in</a>
+                    </span>
+                }
+            </span>
         )
     }
 

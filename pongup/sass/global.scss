@@ -509,6 +509,10 @@ a {
         border-radius: 3px;
         box-shadow: 3px 3px 10px #00152d;
         text-align: center;
+        &.no-matches-list-item {
+            border: none;
+            box-shadow: none;
+        }
     }
     &.ladder-list {
         li {
@@ -860,6 +864,10 @@ p.seed.no-matches-msg {
     padding-left: 2.5%;
     padding-right: 3.75%;
     float: right;
+    p.login-message {
+        color: $formFieldLightBlue;
+        margin-bottom: 30px;
+    }
 }
 
 .form-wrapper {
