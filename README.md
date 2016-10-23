@@ -1,5 +1,12 @@
 # PONGup
 
+## Front End Tests
+
+run the tests:
+```
+mocha --compilers js:babel-core/register pongup/static/js/browserify/pongup/test/
+```
+
 ## PostgreSQL
 
 start local postgres server:
