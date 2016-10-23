@@ -1,6 +1,6 @@
 import * as constants from '../constants'
 
-const initialState = {
+export const initialState = {
     active_tab: 'home',
     is_loading: false,
     username: '',

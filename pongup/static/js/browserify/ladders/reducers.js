@@ -1,6 +1,6 @@
 import * as constants from '../pongup/constants'
 
-const initialState = {
+export const initialState = {
     active_tab: 'ladders',
     is_loading: true,
     user_profile: {},
